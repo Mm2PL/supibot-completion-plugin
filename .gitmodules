@@ -1,0 +1,3 @@
+[submodule "supibot"]
+	path = supibot
+	url = https://github.com/supinic/supibot.git

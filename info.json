@@ -1,0 +1,14 @@
+{
+    "name": "Supibot completion",
+    "description": "Because chatterino users also deserve completion",
+    "authors": [
+        "Mm2PL"
+    ],
+    "tags": [
+        "dank",
+        "bot",
+        "integration"
+    ],
+    "version": "0.0.0",
+    "license": "MIT"
+}
