@@ -38,32 +38,37 @@ function renameFlag(fname) {
 
     const knownFlags = new Set();
 
-    function definitionToLua(def) {
-        let params = [];
-        if (def.Params !== null && def.Params !== undefined) {
-            params = def.Params.map(p => 
-                `{ name=${stringToLua(p.name)}, type=${stringToLua(p.type)} }`
-            );
-        }
+    function definitionToJson(def) {
+        //let params = [];
+        //if (def.Params !== null && def.Params !== undefined) {
+        //    params = def.Params.map((p) => {
+        //            return {
+        //                name: p.name,
+        //                type: p.type,
+        //            };
+        //            //`{ name=${stringToLua(p.name)}, type=${stringToLua(p.type)} }`
+        //        }
+        //    );
+        //}
 
-        let aliases = [];
-        if (def.Aliases !== null && def.Aliases !== undefined) {
-            aliases = def.Aliases.map(stringToLua);
-        }
+        //let aliases = [];
+        //if (def.Aliases !== null && def.Aliases !== undefined) {
+        //    aliases = def.Aliases.map(stringToLua);
+        //}
 
         let flags = [];
         if (def.Flags !== null && def.Flags !== undefined) {
-            flags = def.Flags.map(renameFlag).map(stringToLua);
+            flags = def.Flags.map(renameFlag);
         }
         if (META_COMMANDS.includes(def.Name)) {
-            flags.push(stringToLua("META"));
+            flags.push("META");
         }
         if (SUPINICS_CHANNEL_WHITELIST.includes(def.Name)) {
-            flags.push(stringToLua("SUPINICS_ONLY"));
-            flags.splice(flags.findIndex(f => f === stringToLua("WHITELIST")), 1);
+            flags.push("SUPINICS_ONLY");
+            flags.splice(flags.findIndex(f => f === "WHITELIST"), 1);
         }
         flags.forEach(f => knownFlags.add(f));
-        let eatBeforeSub = 0;
+        let eat_before_sub = 0;
         let subcommands = [];
         if (def.Name === "set") {
             const sd = def.Static_Data();
@@ -71,37 +76,48 @@ function renameFlag(fname) {
                 let innersubs = [];
                 if (v.name === "twitchlotto") {
                     innersubs = require("./supibot/commands/twitchlotto/definitions.js").flags.map(
-                        it => `
-                        { name=${stringToLua(it.name)}, aliases={}, pipe=true, eat_before_sub_command=0 }`
+                        it => {
+                            return {
+                                name: it.name,
+                                aliases: [],
+                                pipe: true,
+                                eat_before_sub_command: 0,
+
+                                params: [],
+                                flags: [],
+                                subcommands: [],
+                            };
+                        }
                     );
                 }
-                const innersubsTxt = innersubs.length !== 0 ? `
-                    subcommands={ ${innersubs.join(", ")} },
-                ` : `
-                    subcommands=nil,
-                `;
-                const subName = stringToLua(v.name);
-                return `
-                {
-                    name=${subName},
-                    aliases={ ${v.aliases.map(stringToLua).join(", ")} },
-                    parameter=${stringToLua(v.parameter)},
-                    pipe=${v.pipe || false},
-                    ${innersubsTxt}
-                    eat_before_sub_command=${v.name === "twitchlotto" ? 1 : 0}
-                }`
+                return {
+                    name: v.name,
+                    aliases: v.aliases,
+                    //parameter: v.parameter,
+                    pipe: v.pipe || false,
+                    subcommands: innersubs !== 0 ? innersubs : null,
+                    eat_before_sub_command: v.name === "twitchlotto" ? 1 : 0,
+
+                    flags: [],
+                    params: [],
+                    subcommands: []
+                }
             }
             );
         } else if (def.Name == "texttransform") {
             const transforms = require("./supibot/commands/texttransform/transforms.js");
-            subcommands = transforms.types.map(t => 
-                `
-                {
-                    name=${stringToLua(t.name)},
-                    aliases={ ${t.aliases.map(stringToLua).join(", ")} },
-                    pipe=true,
-                    subcommands=nil
-                }`
+            subcommands = transforms.types.map(t => {
+                    return {
+                        name: t.name,
+                        aliases: t.aliases,
+                        pipe: true,
+
+                        params: [],
+                        flags: [],
+                        subcommands: [],
+                        eat_before_sub_command: 0
+                    }
+                }
             );
         } else if (def.Name == "alias") {
             const subs = [
@@ -119,35 +135,33 @@ function renameFlag(fname) {
                 {name: "unrestrict", aliases: []},
                 {name: "run", aliases: ["try"]},
             ];
-            subcommands = subs.map(t => 
-                `
-                {
-                    name=${stringToLua(t.name)},
-                    aliases={ ${t.aliases.map(stringToLua).join(", ")} },
-                    pipe=true,
-                    eat_before_sub_command=0
-                }`
+            subcommands = subs.map(t => {
+                    return {
+                        ...t,
+                        pipe: true,
+                        eat_before_sub_command: 0,
+
+                        params: [],
+                        flags: [],
+                        subcommands: []
+                    }
+                }
             );
         }
 
-        const name = stringToLua(def.Name);
-        const subcommandsTxt = subcommands.length !== 0 ? `
-            subcommands={ ${subcommands.join(", ")} },
-        ` : `
-            subcommands=nil,
-        `;
-        return `
-        {
-            name=${name},
-            aliases={ ${aliases.join(", ")} },
-            params={ ${params.join(", ")} },
-            flags={ ${flags.join(", ")} },
-            ${subcommandsTxt}
-            eat_before_sub_command=${eatBeforeSub}
-        }`;
+        return {
+            name: def.Name,
+            aliases: def.Aliases,
+            params: def.Params,
+            flags,
+            subcommands: subcommands.length !== 0 ? subcommands : null,
+            eat_before_sub_command: eat_before_sub,
+            pipe: def.Flags.includes("pipe")
+        }
     }
 
-    const defs = definitions.map(definitionToLua).join(",");
+    const defs = definitions.map(definitionToJson);
+    /*
     const fileData = (`-- This file was autogenerated with make_lua.js from data within the supinic/supibot repo
 -- If you run the script your changes will be lost
 return {
@@ -158,5 +172,10 @@ return {
     },
 }
 `);
-    fs.writeFileSync("completions_generated.lua", fileData);
+*/
+
+    fs.writeFileSync("completions_generated.json", JSON.stringify({
+        definitions: defs,
+        excluded_flags: EXCLUDE_FLAGS,
+    }));
 })();

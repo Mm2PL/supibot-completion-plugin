@@ -1,11 +1,11 @@
 {
-  "name": "sbc_codegen",
-  "version": "1.0.0",
-  "description": "",
-  "main": "make_lua.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tstl",
+    "dev": "tstl --watch"
   },
-  "author": "Mm2PL",
-  "license": "MIT"
+  "devDependencies": {
+    "lua-types": "^2.13.1",
+    "typescript-to-lua": "^1.13.2"
+  }
 }

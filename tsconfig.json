@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["esnext"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "types": [
+        "lua-types/5.4"
+    ],
+    "resolveJsonModule": true
+  },
+  "tstl": {
+    "luaTarget": "5.4"
+  },
+  "exclude": ["supibot/*", "make_lua.js"]
+}
+
