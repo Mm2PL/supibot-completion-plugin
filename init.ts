@@ -1,4 +1,4 @@
-import {inspect} from './inspect';
+//import {inspect} from './inspect';
 import utils from './utils';
 import * as generated from './completions_generated.json';
 
@@ -80,8 +80,8 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
     if (!text.startsWith("$")) {
         return utils.new_completion_list();
     }
-    print("text is: ", inspect(text));
-    print("prefix is: ", inspect(prefix));
+    //print("text is: ", inspect(text));
+    //print("prefix is: ", inspect(prefix));
 
     if (is_first_word) {
         let out = commands_and_their_aliases(null, null);
@@ -135,7 +135,7 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
     }
 
     while (cmd_data?.subcommands !== null && cmd_data?.subcommands !== undefined) {
-        print(cmd_data, " has subcommands: ", inspect(cmd_data.subcommands));
+        //print(cmd_data, " has subcommands: ", inspect(cmd_data.subcommands));
 
         const WORD = " [^ ]+";
         let [temp] = string.match(text, command + string.rep(WORD, cmd_data.eat_before_sub_command) + "$");
