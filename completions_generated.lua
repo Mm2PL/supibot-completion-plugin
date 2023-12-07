@@ -48,7 +48,7 @@ return {definitions = {
     {
         name = "addbetween",
         aliases = {"ab"},
-        params = nil,
+        params = {{name = "sentences", type = "boolean"}},
         flags = {"EXTERNAL_INPUT", "MENTION", "PIPE"},
         subcommands = nil,
         eat_before_sub_command = 0,
@@ -209,6 +209,7 @@ return {definitions = {
             {name = "em", type = "string"},
             {name = "errorMessage", type = "string"},
             {name = "excludeSelf", type = "boolean"},
+            {name = "limit", type = "number"},
             {name = "regex", type = "regex"},
             {name = "replacement", type = "string"}
         },
@@ -221,7 +222,13 @@ return {definitions = {
         name = "artflow",
         aliases = {"rafi", "randomartflowimage"},
         params = nil,
-        flags = {"MENTION", "NON_NULLABLE", "PIPE", "SKIP_BANPHRASE"},
+        flags = {
+            "DEVELOPER",
+            "MENTION",
+            "NON_NULLABLE",
+            "PIPE",
+            "SKIP_BANPHRASE"
+        },
         subcommands = nil,
         eat_before_sub_command = 0,
         pipe = true
@@ -298,6 +305,15 @@ return {definitions = {
         pipe = true
     },
     {
+        name = "bing",
+        aliases = nil,
+        params = {{name = "variant", type = "string"}},
+        flags = {"DEVELOPER", "MENTION", "WHITELIST"},
+        subcommands = nil,
+        eat_before_sub_command = 0,
+        pipe = false
+    },
+    {
         name = "block",
         aliases = {"unblock"},
         params = {{name = "channel", type = "string"}, {name = "command", type = "string"}, {name = "platform", type = "string"}, {name = "user", type = "string"}},
@@ -327,7 +343,7 @@ return {definitions = {
     {
         name = "chan",
         aliases = {"4chan", "textchan", "filechan", "imagechan"},
-        params = {{name = "regex", type = "regex"}, {name = "textOnly", type = "string"}},
+        params = {{name = "regex", type = "regex"}, {name = "search", type = "string"}, {name = "textOnly", type = "string"}},
         flags = {"EXTERNAL_INPUT", "MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
         eat_before_sub_command = 0,
@@ -399,7 +415,7 @@ return {definitions = {
     {
         name = "commitcount",
         aliases = {"FarmingCommits"},
-        params = {{name = "since", type = "date"}},
+        params = {{name = "since", type = "date"}, {name = "type", type = "string"}, {name = "host", type = "string"}},
         flags = {
             "DEVELOPER",
             "MENTION",
@@ -722,6 +738,15 @@ return {definitions = {
         pipe = true
     },
     {
+        name = "fish",
+        aliases = {},
+        params = {{name = "skipStory", type = "boolean"}},
+        flags = {"MENTION", "PIPE"},
+        subcommands = nil,
+        eat_before_sub_command = 0,
+        pipe = true
+    },
+    {
         name = "followage",
         aliases = {"fa"},
         params = nil,
@@ -753,15 +778,6 @@ return {definitions = {
         aliases = nil,
         params = nil,
         flags = {"PIPE"},
-        subcommands = nil,
-        eat_before_sub_command = 0,
-        pipe = true
-    },
-    {
-        name = "fuck",
-        aliases = nil,
-        params = nil,
-        flags = {"BLOCK", "MENTION", "OPT_OUT", "PIPE"},
         subcommands = nil,
         eat_before_sub_command = 0,
         pipe = true
@@ -908,15 +924,6 @@ return {definitions = {
         pipe = true
     },
     {
-        name = "hug",
-        aliases = nil,
-        params = nil,
-        flags = {"OPT_OUT", "PIPE"},
-        subcommands = nil,
-        eat_before_sub_command = 0,
-        pipe = true
-    },
-    {
         name = "id",
         aliases = {"uid"},
         params = nil,
@@ -1043,7 +1050,7 @@ return {definitions = {
     {
         name = "mastodon",
         aliases = {},
-        params = {{name = "instance", type = "string"}, {name = "random", type = "boolean"}},
+        params = {{name = "instance", type = "string"}, {name = "random", type = "boolean"}, {name = "textOnly", type = "boolean"}},
         flags = {"MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
         eat_before_sub_command = 0,
@@ -1051,7 +1058,7 @@ return {definitions = {
     },
     {
         name = "math",
-        aliases = nil,
+        aliases = {"calculate", "calc"},
         params = {{name = "fixed", type = "boolean"}, {name = "precision", type = "number"}},
         flags = {"EXTERNAL_INPUT", "MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
@@ -1075,6 +1082,24 @@ return {definitions = {
         subcommands = nil,
         eat_before_sub_command = 0,
         pipe = false
+    },
+    {
+        name = "metrics",
+        aliases = {},
+        params = nil,
+        flags = {},
+        subcommands = nil,
+        eat_before_sub_command = 0,
+        pipe = false
+    },
+    {
+        name = "nba",
+        aliases = nil,
+        params = nil,
+        flags = {"MENTION", "PIPE"},
+        subcommands = nil,
+        eat_before_sub_command = 0,
+        pipe = true
     },
     {
         name = "necrodancer",
@@ -1362,7 +1387,8 @@ return {definitions = {
             {name = "repeat", type = "boolean"},
             {name = "regex", type = "regex"},
             {name = "sub", type = "boolean"},
-            {name = "twitch", type = "boolean"}
+            {name = "twitch", type = "boolean"},
+            {name = "zeroWidth", type = "boolean"}
         },
         flags = {"PIPE"},
         subcommands = nil,
@@ -1441,7 +1467,8 @@ return {definitions = {
             {name = "ignoreFlair", type = "string"},
             {name = "linkOnly", type = "boolean"},
             {name = "showFlairs", type = "boolean"},
-            {name = "skipGalleries", type = "boolean"}
+            {name = "skipGalleries", type = "boolean"},
+            {name = "skipVideos", type = "boolean"}
         },
         flags = {"EXTERNAL_INPUT", "MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
@@ -1595,6 +1622,15 @@ return {definitions = {
         params = {{name = "from", type = "string"}},
         flags = {"MENTION", "OWNER_OVERRIDE", "PIPE"},
         subcommands = {
+            {
+                name = "ambassador",
+                aliases = {},
+                pipe = false,
+                subcommands = {},
+                eat_before_sub_command = 0,
+                flags = {},
+                params = {}
+            },
             {
                 name = "reminder",
                 aliases = {"remind", "reminders"},
@@ -1804,15 +1840,6 @@ return {definitions = {
         pipe = true
     },
     {
-        name = "songrequestrandomgachi",
-        aliases = {"gsr", "srg", "srrg"},
-        params = {{name = "fav", type = "string"}},
-        flags = {"SKIP_BANPHRASE", "WHITELIST"},
-        subcommands = nil,
-        eat_before_sub_command = 0,
-        pipe = false
-    },
-    {
         name = "sort",
         aliases = nil,
         params = nil,
@@ -1981,7 +2008,7 @@ return {definitions = {
     {
         name = "texttospeech",
         aliases = {"tts"},
-        params = {{name = "lang", type = "string"}, {name = "language", type = "string"}, {name = "speed", type = "number"}},
+        params = {{name = "lang", type = "string"}, {name = "speed", type = "number"}},
         flags = {"MENTION", "PIPE", "SKIP_BANPHRASE", "SUPINICS_ONLY"},
         subcommands = nil,
         eat_before_sub_command = 0,
@@ -2049,7 +2076,7 @@ return {definitions = {
             },
             {
                 name = "superscript",
-                aliases = {"smol", "super"},
+                aliases = {"small", "smol", "super", "tiny"},
                 pipe = true,
                 params = {},
                 flags = {},
@@ -2330,11 +2357,11 @@ return {definitions = {
     {
         name = "top",
         aliases = nil,
-        params = nil,
-        flags = {"MENTION"},
+        params = {{name = "currentOnly", type = "boolean"}},
+        flags = {"MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
         eat_before_sub_command = 0,
-        pipe = false
+        pipe = true
     },
     {
         name = "topgames",
@@ -2379,8 +2406,9 @@ return {definitions = {
             {name = "confidence", type = "boolean"},
             {name = "engine", type = "string"},
             {name = "from", type = "string"},
+            {name = "formality", type = "string"},
             {name = "to", type = "string"},
-            {name = "textOnly", type = "string"}
+            {name = "textOnly", type = "boolean"}
         },
         flags = {"EXTERNAL_INPUT", "MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
@@ -2390,24 +2418,21 @@ return {definitions = {
     {
         name = "transliterate",
         aliases = nil,
-        params = {{name = "japaneseOnly", type = "boolean"}},
+        params = {{name = "lang", type = "language"}},
         flags = {"MENTION", "NON_NULLABLE", "PIPE"},
         subcommands = nil,
         eat_before_sub_command = 0,
         pipe = true
     },
     {
-        name = "truck",
-        aliases = nil,
-        params = nil,
-        flags = {"BLOCK", "OPT_OUT", "PIPE", "SKIP_BANPHRASE"},
-        subcommands = nil,
-        eat_before_sub_command = 0,
-        pipe = true
-    },
-    {
         name = "tuck",
-        aliases = {"gnkiss", "headpat"},
+        aliases = {
+            "fuck",
+            "gnkiss",
+            "headpat",
+            "hug",
+            "truck"
+        },
         params = nil,
         flags = {"BLOCK", "OPT_OUT", "PIPE"},
         subcommands = nil,
@@ -2511,6 +2536,7 @@ return {definitions = {
             {name = "latitude", type = "number"},
             {name = "longitude", type = "number"},
             {name = "pollution", type = "boolean"},
+            {name = "status", type = "string"},
             {name = "radar", type = "boolean"}
         },
         flags = {"MENTION", "NON_NULLABLE", "PIPE"},
