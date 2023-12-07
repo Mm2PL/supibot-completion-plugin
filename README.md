@@ -12,7 +12,7 @@ A plugin for Chatterino both demonstrating that TSTL is capable enough and a som
 
 1. Clone with submodules
 2. `npm i`
-3. `npm run build` to compile typescript to Lua
+3. `npm run build` to compile TypeScript to Lua
 
 ### Update command definitions
 
