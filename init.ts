@@ -142,15 +142,15 @@ function on_completions_requested(this: void, text: string, prefix: string, is_f
         if (temp !== null) {
             print("matched subcmd")
             let out = utils.new_completion_list();
-            out.done = true;
-            for(const val of cmd_data.subcommands) {
+            out.hide_others = true;
+            for (const val of cmd_data.subcommands) {
                 if (!(val.pipe && is_piped)) {
                     out.values.push(
-                        [val.name + " ", c2.CompletionType.CustomCompletion]
+                        val.name + " "
                     );
 
-                    for(const v2 of val.aliases ?? []) {
-                        out.values.push([v2 + " ", c2.CompletionType.CustomCompletion]);
+                    for (const v2 of val.aliases ?? []) {
+                        out.values.push(v2 + " ");
                     }
                 }
             }
@@ -167,8 +167,8 @@ function on_completions_requested(this: void, text: string, prefix: string, is_f
     if (cmd_data !== null && cmd_data.params !== null && cmd_data.params.length != 0) {
         let out = utils.new_completion_list();
         print("DANKING!")
-        for(const val of cmd_data.params) {
-            out.values.push([val.name+":", c2.CompletionType.CustomCompletion]);
+        for (const val of cmd_data.params) {
+            out.values.push(val.name + ":");
         }
         return out;
     }
@@ -181,13 +181,25 @@ function on_completions_requested(this: void, text: string, prefix: string, is_f
     return utils.new_completion_list();
 }
 
+function filter(inp: c2.CompletionList, filter: string): c2.CompletionList {
+    let out = utils.new_completion_list();
+    out.hide_others = inp.hide_others;
+    for (const c of inp.values) {
+        if (c.startsWith(filter)) {
+            out.values.push(c);
+        }
+    }
+    return out;
+}
+
 c2.register_callback(
     c2.EventType.CompletionRequested,
-    (text, prefix, is_first_word) => {
-        let ret = on_completions_requested(text, prefix, is_first_word);
-        c2.log(c2.LogLevel.Debug, "completions: ", inspect(ret));
-        return ret;
+    (text: string, full_text: string, position: number, is_first_word: boolean) => {
+        c2.log(c2.LogLevel.Debug, "doing completions: ", text, full_text, position, is_first_word);
+        return filter(find_useful_completions(full_text, text, is_first_word), text);
     }
 );
+
+
 c2.register_command("/sbc:eval", cmd_eval);
 c2.system_msg("supinic", "[Completion loaded]");
