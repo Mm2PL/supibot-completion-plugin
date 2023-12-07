@@ -29,7 +29,10 @@ function renameFlag(fname) {
     const cmds = await (require('./supibot/commands').loadCommands({
         skipArchivedCommands: true
     }));
-    const {definitions} = cmds;
+    const {definitions, failed, skipped} = cmds;
+    console.log("Skipped commands: ", skipped);
+    console.log("Failed commands: ", failed);
+    console.log(`Loaded ${definitions.length} commands successfully.`);
 
     const knownFlags = new Set();
 
