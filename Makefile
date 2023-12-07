@@ -4,6 +4,6 @@ init.lua: init.ts inspect.lua inspect.d.ts utils.ts chatterino.d.ts completions_
 	npm run build
 	sed -i 's/= require("\(.\+\)")/= import("\1.lua")/g' init.lua utils.lua
 
-completions_generated.json: make_lua.js
-	node make_lua.js
+completions_generated.json: generate.js
+	node generate.js
 
