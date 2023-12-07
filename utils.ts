@@ -28,7 +28,7 @@ namespace utils {
     }
 
     export function new_completion_list(this: void): c2.CompletionList {
-        return {done: false, values: []};
+        return {hide_others: false, values: []};
     }
 }
 

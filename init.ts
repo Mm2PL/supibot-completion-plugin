@@ -85,21 +85,21 @@ function on_completions_requested(this: void, text: string, prefix: string, is_f
 
     if (is_first_word) {
         let out = commands_and_their_aliases(null, null);
-        out.done = true;
+        out.hide_others = true;
         return out;
     }
 
     // for "$COMMAND "
     if (text.startsWith("$") && text.endsWith(" ") && utils.count_occurences_of_byte(text, " ") == 1) {
         let out = commands_and_their_aliases(null, null);
-        out.done = true;
+        out.hide_others = true;
         return out;
     }
 
     // for "$ COMMAND"
     if (text.startsWith("$ ") && utils.count_occurences_of_byte(text, " ") == 1) {
         let out = commands_and_their_aliases("", null);
-        out.done = true;
+        out.hide_others = true;
         return out;
     }
     let [_0, _1, command] = string.find(text, "^[$] ?([^ ]+) ?");
@@ -120,7 +120,7 @@ function on_completions_requested(this: void, text: string, prefix: string, is_f
         let [m2] = string.match(text, "pipe *[^ ]+$");
         if (m1 !== null || m2 !== null) {
             let out = commands_and_their_aliases("", null);
-            out.done = true;
+            out.hide_others = true;
             return out;
         }
 

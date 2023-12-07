@@ -7,33 +7,10 @@ declare module c2 {
     Warning,
     Critical,
   }
-  enum CompletionType {
-    Username,
-    // emotes
-    EmoteStart,
-    FFZGlobalEmote,
-    FFZChannelEmote,
-    BTTVGlobalEmote,
-    BTTVChannelEmote,
-    SeventvGlobalEmote,
-    SeventvChannelEmote,
-    TwitchGlobalEmote,
-    TwitchLocalEmote,
-    TwitchSubscriberEmote,
-    Emoji,
-    EmoteEnd,
-    // end emotes
-
-    CustomCommand,
-    ChatterinoCommand,
-    TwitchCommand,
-    PluginCommand,
-    CustomCompletion,
-  }
 
   type CompletionList = {
-      values: Array<[string, CompletionType]>;
-      done: boolean;
+      values: string[];
+      hide_others: boolean;
   }
 
   class CommandContext {
@@ -55,7 +32,7 @@ declare module c2 {
 
   type EventCallbackFunction =
       //Function
-      ((this: void, text: string, prefix: string, is_first_word: boolean) => CompletionList);
+      ((this: void, prefix: string, full_text: string, position: number, is_first_word: boolean) => any);
 
   function register_callback(
     name: EventType,

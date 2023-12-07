@@ -27,7 +27,7 @@ do
         return count
     end
     function utils.new_completion_list()
-        return {done = false, values = {}}
+        return {hide_others = false, values = {}}
     end
 end
 ____exports.default = utils
