@@ -4,7 +4,7 @@ A plugin for Chatterino both demonstrating that TSTL is capable enough and a som
 
 ## Usage
 
-1. Ensure you are on a build after [#5000](https://github.com/chatterino/chatterino2/issue/5000).
+1. Ensure you are on a build after [#5000](https://github.com/chatterino/chatterino2/pull/5000).
 2. Just dump the contents of the repo into a new directory in your chatterino plugins directory.
 3. Enable in the settings
 
