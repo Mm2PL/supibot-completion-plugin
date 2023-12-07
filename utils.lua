@@ -1,4 +1,4 @@
-local ____lualib = require("lualib_bundle")
+local ____lualib = import("lualib_bundle.lua")
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local ____exports = {}
 local utils = {}

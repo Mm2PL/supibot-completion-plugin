@@ -7,7 +7,7 @@ function cmd_eval(this: void, ctx: c2.CommandContext) {
     let input: string = ctx.words.join(" ");
     let source = "return " + input;
     c2.system_msg(ctx.channel_name, ">>>" + input);
-    let f: (()=>any)|undefined;
+    let f: (() => any) | undefined;
     let err: any;
     [f, err] = load(source);
     if (f === undefined) {
@@ -17,15 +17,15 @@ function cmd_eval(this: void, ctx: c2.CommandContext) {
     }
 }
 
-function commands_and_their_aliases(this: void, _prefix: string|null, _out: c2.CompletionList|null): c2.CompletionList {
+function commands_and_their_aliases(this: void, _prefix: string | null, _out: c2.CompletionList | null): c2.CompletionList {
     let prefix: string = _prefix === null ? "$" : _prefix;
     let out: c2.CompletionList = _out === null ? utils.new_completion_list() : _out;
     for (const val of generated.definitions) {
         if (!utils.arr_contains_any(val.flags, generated.excluded_flags)) {
-            out.values.push([prefix + val.name + " ", c2.CompletionType.CustomCompletion]);
+            out.values.push(prefix + val.name + " ");
             if (val.aliases !== null) {
-                for(const v2 of val.aliases) {
-                    out.values.push([prefix + v2 + " ", c2.CompletionType.CustomCompletion]);
+                for (const v2 of val.aliases) {
+                    out.values.push(prefix + v2 + " ");
                 }
             }
         }
@@ -35,20 +35,20 @@ function commands_and_their_aliases(this: void, _prefix: string|null, _out: c2.C
 
 type Command = {
     name: string,
-    aliases: string[]|null,
+    aliases: string[] | null,
     params: {
         name: string,
         type: string,
-    }[]|null,
+    }[] | null,
     flags: string[],
-    subcommands: Command[]|null,
+    subcommands: Command[] | null,
     eat_before_sub_command: number,
     pipe: boolean,
 }
 
-function lookup_command(this: void, name: string): Command|null {
+function lookup_command(this: void, name: string): Command | null {
     c2.log(c2.LogLevel.Debug, "Looking up ", name);
-    for(const c of generated.definitions) {
+    for (const c of generated.definitions) {
         if (c.name === name) {
             return c;
         }
@@ -59,14 +59,14 @@ function lookup_command(this: void, name: string): Command|null {
     return null;
 }
 
-function lookup_subcommand(this: void, name: string, cmdData: Command): Command|null {
+function lookup_subcommand(this: void, name: string, cmdData: Command): Command | null {
     if (cmdData.subcommands === null) return null;
-    for(const c of cmdData.subcommands) {
+    for (const c of cmdData.subcommands) {
         if (c.name === name) {
             return c;
         }
-        if (c.aliases !== null)  {
-            for(const alias of c.aliases) {
+        if (c.aliases !== null) {
+            for (const alias of c.aliases) {
                 if (alias === name) {
                     return c;
                 }
@@ -76,7 +76,7 @@ function lookup_subcommand(this: void, name: string, cmdData: Command): Command|
     return null;
 }
 
-function on_completions_requested(this: void, text: string, prefix: string, is_first_word: boolean): c2.CompletionList {
+function find_useful_completions(this: void, text: string, prefix: string, is_first_word: boolean): c2.CompletionList {
     if (!text.startsWith("$")) {
         return utils.new_completion_list();
     }
@@ -130,8 +130,8 @@ function on_completions_requested(this: void, text: string, prefix: string, is_f
         if (commandB !== null) {
             command = commandB;
         }
-       //command = commandA || commandB;
-       cmd_data = lookup_command(<string>command);
+        //command = commandA || commandB;
+        cmd_data = lookup_command(<string>command);
     }
 
     while (cmd_data?.subcommands !== null && cmd_data?.subcommands !== undefined) {

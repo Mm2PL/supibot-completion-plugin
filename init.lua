@@ -1,13 +1,13 @@
-local ____lualib = require("lualib_bundle")
+local ____lualib = import("lualib_bundle.lua")
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
 local ____exports = {}
-local ____inspect = require("inspect")
+local ____inspect = import("inspect.lua")
 local inspect = ____inspect.inspect
-local ____utils = require("utils")
+local ____utils = import("utils.lua")
 local utils = ____utils.default
-local generated = require("completions_generated")
+local generated = import("completions_generated.lua")
 local function cmd_eval(ctx)
     table.remove(ctx.words, 1)
     local input = table.concat(ctx.words, " ")
@@ -34,11 +34,11 @@ local function commands_and_their_aliases(_prefix, _out)
     for ____, val in ipairs(generated.definitions) do
         if not utils.arr_contains_any(val.flags, generated.excluded_flags) then
             local ____out_values_0 = out.values
-            ____out_values_0[#____out_values_0 + 1] = {(prefix .. val.name) .. " ", c2.CompletionType.CustomCompletion}
+            ____out_values_0[#____out_values_0 + 1] = (prefix .. val.name) .. " "
             if val.aliases ~= nil then
                 for ____, v2 in ipairs(val.aliases) do
                     local ____out_values_1 = out.values
-                    ____out_values_1[#____out_values_1 + 1] = {(prefix .. v2) .. " ", c2.CompletionType.CustomCompletion}
+                    ____out_values_1[#____out_values_1 + 1] = (prefix .. v2) .. " "
                 end
             end
         end
@@ -76,7 +76,7 @@ local function lookup_subcommand(name, cmdData)
     end
     return nil
 end
-local function on_completions_requested(text, prefix, is_first_word)
+local function find_useful_completions(text, prefix, is_first_word)
     if not __TS__StringStartsWith(text, "$") then
         return utils.new_completion_list()
     end
@@ -90,17 +90,17 @@ local function on_completions_requested(text, prefix, is_first_word)
     )
     if is_first_word then
         local out = commands_and_their_aliases(nil, nil)
-        out.done = true
+        out.hide_others = true
         return out
     end
     if __TS__StringStartsWith(text, "$") and __TS__StringEndsWith(text, " ") and utils.count_occurences_of_byte(text, " ") == 1 then
         local out = commands_and_their_aliases(nil, nil)
-        out.done = true
+        out.hide_others = true
         return out
     end
     if __TS__StringStartsWith(text, "$ ") and utils.count_occurences_of_byte(text, " ") == 1 then
         local out = commands_and_their_aliases("", nil)
-        out.done = true
+        out.hide_others = true
         return out
     end
     local _0, _1, command = string.find(text, "^[$] ?([^ ]+) ?")
@@ -116,7 +116,7 @@ local function on_completions_requested(text, prefix, is_first_word)
         local m2 = string.match(text, "pipe *[^ ]+$")
         if m1 ~= nil or m2 ~= nil then
             local out = commands_and_their_aliases("", nil)
-            out.done = true
+            out.hide_others = true
             return out
         end
         if commandA ~= nil then
@@ -141,14 +141,14 @@ local function on_completions_requested(text, prefix, is_first_word)
         if temp ~= nil then
             print("matched subcmd")
             local out = utils.new_completion_list()
-            out.done = true
+            out.hide_others = true
             for ____, val in ipairs(cmd_data.subcommands) do
                 if not (val.pipe and is_piped) then
                     local ____out_values_4 = out.values
-                    ____out_values_4[#____out_values_4 + 1] = {val.name .. " ", c2.CompletionType.CustomCompletion}
+                    ____out_values_4[#____out_values_4 + 1] = val.name .. " "
                     for ____, v2 in ipairs(val.aliases or ({})) do
                         local ____out_values_5 = out.values
-                        ____out_values_5[#____out_values_5 + 1] = {v2 .. " ", c2.CompletionType.CustomCompletion}
+                        ____out_values_5[#____out_values_5 + 1] = v2 .. " "
                     end
                 end
             end
@@ -168,7 +168,7 @@ local function on_completions_requested(text, prefix, is_first_word)
         print("DANKING!")
         for ____, val in ipairs(cmd_data.params) do
             local ____out_values_10 = out.values
-            ____out_values_10[#____out_values_10 + 1] = {val.name .. ":", c2.CompletionType.CustomCompletion}
+            ____out_values_10[#____out_values_10 + 1] = val.name .. ":"
         end
         return out
     end
@@ -177,16 +177,33 @@ local function on_completions_requested(text, prefix, is_first_word)
     end
     return utils.new_completion_list()
 end
+local function filter(self, inp, filter)
+    local out = utils.new_completion_list()
+    out.hide_others = inp.hide_others
+    for ____, c in ipairs(inp.values) do
+        if __TS__StringStartsWith(c, filter) then
+            local ____out_values_11 = out.values
+            ____out_values_11[#____out_values_11 + 1] = c
+        end
+    end
+    return out
+end
 c2.register_callback(
     c2.EventType.CompletionRequested,
-    function(text, prefix, is_first_word)
-        local ret = on_completions_requested(text, prefix, is_first_word)
+    function(text, full_text, position, is_first_word)
         c2.log(
             c2.LogLevel.Debug,
-            "completions: ",
-            inspect(ret)
+            "doing completions: ",
+            text,
+            full_text,
+            position,
+            is_first_word
         )
-        return ret
+        return filter(
+            nil,
+            find_useful_completions(full_text, text, is_first_word),
+            text
+        )
     end
 )
 c2.register_command("/sbc:eval", cmd_eval)
