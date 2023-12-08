@@ -165,8 +165,12 @@ end
 local function filter(self, inp, filter)
     local out = utils.new_completion_list()
     out.hide_others = inp.hide_others
+    filter = string.lower(filter)
     for ____, c in ipairs(inp.values) do
-        if __TS__StringStartsWith(c, filter) then
+        if __TS__StringStartsWith(
+            string.lower(c),
+            filter
+        ) then
             local ____out_values_11 = out.values
             ____out_values_11[#____out_values_11 + 1] = c
         end

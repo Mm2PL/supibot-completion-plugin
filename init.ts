@@ -184,8 +184,9 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
 function filter(inp: c2.CompletionList, filter: string): c2.CompletionList {
     let out = utils.new_completion_list();
     out.hide_others = inp.hide_others;
+    filter = filter.toLowerCase();
     for (const c of inp.values) {
-        if (c.startsWith(filter)) {
+        if (c.toLowerCase().startsWith(filter)) {
             out.values.push(c);
         }
     }
