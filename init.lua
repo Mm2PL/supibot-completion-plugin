@@ -3,8 +3,6 @@ local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
 local ____exports = {}
-local ____inspect = import("inspect.lua")
-local inspect = ____inspect.inspect
 local ____utils = import("utils.lua")
 local utils = ____utils.default
 local generated = import("completions_generated.lua")
@@ -80,14 +78,6 @@ local function find_useful_completions(text, prefix, is_first_word)
     if not __TS__StringStartsWith(text, "$") then
         return utils.new_completion_list()
     end
-    print(
-        "text is: ",
-        inspect(text)
-    )
-    print(
-        "prefix is: ",
-        inspect(prefix)
-    )
     if is_first_word then
         local out = commands_and_their_aliases(nil, nil)
         out.hide_others = true
@@ -128,11 +118,6 @@ local function find_useful_completions(text, prefix, is_first_word)
         cmd_data = lookup_command(command)
     end
     while (cmd_data and cmd_data.subcommands) ~= nil and (cmd_data and cmd_data.subcommands) ~= nil do
-        print(
-            cmd_data,
-            " has subcommands: ",
-            inspect(cmd_data.subcommands)
-        )
         local WORD = " [^ ]+"
         local temp = string.match(
             text,
