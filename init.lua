@@ -119,16 +119,17 @@ local function find_useful_completions(text, prefix, is_first_word)
     end
     while (cmd_data and cmd_data.subcommands) ~= nil and (cmd_data and cmd_data.subcommands) ~= nil do
         local WORD = " [^ ]+"
-        local temp = string.match(
-            text,
-            (tostring(command) .. string.rep(WORD, cmd_data.eat_before_sub_command)) .. "$"
-        )
+        local pat = (tostring(command) .. string.rep(WORD, cmd_data.eat_before_sub_command + 1)) .. "$"
+        local temp = string.match(text, pat)
         if temp ~= nil then
-            print("matched subcmd")
+            print("matched subcmd ", temp, " from ", pat)
             local out = utils.new_completion_list()
             out.hide_others = true
             for ____, val in ipairs(cmd_data.subcommands) do
-                if not (val.pipe and is_piped) then
+                do
+                    if is_piped and not val.pipe then
+                        goto __continue37
+                    end
                     local ____out_values_4 = out.values
                     ____out_values_4[#____out_values_4 + 1] = val.name .. " "
                     for ____, v2 in ipairs(val.aliases or ({})) do
@@ -136,6 +137,7 @@ local function find_useful_completions(text, prefix, is_first_word)
                         ____out_values_5[#____out_values_5 + 1] = v2 .. " "
                     end
                 end
+                ::__continue37::
             end
             return out
         end

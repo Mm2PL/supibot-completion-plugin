@@ -54,7 +54,7 @@ function renameFlag(fname) {
         if (def.Name === "set") {
             const sd = def.Static_Data();
             subcommands = sd.variables.filter(v=>!v.adminOnly || ADMIN_MODE).map(v => {
-                let innersubs = [];
+                let innersubs = null;
                 if (v.name === "twitchlotto") {
                     innersubs = require("./supibot/commands/twitchlotto/definitions.js").flags.map(
                         it => {
@@ -74,14 +74,12 @@ function renameFlag(fname) {
                 return {
                     name: v.name,
                     aliases: v.aliases,
-                    //parameter: v.parameter,
                     pipe: v.pipe || false,
-                    subcommands: innersubs !== 0 ? innersubs : null,
+                    subcommands: innersubs,
                     eat_before_sub_command: v.name === "twitchlotto" ? 1 : 0,
 
                     flags: [],
                     params: [],
-                    subcommands: []
                 }
             }
             );

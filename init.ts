@@ -138,20 +138,22 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
         //print(cmd_data, " has subcommands: ", inspect(cmd_data.subcommands));
 
         const WORD = " [^ ]+";
-        let [temp] = string.match(text, command + string.rep(WORD, cmd_data.eat_before_sub_command) + "$");
+        const pat = command + string.rep(WORD, cmd_data.eat_before_sub_command+1) + "$";
+        let [temp] = string.match(text, pat);
         if (temp !== null) {
-            print("matched subcmd")
+            print("matched subcmd ", temp, " from ", pat)
             let out = utils.new_completion_list();
             out.hide_others = true;
             for (const val of cmd_data.subcommands) {
-                if (!(val.pipe && is_piped)) {
-                    out.values.push(
-                        val.name + " "
-                    );
+                if (is_piped && !val.pipe) {
+                    continue;
+                }
+                out.values.push(
+                    val.name + " "
+                );
 
-                    for (const v2 of val.aliases ?? []) {
-                        out.values.push(v2 + " ");
-                    }
+                for (const v2 of val.aliases ?? []) {
+                    out.values.push(v2 + " ");
                 }
             }
 

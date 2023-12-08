@@ -1626,7 +1626,7 @@ return {definitions = {
                 name = "ambassador",
                 aliases = {},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1635,7 +1635,7 @@ return {definitions = {
                 name = "reminder",
                 aliases = {"remind", "reminders"},
                 pipe = true,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1644,7 +1644,7 @@ return {definitions = {
                 name = "suggestion",
                 aliases = {"suggest", "suggestions"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1653,7 +1653,7 @@ return {definitions = {
                 name = "location",
                 aliases = {},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1662,7 +1662,7 @@ return {definitions = {
                 name = "gc",
                 aliases = {},
                 pipe = true,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1671,7 +1671,7 @@ return {definitions = {
                 name = "discord",
                 aliases = {},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1680,7 +1680,7 @@ return {definitions = {
                 name = "birthday",
                 aliases = {"bday"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1689,7 +1689,7 @@ return {definitions = {
                 name = "language",
                 aliases = {"lang"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1698,7 +1698,170 @@ return {definitions = {
                 name = "twitchlotto",
                 aliases = {"tl"},
                 pipe = true,
-                subcommands = {},
+                subcommands = {
+                    {
+                        name = "Anime",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Animal",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Bait",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Body-fluids",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Borderline",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Disfigured",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Disturbing",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Drawn",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Furry",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Gore",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Hentai",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Human",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "None",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Porn",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Offensive",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Rendered",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Scat",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    },
+                    {
+                        name = "Softcore",
+                        aliases = {},
+                        pipe = true,
+                        eat_before_sub_command = 0,
+                        params = {},
+                        flags = {},
+                        subcommands = {}
+                    }
+                },
                 eat_before_sub_command = 1,
                 flags = {},
                 params = {}
@@ -1707,7 +1870,7 @@ return {definitions = {
                 name = "twitchlottodescription",
                 aliases = {"tld"},
                 pipe = true,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1716,7 +1879,7 @@ return {definitions = {
                 name = "twitchlottoblacklist",
                 aliases = {"tlbl"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1725,7 +1888,7 @@ return {definitions = {
                 name = "instagram-nsfw",
                 aliases = {"rig-nsfw"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1734,7 +1897,7 @@ return {definitions = {
                 name = "reddit-nsfw",
                 aliases = {"rm-nsfw"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1743,7 +1906,7 @@ return {definitions = {
                 name = "twitch-lotto-nsfw",
                 aliases = {"twitchlotto-nsfw", "tl-nsfw"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1752,7 +1915,7 @@ return {definitions = {
                 name = "twitter-nsfw",
                 aliases = {"tweet-nsfw"},
                 pipe = false,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1761,7 +1924,7 @@ return {definitions = {
                 name = "timer",
                 aliases = {},
                 pipe = true,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
@@ -1776,7 +1939,7 @@ return {definitions = {
                     "track-favorite"
                 },
                 pipe = true,
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0,
                 flags = {},
                 params = {}
