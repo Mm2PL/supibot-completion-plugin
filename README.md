@@ -12,11 +12,10 @@ A plugin for Chatterino both demonstrating that TSTL is capable enough and a som
 
 1. Clone with submodules
 2. `npm i`
-3. `npm run build` to compile TypeScript to Lua
+3. Use `make` to compile Typescript to Lua (if you delete `completions_generated.json` this will regenerate it)
 
 ### Update command definitions
 
 1. This involves executing basically arbitrary code from [the supibot repo](https://github.com/supinic/supibot), ensure you are comfortable with that.
-2. Download supibot dependancies using yarn: `cd supibot`, `yarn`, `cd ..`
-3. Run the generate script: `node generate.js`
+2. Run `make update` to update/download the `supibot` submodule, regenerate `completions_generated.json` and rebuild the plugin
 

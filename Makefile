@@ -11,6 +11,8 @@ completions_generated.json: generate.js supibot/commands/**
 	node generate.js
 
 update_pull:
+	git submodule update --init supibot
+	git -C supibot checkout master
 	git -C supibot pull
 	$(NPM) install
 
