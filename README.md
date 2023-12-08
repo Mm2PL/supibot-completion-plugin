@@ -2,6 +2,16 @@
 
 A plugin for Chatterino both demonstrating that TSTL is capable enough and a somewhat useful feature.
 
+## Features
+
+The plugin:
+
+- Completes simple commands (like `$ping`).
+- Understands the concept of subcommands (commands like `$alias`, `$abb`, `$set`).
+- Understands the `$pipe` command, you can complete commands inside of it (cannot use the `_char` param yet).
+- Understands command parameters, you can complete parameter names (like `$rca description:`).
+- Understands that `$help` takes a command as an input.
+
 ## Usage
 
 1. Ensure you are on a build after [#5000](https://github.com/chatterino/chatterino2/pull/5000).
