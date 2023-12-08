@@ -14,6 +14,6 @@ update_pull:
 	git submodule update --init supibot
 	git -C supibot checkout master
 	git -C supibot pull
-	$(NPM) install
+	cd supibot; $(NPM) install
 
 update: update_pull completions_generated.json init.lua
