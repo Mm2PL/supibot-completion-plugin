@@ -94,9 +94,12 @@ local function find_useful_completions(text, prefix, is_first_word)
         return out
     end
     local _0, _1, command = string.find(text, "^[$] ?([^ ]+) ?")
-    print("Command is: ", command)
+    print(("Command is: \"" .. tostring(command)) .. "\"")
     local is_piped = false
     local cmd_data = lookup_command(command)
+    if cmd_data ~= nil and cmd_data.name == "alias" and command == "$" then
+        return utils.new_completion_list()
+    end
     if command == "pipe" then
         is_piped = true
         print("pipe detected")
@@ -128,7 +131,7 @@ local function find_useful_completions(text, prefix, is_first_word)
             for ____, val in ipairs(cmd_data.subcommands) do
                 do
                     if is_piped and not val.pipe then
-                        goto __continue37
+                        goto __continue38
                     end
                     local ____out_values_4 = out.values
                     ____out_values_4[#____out_values_4 + 1] = val.name .. " "
@@ -137,7 +140,7 @@ local function find_useful_completions(text, prefix, is_first_word)
                         ____out_values_5[#____out_values_5 + 1] = v2 .. " "
                     end
                 end
-                ::__continue37::
+                ::__continue38::
             end
             return out
         end

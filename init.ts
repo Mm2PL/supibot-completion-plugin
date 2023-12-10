@@ -103,9 +103,13 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
         return out;
     }
     let [_0, _1, command] = string.find(text, "^[$] ?([^ ]+) ?");
-    print("Command is: ", command);
+    print("Command is: \"" + command + "\"");
     let is_piped = false;
     let cmd_data = lookup_command(<string>command);
+    if (cmd_data !== null && cmd_data.name === "alias" && command === "$") {
+        // we are in alias invocation, do not currently have the data for this
+        return utils.new_completion_list();
+    }
 
     // meta commands
     if (command == "pipe") {
