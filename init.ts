@@ -22,10 +22,19 @@ function commands_and_their_aliases(this: void, _prefix: string | null, _out: c2
     let out: c2.CompletionList = _out === null ? utils.new_completion_list() : _out;
     for (const val of generated.definitions) {
         if (!utils.arr_contains_any(val.flags, generated.excluded_flags)) {
+            // Prioritize aliases that are more uppercase but otherwise equal to command name
+            // XXX: setting potential: remove uncapitalised command name
+            const lowerAlias = val.aliases?.filter(a => a.toLowerCase() == val.name.toLowerCase());
+            if (lowerAlias !== undefined && lowerAlias.length !== undefined && lowerAlias.length > 0) {
+                out.values.push(prefix + lowerAlias[0] + " ");
+            }
+
             out.values.push(prefix + val.name + " ");
             if (val.aliases !== null) {
                 for (const v2 of val.aliases) {
-                    out.values.push(prefix + v2 + " ");
+                    if (!out.values.includes(v2)) {
+                        out.values.push(prefix + v2 + " ");
+                    }
                 }
             }
         }

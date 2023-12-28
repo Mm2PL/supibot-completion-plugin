@@ -1,4 +1,5 @@
 local ____lualib = import("lualib_bundle.lua")
+local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
@@ -31,12 +32,23 @@ local function commands_and_their_aliases(_prefix, _out)
     local out = _out == nil and utils.new_completion_list() or _out
     for ____, val in ipairs(generated.definitions) do
         if not utils.arr_contains_any(val.flags, generated.excluded_flags) then
-            local ____out_values_0 = out.values
-            ____out_values_0[#____out_values_0 + 1] = (prefix .. val.name) .. " "
+            local ____opt_0 = val.aliases
+            local lowerAlias = ____opt_0 and __TS__ArrayFilter(
+                val.aliases,
+                function(____, a) return string.lower(a) == string.lower(val.name) end
+            )
+            if lowerAlias ~= nil and #lowerAlias ~= nil and #lowerAlias > 0 then
+                local ____out_values_2 = out.values
+                ____out_values_2[#____out_values_2 + 1] = (prefix .. lowerAlias[1]) .. " "
+            end
+            local ____out_values_3 = out.values
+            ____out_values_3[#____out_values_3 + 1] = (prefix .. val.name) .. " "
             if val.aliases ~= nil then
                 for ____, v2 in ipairs(val.aliases) do
-                    local ____out_values_1 = out.values
-                    ____out_values_1[#____out_values_1 + 1] = (prefix .. v2) .. " "
+                    if not __TS__ArrayIncludes(out.values, v2) then
+                        local ____out_values_4 = out.values
+                        ____out_values_4[#____out_values_4 + 1] = (prefix .. v2) .. " "
+                    end
                 end
             end
         end
