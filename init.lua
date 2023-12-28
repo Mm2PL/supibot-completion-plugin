@@ -1,12 +1,12 @@
-local ____lualib = import("lualib_bundle.lua")
+local ____lualib = require("lualib_bundle")
 local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
 local ____exports = {}
-local ____utils = import("utils.lua")
+local ____utils = require("utils")
 local utils = ____utils.default
-local generated = import("completions_generated.lua")
+local generated = require("completions_generated")
 local function cmd_eval(ctx)
     table.remove(ctx.words, 1)
     local input = table.concat(ctx.words, " ")

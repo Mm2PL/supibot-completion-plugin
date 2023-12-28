@@ -5,7 +5,6 @@ NPM := npm
 
 init.lua: init.ts utils.ts chatterino.d.ts completions_generated.json tsconfig.json package.json Makefile
 	$(NPM) run build
-	sed -i 's/= require("\(.\+\)")/= import("\1.lua")/g' init.lua utils.lua
 
 completions_generated.json: generate.js $(wildcard supibot/commands/*/*.js)
 	node generate.js
