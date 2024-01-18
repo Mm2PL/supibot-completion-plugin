@@ -60,7 +60,7 @@ function renameFlag(fname) {
         }
         flags.forEach(f => knownFlags.add(f));
         let eat_before_sub = 0;
-        let subcommands = [];
+        let subcommands = null;
         if (def.Name === "set") {
             const sd = def.Static_Data();
             subcommands = sd.variables.filter(v => !v.adminOnly || ADMIN_MODE).map(v => {
@@ -96,17 +96,17 @@ function renameFlag(fname) {
         } else if (def.Name == "texttransform") {
             const transforms = require("./supibot/commands/texttransform/transforms.js");
             subcommands = transforms.types.map(t => {
-                    return {
-                        name: t.name,
-                        aliases: t.aliases,
-                        pipe: true,
+                return {
+                    name: t.name,
+                    aliases: t.aliases,
+                    pipe: true,
 
-                        params: [],
-                        flags: [],
-                        subcommands: [],
-                        eat_before_sub_command: 0
-                    }
+                    params: [],
+                    flags: [],
+                    subcommands: null,
+                    eat_before_sub_command: 0
                 }
+            }
             );
         } else if (def.Name == "alias") {
             const subs = [
@@ -125,16 +125,16 @@ function renameFlag(fname) {
                 {name: "run", aliases: ["try"]},
             ];
             subcommands = subs.map(t => {
-                    return {
-                        ...t,
-                        pipe: true,
-                        eat_before_sub_command: 0,
+                return {
+                    ...t,
+                    pipe: true,
+                    eat_before_sub_command: 0,
 
-                        params: [],
-                        flags: [],
-                        subcommands: []
-                    }
+                    params: [],
+                    flags: [],
+                    subcommands: null,
                 }
+            }
             );
         }
 
@@ -143,7 +143,7 @@ function renameFlag(fname) {
             aliases: def.Aliases,
             params: def.Params,
             flags,
-            subcommands: subcommands.length !== 0 ? subcommands : null,
+            subcommands: subcommands,
             eat_before_sub_command: eat_before_sub,
             pipe: def.Flags.includes("pipe")
         }
