@@ -183,7 +183,12 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
         let out = utils.new_completion_list();
         print("DANKING!")
         for (const val of cmd_data.params) {
-            out.values.push(val.name + ":");
+            if (val.type === 'boolean') {
+                out.values.push(val.name + ":true");
+                out.values.push(val.name + ":false");
+            } else {
+                out.values.push(val.name + ":");
+            }
         }
         return out;
     }
