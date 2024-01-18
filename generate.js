@@ -1,5 +1,5 @@
-const EXCLUDE_FLAGS = [ "WHITELIST" ];
-const META_COMMANDS = [ "pipe", "alias" ];
+const EXCLUDE_FLAGS = ["WHITELIST"];
+const META_COMMANDS = ["pipe", "alias"];
 const SUPINICS_CHANNEL_WHITELIST = [
     "current",
     "necrodancer",
@@ -63,7 +63,7 @@ function renameFlag(fname) {
         let subcommands = [];
         if (def.Name === "set") {
             const sd = def.Static_Data();
-            subcommands = sd.variables.filter(v=>!v.adminOnly || ADMIN_MODE).map(v => {
+            subcommands = sd.variables.filter(v => !v.adminOnly || ADMIN_MODE).map(v => {
                 let innersubs = null;
                 if (v.name === "twitchlotto") {
                     innersubs = require("./supibot/commands/twitchlotto/definitions.js").flags.map(
