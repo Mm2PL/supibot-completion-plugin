@@ -25,6 +25,16 @@ function renameFlag(fname) {
 
 (async () => {
     const fs = require("fs");
+    const supicore = await import("./supibot/node_modules/supi-core/index.js");
+
+    globalThis.sb = {
+        Date: supicore.Date,
+        Error: supicore.Error,
+        Promise: supicore.Promise,
+        Got: supicore.Got,
+        Metrics: new supicore.Metrics(),
+        Utils: new supicore.Utils()
+    };
 
     const cmds = await (require('./supibot/commands').loadCommands({
         skipArchivedCommands: true
