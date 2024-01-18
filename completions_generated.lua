@@ -87,7 +87,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "upsert",
@@ -96,7 +96,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "check",
@@ -105,7 +105,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "publish",
@@ -114,7 +114,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "unpublish",
@@ -123,7 +123,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "copy",
@@ -132,7 +132,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "describe",
@@ -141,7 +141,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "link",
@@ -150,7 +150,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "delete",
@@ -159,7 +159,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "rename",
@@ -168,7 +168,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "restrict",
@@ -177,7 +177,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "unrestrict",
@@ -186,7 +186,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             },
             {
                 name = "run",
@@ -195,7 +195,7 @@ return {definitions = {
                 eat_before_sub_command = 0,
                 params = {},
                 flags = {},
-                subcommands = {}
+                subcommands = nil
             }
         },
         eat_before_sub_command = 0,
@@ -648,6 +648,15 @@ return {definitions = {
         pipe = false
     },
     {
+        name = "espn",
+        aliases = {"nba", "nfl", "nhl", "mlb"},
+        params = {{name = "date", type = "date"}, {name = "mode", type = "string"}},
+        flags = {"MENTION", "PIPE"},
+        subcommands = nil,
+        eat_before_sub_command = 0,
+        pipe = true
+    },
+    {
         name = "externalbot",
         aliases = {"ebot"},
         params = nil,
@@ -1093,15 +1102,6 @@ return {definitions = {
         pipe = false
     },
     {
-        name = "nba",
-        aliases = nil,
-        params = nil,
-        flags = {"MENTION", "PIPE"},
-        subcommands = nil,
-        eat_before_sub_command = 0,
-        pipe = true
-    },
-    {
         name = "necrodancer",
         aliases = {"nd", "ndr", "necrodancerreset"},
         params = {{name = "zone", type = "string"}},
@@ -1320,6 +1320,7 @@ return {definitions = {
             {name = "author", type = "string"},
             {name = "dateFrom", type = "date"},
             {name = "dateTo", type = "date"},
+            {name = "game", type = "string"},
             {name = "limit", type = "number"},
             {name = "linkOnly", type = "boolean"},
             {name = "period", type = "string"}
@@ -2189,7 +2190,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2198,7 +2199,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2207,7 +2208,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2216,7 +2217,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2225,7 +2226,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2234,7 +2235,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2243,7 +2244,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2252,7 +2253,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2261,7 +2262,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2270,7 +2271,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2279,7 +2280,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2288,7 +2289,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2297,7 +2298,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2306,7 +2307,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2315,7 +2316,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2324,7 +2325,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2333,7 +2334,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2342,7 +2343,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2351,7 +2352,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2360,7 +2361,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2369,7 +2370,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2378,7 +2379,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2387,7 +2388,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2396,7 +2397,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2405,7 +2406,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2414,7 +2415,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2423,7 +2424,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2432,7 +2433,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2441,7 +2442,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2450,7 +2451,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2459,7 +2460,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2468,7 +2469,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             },
             {
@@ -2477,7 +2478,7 @@ return {definitions = {
                 pipe = true,
                 params = {},
                 flags = {},
-                subcommands = {},
+                subcommands = nil,
                 eat_before_sub_command = 0
             }
         },
