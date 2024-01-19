@@ -1,12 +1,3 @@
-/*
-function startswith(str: any, start: String): boolean {
-    return str.sub(1, start.length) == start;
-}
-
-function endswith(str: any, fin: String) {
-    return str.sub(-fin.length) == fin;
-}
-*/
 namespace utils {
     export function arr_contains_any<T>(this: void, left: Array<T>, right: Array<T>): boolean {
         for (const e of right) {
