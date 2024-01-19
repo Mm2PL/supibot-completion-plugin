@@ -132,7 +132,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "upsert",
@@ -143,7 +143,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "check",
@@ -156,7 +156,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "publish",
@@ -165,7 +165,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "unpublish",
@@ -174,7 +174,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "copy",
@@ -185,7 +185,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "describe",
@@ -194,7 +194,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "link",
@@ -203,7 +203,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "delete",
@@ -214,7 +214,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "rename",
@@ -223,7 +223,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "restrict",
@@ -232,7 +232,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "unrestrict",
@@ -241,7 +241,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         },
         {
           "name": "run",
@@ -252,7 +252,7 @@
           "eat_before_sub_command": 0,
           "params": [],
           "flags": [],
-          "subcommands": []
+          "subcommands": null
         }
       ],
       "eat_before_sub_command": 0,
@@ -3860,7 +3860,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3869,7 +3869,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3882,7 +3882,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3895,7 +3895,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3904,7 +3904,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3915,7 +3915,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3929,7 +3929,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3941,7 +3941,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3952,7 +3952,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3964,7 +3964,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3976,7 +3976,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3987,7 +3987,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -3999,7 +3999,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4011,7 +4011,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4020,7 +4020,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4029,7 +4029,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4042,7 +4042,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4051,7 +4051,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4060,7 +4060,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4071,7 +4071,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4080,7 +4080,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4089,7 +4089,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4100,7 +4100,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4109,7 +4109,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4120,7 +4120,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4133,7 +4133,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4145,7 +4145,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4154,7 +4154,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4165,7 +4165,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4174,7 +4174,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4185,7 +4185,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4196,7 +4196,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         },
         {
@@ -4208,7 +4208,7 @@
           "pipe": true,
           "params": [],
           "flags": [],
-          "subcommands": [],
+          "subcommands": null,
           "eat_before_sub_command": 0
         }
       ],
@@ -4747,5 +4747,14 @@
   ],
   "excluded_flags": [
     "WHITELIST"
-  ]
+  ],
+  "config": {
+    "_comment_myUsername": "This is used for fetching your aliases at compiletime",
+    "myUsername": ""
+  },
+  "aliases": [],
+  "git": {
+    "commit": "573eb3a1b982e5c2a5cec1bc537fded200267f1f",
+    "version": "<Unknown>"
+  }
 }
