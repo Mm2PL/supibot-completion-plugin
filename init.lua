@@ -7,9 +7,10 @@ local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
 local generated = require("completions_generated")
-local function commands_and_their_aliases(_prefix, _out)
-    local prefix = _prefix == nil and "$" or _prefix
-    local out = _out == nil and utils.new_completion_list() or _out
+---
+-- @param prefix Prefix to add to completions, usually "$" or "". Do not use spaces.
+local function commands_and_their_aliases(prefix)
+    local out = utils.new_completion_list()
     for ____, val in ipairs(generated.definitions) do
         if not utils.arr_contains_any(val.flags, generated.excluded_flags) then
             local ____opt_0 = val.aliases
@@ -71,17 +72,17 @@ local function find_useful_completions(text, prefix, is_first_word)
         return utils.new_completion_list()
     end
     if is_first_word then
-        local out = commands_and_their_aliases(nil, nil)
+        local out = commands_and_their_aliases("$")
         out.hide_others = true
         return out
     end
     if __TS__StringStartsWith(text, "$") and __TS__StringEndsWith(text, " ") and utils.count_occurences_of_byte(text, " ") == 1 then
-        local out = commands_and_their_aliases(nil, nil)
+        local out = commands_and_their_aliases("$")
         out.hide_others = true
         return out
     end
     if __TS__StringStartsWith(text, "$ ") and utils.count_occurences_of_byte(text, " ") == 1 then
-        local out = commands_and_their_aliases("", nil)
+        local out = commands_and_their_aliases("")
         out.hide_others = true
         return out
     end
@@ -100,7 +101,7 @@ local function find_useful_completions(text, prefix, is_first_word)
         local m1 = string.match(text, "[|] ?[^ ]+$")
         local m2 = string.match(text, "pipe *[^ ]+$")
         if m1 ~= nil or m2 ~= nil then
-            local out = commands_and_their_aliases("", nil)
+            local out = commands_and_their_aliases("")
             out.hide_others = true
             return out
         end
@@ -155,7 +156,9 @@ local function find_useful_completions(text, prefix, is_first_word)
         return out
     end
     if command == "help" then
-        return commands_and_their_aliases("", nil)
+        local completions = commands_and_their_aliases("")
+        completions.hide_others = true
+        return completions
     end
     return utils.new_completion_list()
 end
