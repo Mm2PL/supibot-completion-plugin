@@ -188,8 +188,15 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         local out = utils.new_completion_list()
         print("DANKING!")
         for ____, val in ipairs(cmd_data.params) do
-            local ____out_values_10 = out.values
-            ____out_values_10[#____out_values_10 + 1] = val.name .. ":"
+            if val.type == "boolean" then
+                local ____out_values_14 = out.values
+                ____out_values_14[#____out_values_14 + 1] = val.name .. ":true"
+                local ____out_values_15 = out.values
+                ____out_values_15[#____out_values_15 + 1] = val.name .. ":false"
+            else
+                local ____out_values_16 = out.values
+                ____out_values_16[#____out_values_16 + 1] = val.name .. ":"
+            end
         end
         return out
     end
