@@ -224,8 +224,8 @@ local function filter(self, inp, filter)
             string.lower(c),
             filter
         ) then
-            local ____out_values_11 = out.values
-            ____out_values_11[#____out_values_11 + 1] = c
+            local ____out_values_17 = out.values
+            ____out_values_17[#____out_values_17 + 1] = c
         end
     end
     return out
