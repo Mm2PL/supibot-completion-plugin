@@ -67,6 +67,18 @@ local function lookup_subcommand(name, cmdData)
     end
     return nil
 end
+local function users_aliases(prefix)
+    local out = utils.new_completion_list()
+    if #generated.aliases == 0 then
+        return out
+    end
+    out.hide_others = true
+    for ____, alias in ipairs(generated.aliases) do
+        local ____out_values_7 = out.values
+        ____out_values_7[#____out_values_7 + 1] = prefix .. tostring(alias.name)
+    end
+    return out
+end
 local function try_subcommand_completions(text, sub_data, subcommand, tree, is_piped)
     while (sub_data and sub_data.subcommands) ~= nil and (sub_data and sub_data.subcommands) ~= nil do
         print(((("Iterating subcommand loop: at " .. table.concat(tree, "->")) .. " (") .. tostring(#sub_data.subcommands)) .. " subs)")
@@ -110,6 +122,9 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
     if not __TS__StringStartsWith(text, "$") then
         return utils.new_completion_list()
     end
+    if is_first_word and __TS__StringStartsWith(text, "$$") then
+        return users_aliases("$$")
+    end
     if is_first_word then
         local out = commands_and_their_aliases("$")
         out.hide_others = true
@@ -126,11 +141,11 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         return out
     end
     local _0, _1, command = string.find(text, "^[$] ?([^ ]+) ?")
-    print(("Command is: \"" .. tostring(command)) .. "\"")
     local is_piped = false
     local cmd_data = lookup_command(command)
+    print(("Command is: \"" .. tostring(command)) .. "\"")
     if cmd_data ~= nil and cmd_data.name == "alias" and command == "$" then
-        return utils.new_completion_list()
+        return users_aliases("")
     end
     if command == "pipe" then
         is_piped = true

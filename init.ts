@@ -42,7 +42,15 @@ type Command = {
     subcommands: Command[] | null,
     eat_before_sub_command: number,
     pipe: boolean,
-}
+};
+type SupinicComAlias = {
+    name: string,
+    invocation: string,
+    created: string,
+    edited: string | null,
+    link_author: string | null,
+    link_name: string | null,
+};
 
 /**
  * Look up a command by name from the generated definitions
@@ -78,6 +86,17 @@ function lookup_subcommand(this: void, name: string, cmdData: Command): Command 
         }
     }
     return null;
+}
+
+function users_aliases(this: void, prefix: string): c2.CompletionList {
+    const out = utils.new_completion_list();
+    if (generated.aliases.length === 0)
+        return out;
+    out.hide_others = true;
+    for (const alias of <any[]>generated.aliases) {
+        out.values.push(prefix + alias.name);
+    }
+    return out;
 }
 
 function try_subcommand_completions(this: void, text: string, sub_data: Command | null, subcommand: string, tree: string[], is_piped: boolean): c2.CompletionList | null {
@@ -125,8 +144,10 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
     if (!text.startsWith("$")) {
         return utils.new_completion_list();
     }
-    //print("text is: ", inspect(text));
-    //print("prefix is: ", inspect(prefix));
+    // Alias invocation like "$$ASD"
+    if (is_first_word && text.startsWith('$$')) {
+        return users_aliases("$$");
+    }
 
     if (is_first_word) {
         let out = commands_and_their_aliases("$");
@@ -148,12 +169,11 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
         return out;
     }
     let [_0, _1, command] = string.find(text, "^[$] ?([^ ]+) ?");
-    print("Command is: \"" + command + "\"");
     let is_piped = false;
     let cmd_data = lookup_command(<string>command);
+    print(`Command is: "${command}"`);
     if (cmd_data !== null && cmd_data.name === "alias" && command === "$") {
-        // we are in alias invocation, do not currently have the data for this
-        return utils.new_completion_list();
+        return users_aliases("");
     }
 
     // meta commands

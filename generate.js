@@ -22,9 +22,9 @@ const ADMIN_MODE = false;
 function renameFlag(fname) {
     return fname.replace("-", "_").toUpperCase();
 }
+const fs = require("fs");
 
 (async () => {
-    const fs = require("fs");
     const supicore = await import("./supibot/node_modules/supi-core/index.js");
 
     globalThis.sb = {
@@ -150,8 +150,37 @@ function renameFlag(fname) {
     }
 
     const defs = definitions.map(definitionToJson);
+
+    let aliases = [];
+    const config = require('./config.json');
+    if (!config.myUsername) {
+        console.log("Skipping generation of user-specific data, no username given in config.");
+    } else {
+        const r = await fetch(`https://supinic.com/api/bot/user/${config.myUsername}/alias/list`);
+        if (r.status !== 200) {
+            console.log(`supinic.com api unexpectidly returned ${r.status}, abort`);
+            return;
+        }
+        const data = await r.json();
+        console.log(`Downloaded ${data.data.length} aliases from supinic.com`);
+        aliases = data.data.map(inp => {
+            return {
+                name: inp.name,
+                created: inp.created,
+                edited: inp.edited,
+                link_author: inp.linkAuthor,
+                link_name: inp.linkName,
+
+                invocation: inp.invocation,
+            }
+        });
+    }
     fs.writeFileSync("completions_generated.json", JSON.stringify({
         definitions: defs,
         excluded_flags: EXCLUDE_FLAGS,
+
+        // user specific
+        config,
+        aliases,
     }));
 })();
