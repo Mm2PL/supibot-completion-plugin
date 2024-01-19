@@ -211,6 +211,22 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
         return maybe_comps;
     }
     print(`Tree is ${sub_command_tree.join("->")}`);
+    // Possibly complete alias names as arguments to $alias
+    if (sub_command_tree[0] === 'alias') {
+        // Check if we are at the first arg of the sub
+        const spaces = utils.count_occurences_of_byte(text, " ");
+        // $alias describe |
+        //       1        2
+        if (spaces == 2) {
+            const sub = sub_command_tree[1];
+            const existing_only = (
+                sub === 'describe' || sub === 'delete'
+                || sub === 'rename' || sub === 'unrestrict'
+                || sub === 'run' || sub === 'edit'
+            );
+            let out = users_aliases("");
+            out.hide_others = existing_only;
+            print("Triggered special case for alias completion");
             return out;
         }
     }

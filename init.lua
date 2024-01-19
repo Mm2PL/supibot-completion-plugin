@@ -181,6 +181,14 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         return maybe_comps
     end
     print("Tree is " .. table.concat(sub_command_tree, "->"))
+    if sub_command_tree[1] == "alias" then
+        local spaces = utils.count_occurences_of_byte(text, " ")
+        if spaces == 2 then
+            local sub = sub_command_tree[2]
+            local existing_only = sub == "describe" or sub == "delete" or sub == "rename" or sub == "unrestrict" or sub == "run" or sub == "edit"
+            local out = users_aliases("")
+            out.hide_others = existing_only
+            print("Triggered special case for alias completion")
             return out
         end
     end
