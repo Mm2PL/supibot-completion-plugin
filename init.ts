@@ -80,7 +80,48 @@ function lookup_subcommand(this: void, name: string, cmdData: Command): Command 
     return null;
 }
 
-function find_useful_completions(this: void, text: string, prefix: string, is_first_word: boolean): c2.CompletionList {
+function try_subcommand_completions(this: void, text: string, sub_data: Command | null, subcommand: string, tree: string[], is_piped: boolean): c2.CompletionList | null {
+    while (sub_data?.subcommands !== null && sub_data?.subcommands !== undefined) {
+        print(`Iterating subcommand loop: at ${tree.join("->")} (${sub_data.subcommands.length} subs)`);
+
+        const WORD = " [^ ]+";
+        const pat_end = subcommand + string.rep(WORD, sub_data.eat_before_sub_command + 1) + "$";
+        print(`Created pattern: "${pat_end}" for ${subcommand}, text is "${text}"`);
+        let [temp] = string.match(text, pat_end);
+        if (temp !== null) {
+            print(`matched subcmd "${temp}" from "${pat_end}"`);
+            let out = utils.new_completion_list();
+            out.hide_others = true;
+            for (const val of sub_data.subcommands) {
+                if (is_piped && !val.pipe) {
+                    continue;
+                }
+                out.values.push(
+                    val.name + " "
+                );
+
+                for (const v2 of val.aliases ?? []) {
+                    out.values.push(v2 + " ");
+                }
+            }
+
+            return out;
+        }
+
+        const pat_more = subcommand + string.rep(WORD, sub_data.eat_before_sub_command) + " ([^ ]+)";
+        [subcommand] = string.match(text, pat_more);
+        sub_data = lookup_subcommand(subcommand, sub_data);
+        if (sub_data == null) {
+            print(`No more sub commands at ${tree.join("->")} with pattern "${pat_more}"`);
+            break;
+        }
+        print(`Have more sub commands at ${tree.join("->")} -> "${subcommand}"`);
+        tree.push(subcommand);
+    }
+    return null;
+}
+
+function find_useful_completions(this: void, text: string, prefix: string, cursor_position: number, is_first_word: boolean): c2.CompletionList {
     if (!text.startsWith("$")) {
         return utils.new_completion_list();
     }
@@ -142,36 +183,15 @@ function find_useful_completions(this: void, text: string, prefix: string, is_fi
         cmd_data = lookup_command(<string>command);
     }
 
-    while (cmd_data?.subcommands !== null && cmd_data?.subcommands !== undefined) {
-        //print(cmd_data, " has subcommands: ", inspect(cmd_data.subcommands));
+    const sub_command_tree: string[] = [<string>command];
 
-        const WORD = " [^ ]+";
-        const pat = command + string.rep(WORD, cmd_data.eat_before_sub_command+1) + "$";
-        let [temp] = string.match(text, pat);
-        if (temp !== null) {
-            print("matched subcmd ", temp, " from ", pat)
-            let out = utils.new_completion_list();
-            out.hide_others = true;
-            for (const val of cmd_data.subcommands) {
-                if (is_piped && !val.pipe) {
-                    continue;
-                }
-                out.values.push(
-                    val.name + " "
-                );
-
-                for (const v2 of val.aliases ?? []) {
-                    out.values.push(v2 + " ");
-                }
-            }
-
+    const maybe_comps = try_subcommand_completions(text, cmd_data, <string>command, sub_command_tree, is_piped);
+    if (maybe_comps !== null) {
+        // have subcommands to complete
+        return maybe_comps;
+    }
+    print(`Tree is ${sub_command_tree.join("->")}`);
             return out;
-        }
-
-        [command] = string.match(text, command + string.rep(WORD, cmd_data.eat_before_sub_command) + " ([^ ]+)");
-        cmd_data = lookup_subcommand(command, cmd_data);
-        if (cmd_data == null) {
-            break;
         }
     }
     if (cmd_data !== null && cmd_data.params !== null && cmd_data.params.length != 0) {
@@ -214,7 +234,7 @@ c2.register_callback(
     c2.EventType.CompletionRequested,
     (text: string, full_text: string, position: number, is_first_word: boolean) => {
         c2.log(c2.LogLevel.Debug, "doing completions: ", text, full_text, position, is_first_word);
-        return filter(find_useful_completions(full_text, text, is_first_word), text);
+        return filter(find_useful_completions(full_text, text, position, is_first_word), text);
     }
 );
 

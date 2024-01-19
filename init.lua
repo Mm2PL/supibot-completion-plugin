@@ -67,7 +67,46 @@ local function lookup_subcommand(name, cmdData)
     end
     return nil
 end
-local function find_useful_completions(text, prefix, is_first_word)
+local function try_subcommand_completions(text, sub_data, subcommand, tree, is_piped)
+    while (sub_data and sub_data.subcommands) ~= nil and (sub_data and sub_data.subcommands) ~= nil do
+        print(((("Iterating subcommand loop: at " .. table.concat(tree, "->")) .. " (") .. tostring(#sub_data.subcommands)) .. " subs)")
+        local WORD = " [^ ]+"
+        local pat_end = (subcommand .. string.rep(WORD, sub_data.eat_before_sub_command + 1)) .. "$"
+        print(((((("Created pattern: \"" .. pat_end) .. "\" for ") .. subcommand) .. ", text is \"") .. text) .. "\"")
+        local temp = string.match(text, pat_end)
+        if temp ~= nil then
+            print(((("matched subcmd \"" .. temp) .. "\" from \"") .. pat_end) .. "\"")
+            local out = utils.new_completion_list()
+            out.hide_others = true
+            for ____, val in ipairs(sub_data.subcommands) do
+                do
+                    if is_piped and not val.pipe then
+                        goto __continue33
+                    end
+                    local ____out_values_8 = out.values
+                    ____out_values_8[#____out_values_8 + 1] = val.name .. " "
+                    for ____, v2 in ipairs(val.aliases or ({})) do
+                        local ____out_values_9 = out.values
+                        ____out_values_9[#____out_values_9 + 1] = v2 .. " "
+                    end
+                end
+                ::__continue33::
+            end
+            return out
+        end
+        local pat_more = (subcommand .. string.rep(WORD, sub_data.eat_before_sub_command)) .. " ([^ ]+)"
+        subcommand = string.match(text, pat_more)
+        sub_data = lookup_subcommand(subcommand, sub_data)
+        if sub_data == nil then
+            print(((("No more sub commands at " .. table.concat(tree, "->")) .. " with pattern \"") .. pat_more) .. "\"")
+            break
+        end
+        print(((("Have more sub commands at " .. table.concat(tree, "->")) .. " -> \"") .. subcommand) .. "\"")
+        tree[#tree + 1] = subcommand
+    end
+    return nil
+end
+local function find_useful_completions(text, prefix, cursor_position, is_first_word)
     if not __TS__StringStartsWith(text, "$") then
         return utils.new_completion_list()
     end
@@ -113,37 +152,19 @@ local function find_useful_completions(text, prefix, is_first_word)
         end
         cmd_data = lookup_command(command)
     end
-    while (cmd_data and cmd_data.subcommands) ~= nil and (cmd_data and cmd_data.subcommands) ~= nil do
-        local WORD = " [^ ]+"
-        local pat = (tostring(command) .. string.rep(WORD, cmd_data.eat_before_sub_command + 1)) .. "$"
-        local temp = string.match(text, pat)
-        if temp ~= nil then
-            print("matched subcmd ", temp, " from ", pat)
-            local out = utils.new_completion_list()
-            out.hide_others = true
-            for ____, val in ipairs(cmd_data.subcommands) do
-                do
-                    if is_piped and not val.pipe then
-                        goto __continue38
-                    end
-                    local ____out_values_4 = out.values
-                    ____out_values_4[#____out_values_4 + 1] = val.name .. " "
-                    for ____, v2 in ipairs(val.aliases or ({})) do
-                        local ____out_values_5 = out.values
-                        ____out_values_5[#____out_values_5 + 1] = v2 .. " "
-                    end
-                end
-                ::__continue38::
-            end
+    local sub_command_tree = {command}
+    local maybe_comps = try_subcommand_completions(
+        text,
+        cmd_data,
+        command,
+        sub_command_tree,
+        is_piped
+    )
+    if maybe_comps ~= nil then
+        return maybe_comps
+    end
+    print("Tree is " .. table.concat(sub_command_tree, "->"))
             return out
-        end
-        command = string.match(
-            text,
-            (tostring(command) .. string.rep(WORD, cmd_data.eat_before_sub_command)) .. " ([^ ]+)"
-        )
-        cmd_data = lookup_subcommand(command, cmd_data)
-        if cmd_data == nil then
-            break
         end
     end
     if cmd_data ~= nil and cmd_data.params ~= nil and #cmd_data.params ~= 0 then
@@ -190,7 +211,7 @@ c2.register_callback(
         )
         return filter(
             nil,
-            find_useful_completions(full_text, text, is_first_word),
+            find_useful_completions(full_text, text, position, is_first_word),
             text
         )
     end
