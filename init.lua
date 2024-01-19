@@ -36,19 +36,21 @@ local function commands_and_their_aliases(prefix)
     end
     return out
 end
+--- Look up a command by name from the generated definitions
 local function lookup_command(name)
     c2.log(c2.LogLevel.Debug, "Looking up ", name)
     for ____, c in ipairs(generated.definitions) do
         if c.name == name then
             return c
         end
-        local ____opt_2 = c.aliases
-        if ____opt_2 and __TS__ArrayIncludes(c.aliases, name) then
+        local ____opt_5 = c.aliases
+        if ____opt_5 and __TS__ArrayIncludes(c.aliases, name) then
             return c
         end
     end
     return nil
 end
+--- Look up a subcommand of a given command by name
 local function lookup_subcommand(name, cmdData)
     if cmdData.subcommands == nil then
         return nil
