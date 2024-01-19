@@ -200,7 +200,7 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         end
         return out
     end
-    if command == "help" then
+    if command == "help" or command == "code" then
         local completions = commands_and_their_aliases("")
         completions.hide_others = true
         return completions

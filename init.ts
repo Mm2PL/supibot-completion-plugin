@@ -229,7 +229,7 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
     }
 
     // special cases
-    if (command == "help") {
+    if (command == "help" || command == "code") {
         let completions = commands_and_their_aliases("");
         completions.hide_others = true;
         return completions;
