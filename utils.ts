@@ -30,6 +30,15 @@ namespace utils {
     export function new_completion_list(this: void): c2.CompletionList {
         return {hide_others: false, values: []};
     }
+
+    export function has_load(this: void): boolean {
+        try{
+            load("");
+            return true;
+        }catch(e) {
+            return false;
+        }
+    }
 }
 
 export default utils;

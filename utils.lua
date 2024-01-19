@@ -29,6 +29,23 @@ do
     function utils.new_completion_list()
         return {hide_others = false, values = {}}
     end
+    function utils.has_load()
+        do
+            local function ____catch(e)
+                return true, false
+            end
+            local ____try, ____hasReturned, ____returnValue = pcall(function()
+                load("")
+                return true, true
+            end)
+            if not ____try then
+                ____hasReturned, ____returnValue = ____catch(____hasReturned)
+            end
+            if ____hasReturned then
+                return ____returnValue
+            end
+        end
+    end
 end
 ____exports.default = utils
 return ____exports

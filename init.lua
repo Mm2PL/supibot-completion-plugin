@@ -7,26 +7,6 @@ local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
 local generated = require("completions_generated")
-local function cmd_eval(ctx)
-    table.remove(ctx.words, 1)
-    local input = table.concat(ctx.words, " ")
-    local source = "return " .. input
-    c2.system_msg(ctx.channel_name, ">>>" .. input)
-    local f
-    local err
-    f, err = load(source)
-    if f == nil then
-        c2.system_msg(
-            ctx.channel_name,
-            "!<" .. tostring(err)
-        )
-    else
-        c2.system_msg(
-            ctx.channel_name,
-            "<< " .. tostring(f(nil))
-        )
-    end
-end
 local function commands_and_their_aliases(_prefix, _out)
     local prefix = _prefix == nil and "$" or _prefix
     local out = _out == nil and utils.new_completion_list() or _out
@@ -212,6 +192,28 @@ c2.register_callback(
         )
     end
 )
-c2.register_command("/sbc:eval", cmd_eval)
 c2.system_msg("supinic", "[Completion loaded]")
+if utils.has_load() then
+    local function cmd_eval(ctx)
+        table.remove(ctx.words, 1)
+        local input = table.concat(ctx.words, " ")
+        local source = "return " .. input
+        c2.system_msg(ctx.channel_name, ">>>" .. input)
+        local f
+        local err
+        f, err = load(source)
+        if f == nil then
+            c2.system_msg(
+                ctx.channel_name,
+                "!<" .. tostring(err)
+            )
+        else
+            c2.system_msg(
+                ctx.channel_name,
+                "<< " .. tostring(f(nil))
+            )
+        end
+    end
+    c2.register_command("/sbc:eval", cmd_eval)
+end
 return ____exports

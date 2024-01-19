@@ -2,20 +2,6 @@
 import utils from './utils';
 import * as generated from './completions_generated.json';
 
-function cmd_eval(this: void, ctx: c2.CommandContext) {
-    table.remove(ctx.words, 1);
-    let input: string = ctx.words.join(" ");
-    let source = "return " + input;
-    c2.system_msg(ctx.channel_name, ">>>" + input);
-    let f: (() => any) | undefined;
-    let err: any;
-    [f, err] = load(source);
-    if (f === undefined) {
-        c2.system_msg(ctx.channel_name, "!<" + tostring(err));
-    } else {
-        c2.system_msg(ctx.channel_name, "<< " + tostring(f()));
-    }
-}
 
 function commands_and_their_aliases(this: void, _prefix: string | null, _out: c2.CompletionList | null): c2.CompletionList {
     let prefix: string = _prefix === null ? "$" : _prefix;
@@ -55,6 +41,9 @@ type Command = {
     pipe: boolean,
 }
 
+/**
+ * Look up a command by name from the generated definitions
+ */
 function lookup_command(this: void, name: string): Command | null {
     c2.log(c2.LogLevel.Debug, "Looking up ", name);
     for (const c of generated.definitions) {
@@ -68,6 +57,9 @@ function lookup_command(this: void, name: string): Command | null {
     return null;
 }
 
+/**
+ * Look up a subcommand of a given command by name
+ */
 function lookup_subcommand(this: void, name: string, cmdData: Command): Command | null {
     if (cmdData.subcommands === null) return null;
     for (const c of cmdData.subcommands) {
@@ -221,6 +213,22 @@ c2.register_callback(
     }
 );
 
+if (utils.has_load()) {
+    function cmd_eval(this: void, ctx: c2.CommandContext) {
+        table.remove(ctx.words, 1);
+        let input: string = ctx.words.join(" ");
+        let source = "return " + input;
+        c2.system_msg(ctx.channel_name, ">>>" + input);
+        let f: (() => any) | undefined;
+        let err: any;
+        [f, err] = load(source);
+        if (f === undefined) {
+            c2.system_msg(ctx.channel_name, "!<" + tostring(err));
+        } else {
+            c2.system_msg(ctx.channel_name, "<< " + tostring(f()));
+        }
+    }
 
-c2.register_command("/sbc:eval", cmd_eval);
 c2.system_msg("supinic", "[Completion loaded]");
+    c2.register_command("/sbc:eval", cmd_eval);
+}
