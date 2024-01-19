@@ -2776,5 +2776,5 @@ return {
     excluded_flags = {"WHITELIST"},
     config = {_comment_myUsername = "This is used for fetching your aliases at compiletime", myUsername = ""},
     aliases = {},
-    git = {commit = "573eb3a1b982e5c2a5cec1bc537fded200267f1f", version = "<Unknown>"}
+    git = {commit = "27c97c9d9e1662d974edd3dcda9c2a49a5935fac", version = "v1.0.0"}
 }
