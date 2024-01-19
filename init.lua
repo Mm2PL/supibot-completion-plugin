@@ -231,7 +231,6 @@ c2.register_callback(
         )
     end
 )
-c2.system_msg("supinic", "[Completion loaded]")
 if utils.has_load() then
     local function cmd_eval(ctx)
         table.remove(ctx.words, 1)
@@ -255,4 +254,5 @@ if utils.has_load() then
     end
     c2.register_command("/sbc:eval", cmd_eval)
 end
+c2.system_msg("supinic", ("[Supibot completion " .. generated.git.version) .. " loaded]")
 return ____exports

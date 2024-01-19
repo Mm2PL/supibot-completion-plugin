@@ -23,6 +23,7 @@ function renameFlag(fname) {
     return fname.replace("-", "_").toUpperCase();
 }
 const fs = require("fs");
+const child_process = require('node:child_process');
 
 (async () => {
     const supicore = await import("./supibot/node_modules/supi-core/index.js");
@@ -175,6 +176,23 @@ const fs = require("fs");
             }
         });
     }
+    const git = {
+        commit: "<No data>",
+
+        // last v
+        version: "<Unknown>",
+    };
+    try {
+        git.version = child_process.execSync('git describe --abbrev=0 --dirty').toString().trim();
+    } catch (e) {
+        // no git
+    }
+    try {
+        git.commit = child_process.execSync('git rev-parse HEAD').toString().trim();
+    } catch (e) {
+        // no git
+    }
+
     fs.writeFileSync("completions_generated.json", JSON.stringify({
         definitions: defs,
         excluded_flags: EXCLUDE_FLAGS,
@@ -182,5 +200,6 @@ const fs = require("fs");
         // user specific
         config,
         aliases,
+        git,
     }));
 })();

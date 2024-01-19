@@ -274,6 +274,6 @@ if (utils.has_load()) {
         }
     }
 
-c2.system_msg("supinic", "[Completion loaded]");
     c2.register_command("/sbc:eval", cmd_eval);
 }
+c2.system_msg("supinic", `[Supibot completion ${generated.git.version} loaded]`);
