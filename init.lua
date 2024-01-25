@@ -6,6 +6,8 @@ local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
 local generated = require("completions_generated")
+local ____percommand = require("percommand")
+local commands = ____percommand.default
 --- Look up a command by name from the generated definitions
 local function lookup_command(name)
     c2.log(c2.LogLevel.Debug, "Looking up ", name)
@@ -161,6 +163,21 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
             print("Triggered special case for alias completion")
             return out
         end
+    end
+    if (cmd_data and cmd_data.name) == "ban" then
+        return commands.ban(cmd_data, command, text, prefix)
+    end
+    if (cmd_data and cmd_data.name) == "block" then
+        return commands.block(cmd_data, text, prefix)
+    end
+    if (cmd_data and cmd_data.name) == "unping" then
+        return commands.unping(cmd_data, text, prefix)
+    end
+    if (cmd_data and cmd_data.name) == "optout" then
+        return commands.optout(cmd_data, text, prefix, cursor_position)
+    end
+    if (cmd_data and cmd_data.name) == "unmention" then
+        return commands.unmention(cmd_data, text, prefix)
     end
     if cmd_data ~= nil and cmd_data.params ~= nil and #cmd_data.params ~= 0 then
         local out = utils.new_completion_list()

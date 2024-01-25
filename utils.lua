@@ -1,5 +1,16 @@
 local ____lualib = require("lualib_bundle")
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
+local Map = ____lualib.Map
+local __TS__New = ____lualib.__TS__New
+local __TS__StringAccess = ____lualib.__TS__StringAccess
+local __TS__StringSlice = ____lualib.__TS__StringSlice
+local Error = ____lualib.Error
+local RangeError = ____lualib.RangeError
+local ReferenceError = ____lualib.ReferenceError
+local SyntaxError = ____lualib.SyntaxError
+local TypeError = ____lualib.TypeError
+local URIError = ____lualib.URIError
+local __TS__StringSplit = ____lualib.__TS__StringSplit
 local __TS__ArrayEvery = ____lualib.__TS__ArrayEvery
 local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local ____exports = {}
@@ -48,6 +59,62 @@ do
                 return ____returnValue
             end
         end
+    end
+    function utils.parse_params(text, expected_names)
+        local quoted = false
+        local lastspace = 0
+        local currentname = nil
+        local value_begin = nil
+        local last_param_end = 0
+        local non_param_args = {}
+        local out = __TS__New(Map)
+        do
+            local i = 0
+            while i < #text do
+                local char = __TS__StringAccess(text, i)
+                if char == " " then
+                    lastspace = i
+                    if not quoted and currentname ~= nil then
+                        out:set(
+                            currentname,
+                            __TS__StringSlice(text, value_begin or 0, i)
+                        )
+                        currentname = nil
+                        last_param_end = i
+                    end
+                elseif char == ":" and not quoted then
+                    local name = __TS__StringSlice(text, lastspace + 1, i)
+                    if __TS__ArrayIncludes(expected_names, name) then
+                        non_param_args[#non_param_args + 1] = __TS__StringSlice(text, last_param_end, i)
+                        currentname = name
+                        value_begin = i + 1
+                    end
+                elseif char == "\"" then
+                    quoted = not quoted
+                end
+                i = i + 1
+            end
+        end
+        if quoted then
+            error(
+                __TS__New(Error, "Unclosed quote"),
+                0
+            )
+        end
+        if currentname ~= nil then
+            out:set(
+                currentname,
+                __TS__StringSlice(text, value_begin or 0, #text)
+            )
+        end
+        non_param_args[#non_param_args + 1] = __TS__StringSlice(text, last_param_end, #text)
+        return {
+            params = out,
+            argv = __TS__StringSplit(
+                table.concat(non_param_args, " "),
+                " "
+            )
+        }
     end
     utils.REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG"
     local function get_excluded_flags()

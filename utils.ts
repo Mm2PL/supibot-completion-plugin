@@ -32,6 +32,54 @@ namespace utils {
             return false;
         }
     }
+
+    export type CommandArgs = {
+        params: Map<string, string>,
+        argv: Array<string>
+    }
+
+    export function parse_params(this: void, text: string, expected_names: Array<string>): CommandArgs {
+        let quoted = false;
+        let lastspace = 0;
+        let currentname = null;
+        let value_begin = null;
+        let last_param_end = 0;
+        let non_param_args = [];
+        const out = new Map();
+        for (let i = 0; i < text.length; i++) {
+            const char = text[i];
+            if (char === ' ') {
+                lastspace = i;
+                if (!quoted && currentname !== null) {
+                    // end of param value
+                    out.set(currentname, text.slice(value_begin ?? 0, i));
+                    currentname = null;
+                    last_param_end = i;
+                }
+            }
+            else if (char === ':' && !quoted) {
+                // param:VALUE
+                const name = text.slice(lastspace + 1, i);
+                //print(`begin param? "${name}" ex: "${expected_names.join(";")}"`);
+                if (expected_names.includes(name)) {
+                    non_param_args.push(text.slice(last_param_end, i));
+                    currentname = name;
+                    value_begin = i + 1;
+                }
+            } else if (char === '"') {
+                quoted = !quoted;
+            }
+        }
+        if (quoted) {
+            throw new Error('Unclosed quote');
+        }
+        if (currentname !== null) {
+            out.set(currentname, text.slice(value_begin ?? 0, text.length));
+        }
+        non_param_args.push(text.slice(last_param_end, text.length));
+        return {params: out, argv: non_param_args.join(" ").split(" ")};
+    }
+
     export const REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG";
     function get_excluded_flags(this: void): Array<string> {
         if (generated.config.rewrite_gift) {

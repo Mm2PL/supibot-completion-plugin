@@ -1,9 +1,10 @@
 //import {inspect} from './inspect';
 import utils from './utils';
 import * as generated from './completions_generated.json';
+import commands from './percommand';
 
 
-type Command = {
+export type Command = {
     name: string,
     aliases: string[] | null,
     params: {
@@ -202,6 +203,23 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
             return out;
         }
     }
+
+    if (cmd_data?.name === 'ban') {
+        return commands.ban(cmd_data, <string>command, text, prefix);
+    }
+    if (cmd_data?.name === 'block') {
+        return commands.block(cmd_data, text, prefix);
+    }
+    if (cmd_data?.name === 'unping') {
+        return commands.unping(cmd_data, text, prefix);
+    }
+    if (cmd_data?.name === 'optout') {
+        return commands.optout(cmd_data, text, prefix, cursor_position);
+    }
+    if (cmd_data?.name === 'unmention') {
+        return commands.unmention(cmd_data, text, prefix);
+    }
+
     if (cmd_data !== null && cmd_data.params !== null && cmd_data.params.length != 0) {
         let out = utils.new_completion_list();
         print("DANKING!")
