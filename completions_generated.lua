@@ -784,7 +784,80 @@ return {
             aliases = {},
             params = {{name = "skipStory", type = "boolean"}},
             flags = {"MENTION", "PIPE"},
-            subcommands = nil,
+            subcommands = {
+                {
+                    name = "buy",
+                    aliases = {},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "config",
+                    aliases = {"setup"},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "fish",
+                    aliases = {},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "leaderboard",
+                    aliases = {"top"},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "sell",
+                    aliases = {},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "show",
+                    aliases = {"count", "display", "collection"},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "stats",
+                    aliases = {"statistics"},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                },
+                {
+                    name = "trap",
+                    aliases = {"net", "trawl"},
+                    pipe = true,
+                    eat_before_sub_command = 0,
+                    params = {},
+                    flags = {},
+                    subcommands = {}
+                }
+            },
             eat_before_sub_command = 0,
             pipe = true
         },
@@ -1190,7 +1263,13 @@ return {
         {
             name = "optout",
             aliases = {"unoptout"},
-            params = nil,
+            params = {
+                {name = "command", type = "string"},
+                {name = "channel", type = "string"},
+                {name = "id", type = "number"},
+                {name = "invocation", type = "string"},
+                {name = "platform", type = "string"}
+            },
             flags = {"MENTION", "SKIP_BANPHRASE"},
             subcommands = nil,
             eat_before_sub_command = 0,
@@ -2170,7 +2249,7 @@ return {
         {
             name = "subscribe",
             aliases = {"unsubscribe"},
-            params = nil,
+            params = {{name = "skipPrivateReminder", type = "boolean"}},
             flags = {"MENTION", "PIPE", "SKIP_BANPHRASE"},
             subcommands = nil,
             eat_before_sub_command = 0,
@@ -2814,7 +2893,7 @@ return {
         }
     },
     excluded_flags = {"WHITELIST"},
-    config = {_comment_my_username = "This is used for fetching your aliases at compiletime", my_username = ""},
+    config = {_comment_my_username = "This is used for fetching your aliases at compiletime", my_username = "", _comment_rewrite_gift = "This will make the plugin rewrite usages of `$gift` as `$cookie gift`. This is a runtime config.", rewrite_gift = false},
     aliases = {},
-    git = {commit = "db223c922b71f5d909e5adf060f3ce753dfa3730", version = "v1.0.0-dirty"}
+    git = {commit = "81bae8e76bd6717ad23dbcf2449beb8386f8405b", version = "v1.0.0-dirty"}
 }

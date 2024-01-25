@@ -169,6 +169,17 @@ const child_process = require('node:child_process');
                     subcommands: null,
                 }
             ];
+        } else if (def.Name === 'fish') {
+            const scmds = require("./supibot/commands/fish/subcommands");
+            subcommands = scmds.subcommands.map(it => ({
+                name: it.name,
+                aliases: it.aliases,
+                pipe: true,
+                eat_before_sub_command: 0,
+                params: [],
+                flags: [],
+                subcommands: [],
+            }));
         }
 
         return {
