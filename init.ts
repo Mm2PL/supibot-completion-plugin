@@ -292,7 +292,7 @@ if (generated.config.rewrite_gift) {
         }
         const type = ctx.words.shift();
         if (type !== 'cookie') {
-            c2.system_msg(ctx.channel_name, usage + `. Unknown type "${type}".`)
+            c2.system_msg(ctx.channel_name, usage + `. Unknown type "${type}".`);
             return;
         }
         const target = ctx.words.shift();
