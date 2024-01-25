@@ -241,5 +241,34 @@ if utils.has_load() then
     end
     c2.register_command("/sbc:eval", cmd_eval)
 end
+if generated.config.rewrite_gift then
+    local function cmd_fake_gift(ctx)
+        local invocation = table.remove(ctx.words, 1)
+        local usage = ("This is Supibot-completion-plugin fake $gift/$give. Usage: " .. tostring(invocation)) .. " cookie <name>"
+        if #ctx.words == 0 then
+            c2.system_msg(ctx.channel_name, usage)
+            return
+        end
+        local ____type = table.remove(ctx.words, 1)
+        if ____type ~= "cookie" then
+            c2.system_msg(
+                ctx.channel_name,
+                usage .. (". Unknown type \"" .. tostring(____type)) .. "\"."
+            )
+            return
+        end
+        local target = table.remove(ctx.words, 1)
+        if target == nil then
+            c2.system_msg(ctx.channel_name, usage .. ". Missing username.")
+            return
+        end
+        c2.system_msg(
+            ctx.channel_name,
+            "$cookie gift " .. tostring(target)
+        )
+    end
+    c2.register_command("$gift", cmd_fake_gift)
+    c2.register_command("$give", cmd_fake_gift)
+end
 c2.system_msg("supinic", ("[Supibot completion " .. generated.git.version) .. " loaded]")
 return ____exports

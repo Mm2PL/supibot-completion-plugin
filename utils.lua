@@ -49,6 +49,15 @@ do
             end
         end
     end
+    utils.REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG"
+    local function get_excluded_flags()
+        if generated.config.rewrite_gift then
+            return generated.excluded_flags
+        end
+        local temp = {table.unpack(generated.excluded_flags)}
+        temp[#temp + 1] = utils.REQUIRE_LEGACY_GIVE_CFG
+        return temp
+    end
     ---
     -- @param prefix Prefix to add to completions, usually "$" or "". Do not use spaces.
     function utils.commands_and_their_aliases(prefix, required_flags)
@@ -56,6 +65,7 @@ do
             required_flags = {}
         end
         local out = utils.new_completion_list()
+        local excl_flags = get_excluded_flags()
         for ____, val in ipairs(generated.definitions) do
             do
                 if #required_flags ~= 0 and not __TS__ArrayEvery(
@@ -64,7 +74,7 @@ do
                 ) then
                     goto __continue26
                 end
-                if not utils.arr_contains_any(val.flags, generated.excluded_flags) then
+                if not utils.arr_contains_any(val.flags, excl_flags) then
                     local ____opt_0 = val.aliases
                     local lowerAlias = ____opt_0 and __TS__ArrayFilter(
                         val.aliases,

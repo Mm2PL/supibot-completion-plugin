@@ -264,4 +264,27 @@ if (utils.has_load()) {
 
     c2.register_command("/sbc:eval", cmd_eval);
 }
+if (generated.config.rewrite_gift) {
+    function cmd_fake_gift(this: void, ctx: c2.CommandContext) {
+        const invocation = ctx.words.shift(); // remove invocation
+        const usage = `This is Supibot-completion-plugin fake $gift/$give. Usage: ${invocation} cookie <name>`;
+        if (ctx.words.length === 0) {
+            c2.system_msg(ctx.channel_name, usage);
+            return;
+        }
+        const type = ctx.words.shift();
+        if (type !== 'cookie') {
+            c2.system_msg(ctx.channel_name, usage + `. Unknown type "${type}".`)
+            return;
+        }
+        const target = ctx.words.shift();
+        if (target === null) {
+            c2.system_msg(ctx.channel_name, usage + `. Missing username.`);
+            return;
+        }
+        c2.system_msg(ctx.channel_name, `$cookie gift ${target}`);
+    }
+    c2.register_command("$gift", cmd_fake_gift);
+    c2.register_command("$give", cmd_fake_gift);
+}
 c2.system_msg("supinic", `[Supibot completion ${generated.git.version} loaded]`);

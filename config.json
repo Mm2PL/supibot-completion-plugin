@@ -1,4 +1,6 @@
 {
     "_comment_my_username": "This is used for fetching your aliases at compiletime",
-    "my_username": ""
+    "my_username": "",
+    "_comment_rewrite_gift": "This will make the plugin rewrite usages of `$gift` as `$cookie gift`. This is a runtime config.",
+    "rewrite_gift": false
 }
