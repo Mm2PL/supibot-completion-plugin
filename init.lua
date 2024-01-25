@@ -15,8 +15,8 @@ local function lookup_command(name)
         if c.name == name then
             return c
         end
-        local ____opt_5 = c.aliases
-        if ____opt_5 and __TS__ArrayIncludes(c.aliases, name) then
+        local ____opt_0 = c.aliases
+        if ____opt_0 and __TS__ArrayIncludes(c.aliases, name) then
             return c
         end
     end
@@ -48,8 +48,8 @@ local function users_aliases(prefix)
     end
     out.hide_others = true
     for ____, alias in ipairs(generated.aliases) do
-        local ____out_values_7 = out.values
-        ____out_values_7[#____out_values_7 + 1] = prefix .. tostring(alias.name)
+        local ____out_values_2 = out.values
+        ____out_values_2[#____out_values_2 + 1] = prefix .. tostring(alias.name)
     end
     return out
 end
@@ -67,16 +67,16 @@ local function try_subcommand_completions(text, sub_data, subcommand, tree, is_p
             for ____, val in ipairs(sub_data.subcommands) do
                 do
                     if is_piped and not val.pipe then
-                        goto __continue33
+                        goto __continue23
                     end
-                    local ____out_values_8 = out.values
-                    ____out_values_8[#____out_values_8 + 1] = val.name .. " "
+                    local ____out_values_3 = out.values
+                    ____out_values_3[#____out_values_3 + 1] = val.name .. " "
                     for ____, v2 in ipairs(val.aliases or ({})) do
-                        local ____out_values_9 = out.values
-                        ____out_values_9[#____out_values_9 + 1] = v2 .. " "
+                        local ____out_values_4 = out.values
+                        ____out_values_4[#____out_values_4 + 1] = v2 .. " "
                     end
                 end
-                ::__continue33::
+                ::__continue23::
             end
             return out
         end
@@ -184,18 +184,18 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         print("DANKING!")
         for ____, val in ipairs(cmd_data.params) do
             if val.type == "boolean" then
-                local ____out_values_14 = out.values
-                ____out_values_14[#____out_values_14 + 1] = val.name .. ":true"
-                local ____out_values_15 = out.values
-                ____out_values_15[#____out_values_15 + 1] = val.name .. ":false"
+                local ____out_values_19 = out.values
+                ____out_values_19[#____out_values_19 + 1] = val.name .. ":true"
+                local ____out_values_20 = out.values
+                ____out_values_20[#____out_values_20 + 1] = val.name .. ":false"
             else
-                local ____out_values_16 = out.values
-                ____out_values_16[#____out_values_16 + 1] = val.name .. ":"
+                local ____out_values_21 = out.values
+                ____out_values_21[#____out_values_21 + 1] = val.name .. ":"
             end
         end
         return out
     end
-    if command == "help" or command == "code" then
+    if command == "help" or command == "code" or (cmd_data and cmd_data.name) == "optout" then
         local completions = utils.commands_and_their_aliases("")
         completions.hide_others = true
         return completions
@@ -211,8 +211,8 @@ local function filter(self, inp, filter)
             string.lower(c),
             filter
         ) then
-            local ____out_values_17 = out.values
-            ____out_values_17[#____out_values_17 + 1] = c
+            local ____out_values_24 = out.values
+            ____out_values_24[#____out_values_24 + 1] = c
         end
     end
     return out
