@@ -11,7 +11,7 @@ namespace utils {
     export function count_occurences_of_byte(this: void, str: string, b: string): Number {
         const byte = string.byte(b);
         let count = 0;
-        for(let i = 1; i <= str.length; i++) {
+        for (let i = 1; i <= str.length; i++) {
             let sb = string.byte(str, i);
             if (sb == byte) {
                 count++;
@@ -25,10 +25,10 @@ namespace utils {
     }
 
     export function has_load(this: void): boolean {
-        try{
+        try {
             load("");
             return true;
-        }catch(e) {
+        } catch (e) {
             return false;
         }
     }
