@@ -3,34 +3,6 @@ import utils from './utils';
 import * as generated from './completions_generated.json';
 
 
-
-/**
- * @param {string} prefix Prefix to add to completions, usually "$" or "". Do not use spaces.
- */
-function commands_and_their_aliases(this: void, prefix: string): c2.CompletionList {
-    let out: c2.CompletionList = utils.new_completion_list();
-    for (const val of generated.definitions) {
-        if (!utils.arr_contains_any(val.flags, generated.excluded_flags)) {
-            // Prioritize aliases that are more uppercase but otherwise equal to command name
-            // XXX: setting potential: remove uncapitalised command name
-            const lowerAlias = val.aliases?.filter(a => a.toLowerCase() == val.name.toLowerCase());
-            if (lowerAlias !== undefined && lowerAlias.length !== undefined && lowerAlias.length > 0) {
-                out.values.push(prefix + lowerAlias[0] + " ");
-            }
-
-            out.values.push(prefix + val.name + " ");
-            if (val.aliases !== null) {
-                for (const v2 of val.aliases) {
-                    if (!out.values.includes(v2)) {
-                        out.values.push(prefix + v2 + " ");
-                    }
-                }
-            }
-        }
-    }
-    return out;
-}
-
 type Command = {
     name: string,
     aliases: string[] | null,
@@ -150,21 +122,21 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
     }
 
     if (is_first_word) {
-        let out = commands_and_their_aliases("$");
+        let out = utils.commands_and_their_aliases("$");
         out.hide_others = true;
         return out;
     }
 
     // for "$COMMAND "
     if (text.startsWith("$") && text.endsWith(" ") && utils.count_occurences_of_byte(text, " ") == 1) {
-        let out = commands_and_their_aliases("$");
+        let out = utils.commands_and_their_aliases("$");
         out.hide_others = true;
         return out;
     }
 
     // for "$ COMMAND"
     if (text.startsWith("$ ") && utils.count_occurences_of_byte(text, " ") == 1) {
-        let out = commands_and_their_aliases("");
+        let out = utils.commands_and_their_aliases("");
         out.hide_others = true;
         return out;
     }
@@ -188,7 +160,7 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
         let [m1] = string.match(text, "[|] ?[^ ]+$");
         let [m2] = string.match(text, "pipe *[^ ]+$");
         if (m1 !== null || m2 !== null) {
-            let out = commands_and_their_aliases("");
+            let out = utils.commands_and_their_aliases("");
             out.hide_others = true;
             return out;
         }
@@ -246,7 +218,7 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
 
     // special cases
     if (command == "help" || command == "code") {
-        let completions = commands_and_their_aliases("");
+        let completions = utils.commands_and_their_aliases("");
         completions.hide_others = true;
         return completions;
     }

@@ -1,5 +1,4 @@
 local ____lualib = require("lualib_bundle")
-local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
@@ -7,35 +6,6 @@ local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
 local generated = require("completions_generated")
----
--- @param prefix Prefix to add to completions, usually "$" or "". Do not use spaces.
-local function commands_and_their_aliases(prefix)
-    local out = utils.new_completion_list()
-    for ____, val in ipairs(generated.definitions) do
-        if not utils.arr_contains_any(val.flags, generated.excluded_flags) then
-            local ____opt_0 = val.aliases
-            local lowerAlias = ____opt_0 and __TS__ArrayFilter(
-                val.aliases,
-                function(____, a) return string.lower(a) == string.lower(val.name) end
-            )
-            if lowerAlias ~= nil and #lowerAlias ~= nil and #lowerAlias > 0 then
-                local ____out_values_2 = out.values
-                ____out_values_2[#____out_values_2 + 1] = (prefix .. lowerAlias[1]) .. " "
-            end
-            local ____out_values_3 = out.values
-            ____out_values_3[#____out_values_3 + 1] = (prefix .. val.name) .. " "
-            if val.aliases ~= nil then
-                for ____, v2 in ipairs(val.aliases) do
-                    if not __TS__ArrayIncludes(out.values, v2) then
-                        local ____out_values_4 = out.values
-                        ____out_values_4[#____out_values_4 + 1] = (prefix .. v2) .. " "
-                    end
-                end
-            end
-        end
-    end
-    return out
-end
 --- Look up a command by name from the generated definitions
 local function lookup_command(name)
     c2.log(c2.LogLevel.Debug, "Looking up ", name)
@@ -128,17 +98,17 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         return users_aliases("$$")
     end
     if is_first_word then
-        local out = commands_and_their_aliases("$")
+        local out = utils.commands_and_their_aliases("$")
         out.hide_others = true
         return out
     end
     if __TS__StringStartsWith(text, "$") and __TS__StringEndsWith(text, " ") and utils.count_occurences_of_byte(text, " ") == 1 then
-        local out = commands_and_their_aliases("$")
+        local out = utils.commands_and_their_aliases("$")
         out.hide_others = true
         return out
     end
     if __TS__StringStartsWith(text, "$ ") and utils.count_occurences_of_byte(text, " ") == 1 then
-        local out = commands_and_their_aliases("")
+        local out = utils.commands_and_their_aliases("")
         out.hide_others = true
         return out
     end
@@ -157,7 +127,7 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         local m1 = string.match(text, "[|] ?[^ ]+$")
         local m2 = string.match(text, "pipe *[^ ]+$")
         if m1 ~= nil or m2 ~= nil then
-            local out = commands_and_their_aliases("")
+            local out = utils.commands_and_their_aliases("")
             out.hide_others = true
             return out
         end
@@ -209,7 +179,7 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         return out
     end
     if command == "help" or command == "code" then
-        local completions = commands_and_their_aliases("")
+        local completions = utils.commands_and_their_aliases("")
         completions.hide_others = true
         return completions
     end

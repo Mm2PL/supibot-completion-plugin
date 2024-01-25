@@ -1,6 +1,9 @@
 local ____lualib = require("lualib_bundle")
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
+local __TS__ArrayEvery = ____lualib.__TS__ArrayEvery
+local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local ____exports = {}
+local generated = require("completions_generated")
 local utils = {}
 do
     function utils.arr_contains_any(left, right)
@@ -45,6 +48,47 @@ do
                 return ____returnValue
             end
         end
+    end
+    ---
+    -- @param prefix Prefix to add to completions, usually "$" or "". Do not use spaces.
+    function utils.commands_and_their_aliases(prefix, required_flags)
+        if required_flags == nil then
+            required_flags = {}
+        end
+        local out = utils.new_completion_list()
+        for ____, val in ipairs(generated.definitions) do
+            do
+                if #required_flags ~= 0 and not __TS__ArrayEvery(
+                    required_flags,
+                    function(____, it) return __TS__ArrayIncludes(val.flags, it) end
+                ) then
+                    goto __continue26
+                end
+                if not utils.arr_contains_any(val.flags, generated.excluded_flags) then
+                    local ____opt_0 = val.aliases
+                    local lowerAlias = ____opt_0 and __TS__ArrayFilter(
+                        val.aliases,
+                        function(____, a) return string.lower(a) == string.lower(val.name) end
+                    )
+                    if lowerAlias ~= nil and #lowerAlias ~= nil and #lowerAlias > 0 then
+                        local ____out_values_2 = out.values
+                        ____out_values_2[#____out_values_2 + 1] = (prefix .. lowerAlias[1]) .. " "
+                    end
+                    local ____out_values_3 = out.values
+                    ____out_values_3[#____out_values_3 + 1] = (prefix .. val.name) .. " "
+                    if val.aliases ~= nil then
+                        for ____, v2 in ipairs(val.aliases) do
+                            if not __TS__ArrayIncludes(out.values, v2) then
+                                local ____out_values_4 = out.values
+                                ____out_values_4[#____out_values_4 + 1] = (prefix .. v2) .. " "
+                            end
+                        end
+                    end
+                end
+            end
+            ::__continue26::
+        end
+        return out
     end
 end
 ____exports.default = utils
