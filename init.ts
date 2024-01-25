@@ -217,7 +217,7 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
     }
 
     // special cases
-    if (command == "help" || command == "code") {
+    if (command === "help" || command === "code" || cmd_data?.name === 'optout') {
         let completions = utils.commands_and_their_aliases("");
         completions.hide_others = true;
         return completions;
