@@ -433,7 +433,39 @@ return {
             aliases = nil,
             params = nil,
             flags = {"MENTION", "PIPE", "ROLLBACK"},
-            subcommands = nil,
+            subcommands = {{
+                name = "eat",
+                aliases = {},
+                pipe = true,
+                eat_before_sub_command = 0,
+                params = {},
+                flags = {},
+                subcommands = nil
+            }, {
+                name = "donate",
+                aliases = {"give", "gift"},
+                pipe = true,
+                eat_before_sub_command = 0,
+                params = {},
+                flags = {},
+                subcommands = nil
+            }, {
+                name = "stats",
+                aliases = {"statistics"},
+                pipe = true,
+                eat_before_sub_command = 0,
+                params = {},
+                flags = {},
+                subcommands = nil
+            }, {
+                name = "top",
+                aliases = {"leaders", "leaderboard"},
+                pipe = true,
+                eat_before_sub_command = 0,
+                params = {},
+                flags = {},
+                subcommands = nil
+            }},
             eat_before_sub_command = 0,
             pipe = true
         },
@@ -859,8 +891,16 @@ return {
             name = "gift",
             aliases = {"give"},
             params = nil,
-            flags = {"DEVELOPER", "MENTION", "PIPE"},
-            subcommands = nil,
+            flags = {"DEVELOPER", "MENTION", "PIPE", "REQUIRE_LEGACY_GIVE_CFG"},
+            subcommands = {{
+                name = "cookie",
+                aliases = {},
+                pipe = false,
+                eat_before_sub_command = 0,
+                params = {},
+                flags = {"REQUIRE_LEGACY_GIVE_CFG"},
+                subcommands = nil
+            }},
             eat_before_sub_command = 0,
             pipe = true
         },
@@ -2774,7 +2814,7 @@ return {
         }
     },
     excluded_flags = {"WHITELIST"},
-    config = {_comment_myUsername = "This is used for fetching your aliases at compiletime", myUsername = ""},
+    config = {_comment_my_username = "This is used for fetching your aliases at compiletime", my_username = ""},
     aliases = {},
-    git = {commit = "27c97c9d9e1662d974edd3dcda9c2a49a5935fac", version = "v1.0.0"}
+    git = {commit = "db223c922b71f5d909e5adf060f3ce753dfa3730", version = "v1.0.0-dirty"}
 }

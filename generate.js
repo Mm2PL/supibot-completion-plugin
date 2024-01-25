@@ -1,3 +1,4 @@
+const REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG";
 const EXCLUDE_FLAGS = ["WHITELIST"];
 const META_COMMANDS = ["pipe", "alias"];
 const SUPINICS_CHANNEL_WHITELIST = [
@@ -135,8 +136,39 @@ const child_process = require('node:child_process');
                     flags: [],
                     subcommands: null,
                 }
-            }
-            );
+            });
+        }
+        else if (def.Name === 'cookie') {
+            const subs = [
+                {name: "eat", aliases: []},
+                {name: "donate", aliases: ["give", "gift"]},
+                {name: "stats", aliases: ["statistics"]},
+                {name: "top", aliases: ["leaders", "leaderboard"]},
+            ];
+            subcommands = subs.map(t => {
+                return {
+                    ...t,
+                    pipe: true,
+                    eat_before_sub_command: 0,
+
+                    params: [],
+                    flags: [],
+                    subcommands: null,
+                }
+            });
+        } else if (def.Name === 'gift') {
+            flags.push(REQUIRE_LEGACY_GIVE_CFG);
+            subcommands = [
+                {
+                    name: 'cookie',
+                    aliases: [],
+                    pipe: false,
+                    eat_before_sub_command: 0,
+                    params: [],
+                    flags: [REQUIRE_LEGACY_GIVE_CFG],
+                    subcommands: null,
+                }
+            ];
         }
 
         return {
