@@ -1,4 +1,4 @@
 {
-    "_comment_myUsername": "This is used for fetching your aliases at compiletime",
-    "myUsername": ""
+    "_comment_my_username": "This is used for fetching your aliases at compiletime",
+    "my_username": "",
 }

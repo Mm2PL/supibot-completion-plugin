@@ -154,10 +154,10 @@ const child_process = require('node:child_process');
 
     let aliases = [];
     const config = require('./config.json');
-    if (!config.myUsername) {
+    if (!config.my_username) {
         console.log("Skipping generation of user-specific data, no username given in config.");
     } else {
-        const r = await fetch(`https://supinic.com/api/bot/user/${config.myUsername}/alias/list`);
+        const r = await fetch(`https://supinic.com/api/bot/user/${config.my_username}/alias/list`);
         if (r.status !== 200) {
             console.log(`supinic.com api unexpectidly returned ${r.status}, abort`);
             return;
