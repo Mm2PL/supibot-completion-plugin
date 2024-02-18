@@ -240,20 +240,14 @@ if utils.has_load() then
         table.remove(ctx.words, 1)
         local input = table.concat(ctx.words, " ")
         local source = "return " .. input
-        c2.system_msg(ctx.channel_name, ">>>" .. input)
+        ctx.channel:add_system_message(">>>" .. input)
         local f
         local err
         f, err = load(source)
         if f == nil then
-            c2.system_msg(
-                ctx.channel_name,
-                "!<" .. tostring(err)
-            )
+            ctx.channel:add_system_message("!<" .. tostring(err))
         else
-            c2.system_msg(
-                ctx.channel_name,
-                "<< " .. tostring(f(nil))
-            )
+            ctx.channel:add_system_message("<< " .. tostring(f(nil)))
         end
     end
     c2.register_command("/sbc:eval", cmd_eval)
@@ -263,25 +257,22 @@ if generated.config.rewrite_gift then
         local invocation = table.remove(ctx.words, 1)
         local usage = ("This is Supibot-completion-plugin fake $gift/$give. Usage: " .. tostring(invocation)) .. " cookie <name>"
         if #ctx.words == 0 then
-            c2.system_msg(ctx.channel_name, usage)
+            ctx.channel:add_system_message(usage)
             return
         end
         local ____type = table.remove(ctx.words, 1)
         if ____type ~= "cookie" then
-            c2.system_msg(
-                ctx.channel_name,
-                usage .. (". Unknown type \"" .. tostring(____type)) .. "\"."
-            )
+            ctx.channel:add_system_message(usage .. (". Unknown type \"" .. tostring(____type)) .. "\".")
             return
         end
         local target = table.remove(ctx.words, 1)
         if target == nil then
-            c2.system_msg(ctx.channel_name, usage .. ". Missing username.")
+            ctx.channel:add_system_message(usage .. ". Missing username.")
             return
         end
-        c2.system_msg(
-            ctx.channel_name,
-            "$cookie gift " .. tostring(target)
+        ctx.channel:send_message(
+            "$cookie gift " .. tostring(target),
+            false
         )
     end
     c2.register_command("$gift", cmd_fake_gift)

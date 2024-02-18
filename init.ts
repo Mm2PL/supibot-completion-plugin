@@ -287,22 +287,23 @@ if (generated.config.rewrite_gift) {
         const invocation = ctx.words.shift(); // remove invocation
         const usage = `This is Supibot-completion-plugin fake $gift/$give. Usage: ${invocation} cookie <name>`;
         if (ctx.words.length === 0) {
-            c2.system_msg(ctx.channel_name, usage);
+            ctx.channel.add_system_message(usage);
             return;
         }
         const type = ctx.words.shift();
         if (type !== 'cookie') {
-            c2.system_msg(ctx.channel_name, usage + `. Unknown type "${type}".`);
+            ctx.channel.add_system_message(usage + `. Unknown type "${type}".`);
             return;
         }
         const target = ctx.words.shift();
         if (target === null) {
-            c2.system_msg(ctx.channel_name, usage + `. Missing username.`);
+            ctx.channel.add_system_message(usage + `. Missing username.`);
             return;
         }
-        c2.system_msg(ctx.channel_name, `$cookie gift ${target}`);
+        ctx.channel.send_message(`$cookie gift ${target}`, false);
     }
     c2.register_command("$gift", cmd_fake_gift);
     c2.register_command("$give", cmd_fake_gift);
 }
-c2.system_msg("supinic", `[Supibot completion ${generated.git.version} loaded]`);
+c2.Channel.by_name("supinic", c2.Platform.Twitch)
+    ?.add_system_message(`[Supibot completion ${generated.git.version} loaded]`);
