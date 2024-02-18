@@ -269,14 +269,14 @@ if (utils.has_load()) {
         table.remove(ctx.words, 1);
         let input: string = ctx.words.join(" ");
         let source = "return " + input;
-        c2.system_msg(ctx.channel_name, ">>>" + input);
+        ctx.channel.add_system_message(">>>" + input);
         let f: (() => any) | undefined;
         let err: any;
         [f, err] = load(source);
         if (f === undefined) {
-            c2.system_msg(ctx.channel_name, "!<" + tostring(err));
+            ctx.channel.add_system_message("!<" + tostring(err));
         } else {
-            c2.system_msg(ctx.channel_name, "<< " + tostring(f()));
+            ctx.channel.add_system_message("<< " + tostring(f()));
         }
     }
 

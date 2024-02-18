@@ -7,35 +7,92 @@ declare module c2 {
     Warning,
     Critical,
   }
-
-  type CompletionList = {
-      values: string[];
-      hide_others: boolean;
+  class CommandContext {
+    words: String[];
+    channel: Channel;
   }
 
-  class CommandContext {
-    words: string[];
-    channel_name: string;
+  enum Platform {
+    Twitch,
+  }
+  enum ChannelType {
+    None,
+    Direct,
+    Twitch,
+    TwitchWhispers,
+    TwitchWatching,
+    TwitchMentions,
+    TwitchLive,
+    TwitchAutomod,
+    Irc,
+    Misc,
+  }
+
+  interface IWeakResource {
+    is_valid(): boolean;
+  }
+
+  class RoomModes {
+    unique_chat: boolean;
+    subscriber_only: boolean;
+    emotes_only: boolean;
+    follower_only: null | number;
+    slow_mode: null | number;
+  }
+  class StreamStatus {
+    live: boolean;
+    viewer_count: number;
+    uptime: number;
+    title: string;
+    game_name: string;
+    game_id: string;
+  }
+
+  class Channel implements IWeakResource {
+    is_valid(): boolean;
+    get_name(): string;
+    get_type(): ChannelType;
+    get_display_name(): string;
+    send_message(message: string, execute_commands: boolean): void;
+    add_system_message(message: string): void;
+
+    is_twitch_channel(): boolean;
+
+    get_room_modes(): RoomModes;
+    get_stream_status(): StreamStatus;
+    get_twitch_id(): string;
+    is_broadcaster(): boolean;
+    is_mod(): boolean;
+    is_vip(): boolean;
+
+    static by_name(this: void, name: string, platform: Platform): null | Channel;
+    static by_twitch_id(this: void, id: string): null | Channel;
   }
 
   function log(level: LogLevel, ...data: any[]): void;
   function register_command(
-    name: string,
+    name: String,
     handler: (ctx: CommandContext) => void
   ): boolean;
-  function send_msg(channel: string, text: string): boolean;
-  function system_msg(channel: string, text: string): boolean;
 
-  enum EventType {
-    CompletionRequested,
+  class CompletionList {
+    values: String[];
+    hide_others: boolean;
   }
 
-  type EventCallbackFunction =
-      //Function
-      ((this: void, prefix: string, full_text: string, position: number, is_first_word: boolean) => any);
+  enum EventType {
+    CompletionRequested = "CompletionRequested",
+  }
 
-  function register_callback(
-    name: EventType,
-    handler: EventCallbackFunction
-  ): void;
+  type CbFuncCompletionsRequested = (
+    query: string,
+    full_text_content: string,
+    cursor_position: number,
+    is_first_word: boolean
+  ) => CompletionList;
+  type CbFunc<T> = T extends EventType.CompletionRequested
+    ? CbFuncCompletionsRequested
+    : never;
+
+  function register_callback<T>(type: T, func: CbFunc<T>): void;
 }
