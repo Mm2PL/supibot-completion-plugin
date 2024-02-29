@@ -278,5 +278,8 @@ if generated.config.rewrite_gift then
     c2.register_command("$gift", cmd_fake_gift)
     c2.register_command("$give", cmd_fake_gift)
 end
-c2.system_msg("supinic", ("[Supibot completion " .. generated.git.version) .. " loaded]")
+local ____opt_20 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
+if ____opt_20 ~= nil then
+    ____opt_20:add_system_message(("[Supibot completion " .. generated.git.version) .. " loaded]")
+end
 return ____exports
