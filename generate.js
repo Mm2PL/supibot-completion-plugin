@@ -196,7 +196,17 @@ const child_process = require('node:child_process');
     const defs = definitions.map(definitionToJson);
 
     let aliases = [];
-    const config = require('./config.json');
+    let config;
+    try {
+        config = require('./config.json');
+    } catch {
+    }
+
+    if (!config) {
+        console.log('Unable to load user config, using config.dist.json instead');
+        config = require('./config.dist.json');
+    }
+
     if (!config.my_username) {
         console.log("Skipping generation of user-specific data, no username given in config.");
     } else {

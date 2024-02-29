@@ -6,6 +6,8 @@ NPM := npm
 init.lua: init.ts utils.ts chatterino.d.ts completions_generated.json tsconfig.json package.json Makefile percommand.ts
 	$(NPM) run build
 
+# This empty rule convinces make to update completions_generated if config.json was touched but not cry if it doesn't exist
+config.json:
 completions_generated.json: generate.js config.json $(wildcard supibot/commands/*/*.js)
 	node generate.js
 
