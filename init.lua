@@ -2,6 +2,7 @@ local ____lualib = require("lualib_bundle")
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
+local __TS__ArrayJoin = ____lualib.__TS__ArrayJoin
 local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
@@ -219,26 +220,26 @@ local function filter(self, inp, filter)
 end
 c2.register_callback(
     c2.EventType.CompletionRequested,
-    function(text, full_text, position, is_first_word)
+    function(ev)
         c2.log(
             c2.LogLevel.Debug,
             "doing completions: ",
-            text,
-            full_text,
-            position,
-            is_first_word
+            ev.query,
+            ev.full_text_content,
+            ev.cursor_position,
+            ev.is_first_word
         )
         return filter(
             nil,
-            find_useful_completions(full_text, text, position, is_first_word),
-            text
+            find_useful_completions(ev.full_text_content, ev.query, ev.cursor_position, ev.is_first_word),
+            ev.query
         )
     end
 )
 if utils.has_load() then
     local function cmd_eval(ctx)
         table.remove(ctx.words, 1)
-        local input = table.concat(ctx.words, " ")
+        local input = __TS__ArrayJoin(ctx.words, " ")
         local source = "return " .. input
         ctx.channel:add_system_message(">>>" .. input)
         local f
@@ -278,8 +279,8 @@ if generated.config.rewrite_gift then
     c2.register_command("$gift", cmd_fake_gift)
     c2.register_command("$give", cmd_fake_gift)
 end
-local ____opt_20 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
-if ____opt_20 ~= nil then
-    ____opt_20:add_system_message(("[Supibot completion " .. generated.git.version) .. " loaded]")
+local ____opt_25 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
+if ____opt_25 ~= nil then
+    ____opt_25:add_system_message(("[Supibot completion " .. generated.git.version) .. " loaded]")
 end
 return ____exports

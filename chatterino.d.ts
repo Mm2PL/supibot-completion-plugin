@@ -75,6 +75,13 @@ declare module c2 {
     handler: (ctx: CommandContext) => void
   ): boolean;
 
+  class CompletionEvent {
+    query: string;
+    full_text_content: string;
+    cursor_position: number;
+    is_first_word: boolean;
+  }
+
   class CompletionList {
     values: String[];
     hide_others: boolean;
@@ -84,15 +91,11 @@ declare module c2 {
     CompletionRequested = "CompletionRequested",
   }
 
-  type CbFuncCompletionsRequested = (
-    query: string,
-    full_text_content: string,
-    cursor_position: number,
-    is_first_word: boolean
-  ) => CompletionList;
+  type CbFuncCompletionsRequested = (ev: CompletionEvent) => CompletionList;
   type CbFunc<T> = T extends EventType.CompletionRequested
     ? CbFuncCompletionsRequested
     : never;
 
   function register_callback<T>(type: T, func: CbFunc<T>): void;
+  function later(callback: () => void, msec: number): void;
 }

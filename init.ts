@@ -258,9 +258,9 @@ function filter(inp: c2.CompletionList, filter: string): c2.CompletionList {
 
 c2.register_callback(
     c2.EventType.CompletionRequested,
-    (text: string, full_text: string, position: number, is_first_word: boolean) => {
-        c2.log(c2.LogLevel.Debug, "doing completions: ", text, full_text, position, is_first_word);
-        return filter(find_useful_completions(full_text, text, position, is_first_word), text);
+    (ev: c2.CompletionEvent) => {
+        c2.log(c2.LogLevel.Debug, "doing completions: ", ev.query, ev.full_text_content, ev.cursor_position, ev.is_first_word);
+        return filter(find_useful_completions(ev.full_text_content, ev.query, ev.cursor_position, ev.is_first_word), ev.query)
     }
 );
 
