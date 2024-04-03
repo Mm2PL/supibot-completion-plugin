@@ -220,21 +220,6 @@ return {
             pipe = true
         },
         {
-            name = "artflow",
-            aliases = {"rafi", "randomartflowimage"},
-            params = nil,
-            flags = {
-                "DEVELOPER",
-                "MENTION",
-                "NON_NULLABLE",
-                "PIPE",
-                "SKIP_BANPHRASE"
-            },
-            subcommands = nil,
-            eat_before_sub_command = 0,
-            pipe = true
-        },
-        {
             name = "atop",
             aliases = nil,
             params = nil,
@@ -317,7 +302,13 @@ return {
         {
             name = "block",
             aliases = {"unblock"},
-            params = {{name = "channel", type = "string"}, {name = "command", type = "string"}, {name = "platform", type = "string"}, {name = "user", type = "string"}},
+            params = {
+                {name = "channel", type = "string"},
+                {name = "command", type = "string"},
+                {name = "id", type = "number"},
+                {name = "platform", type = "string"},
+                {name = "user", type = "string"}
+            },
             flags = {"MENTION"},
             subcommands = nil,
             eat_before_sub_command = 0,
@@ -1535,15 +1526,6 @@ return {
             pipe = true
         },
         {
-            name = "randomgeneratedmeme",
-            aliases = {"rgm"},
-            params = nil,
-            flags = {"MENTION", "NON_NULLABLE", "PIPE"},
-            subcommands = nil,
-            eat_before_sub_command = 0,
-            pipe = true
-        },
-        {
             name = "randomhistoricevent",
             aliases = {"rhe"},
             params = nil,
@@ -1741,7 +1723,7 @@ return {
             name = "set",
             aliases = {"unset"},
             params = {{name = "from", type = "string"}},
-            flags = {"MENTION", "OWNER_OVERRIDE", "PIPE"},
+            flags = {"MENTION", "PIPE"},
             subcommands = {
                 {
                     name = "ambassador",
@@ -2769,7 +2751,14 @@ return {
         {
             name = "unping",
             aliases = {"reping"},
-            params = nil,
+            params = {
+                {name = "command", type = "string"},
+                {name = "channel", type = "string"},
+                {name = "id", type = "number"},
+                {name = "invocation", type = "string"},
+                {name = "platform", type = "string"},
+                {name = "user", type = "string"}
+            },
             flags = {"MENTION"},
             subcommands = nil,
             eat_before_sub_command = 0,
@@ -2798,15 +2787,6 @@ return {
             aliases = nil,
             params = nil,
             flags = {"MENTION", "NON_NULLABLE", "PIPE", "WHITELIST"},
-            subcommands = nil,
-            eat_before_sub_command = 0,
-            pipe = true
-        },
-        {
-            name = "vote",
-            aliases = {"poll"},
-            params = nil,
-            flags = {"MENTION", "PIPE"},
             subcommands = nil,
             eat_before_sub_command = 0,
             pipe = true
@@ -2895,5 +2875,5 @@ return {
     excluded_flags = {"WHITELIST"},
     config = {_comment_my_username = "This is used for fetching your aliases at compiletime", my_username = "", _comment_rewrite_gift = "This will make the plugin rewrite usages of `$gift` as `$cookie gift`. This is a runtime config.", rewrite_gift = false},
     aliases = {},
-    git = {commit = "81bae8e76bd6717ad23dbcf2449beb8386f8405b", version = "v1.0.0-dirty"}
+    git = {commit = "4118590806a38c02fcc588ea3dd181e37af0ecaf", version = "v1.0.0-dirty"}
 }
