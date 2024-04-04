@@ -28,4 +28,9 @@ The plugin:
 
 1. This involves executing basically arbitrary code from [the supibot repo](https://github.com/supinic/supibot), ensure you are comfortable with that.
 2. Run `make update` to update/download the `supibot` submodule, regenerate `completions_generated.json` and rebuild the plugin
+## Projects used
+
+This uses `json.lua` created by rxi, [the project is available
+here](https://github.com/rxi/json.lua). The license may be found at the top of
+the file. The Typescript definitions (`json.d.ts`) for it were created by me.
 
