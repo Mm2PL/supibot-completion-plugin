@@ -198,13 +198,13 @@ const child_process = require('node:child_process');
     let aliases = [];
     let config;
     try {
-        config = require('./config.json');
+        config = require('./data/config.json');
     } catch {
     }
 
     if (!config) {
-        console.log('Unable to load user config, using config.dist.json instead');
-        config = require('./config.dist.json');
+        console.log('Unable to load user config, using data/config.dist.json instead');
+        config = require('./data/config.dist.json');
     }
 
     if (!config.my_username) {
@@ -217,17 +217,7 @@ const child_process = require('node:child_process');
         }
         const data = await r.json();
         console.log(`Downloaded ${data.data.length} aliases from supinic.com`);
-        aliases = data.data.map(inp => {
-            return {
-                name: inp.name,
-                created: inp.created,
-                edited: inp.edited,
-                link_author: inp.linkAuthor,
-                link_name: inp.linkName,
-
-                invocation: inp.invocation,
-            }
-        });
+        fs.writeFileSync("data/aliases.json", JSON.stringify(data));
     }
     const git = {
         commit: "<No data>",
@@ -246,13 +236,9 @@ const child_process = require('node:child_process');
         // no git
     }
 
-    fs.writeFileSync("completions_generated.json", JSON.stringify({
+    fs.writeFileSync("data/completions_generated.json", JSON.stringify({
         definitions: defs,
         excluded_flags: EXCLUDE_FLAGS,
-
-        // user specific
-        config,
-        aliases,
         git,
     }));
 })();

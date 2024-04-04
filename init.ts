@@ -1,7 +1,9 @@
 //import {inspect} from './inspect';
 import utils from './utils';
-import * as generated from './completions_generated.json';
 import commands from './percommand';
+import storage from './data';
+
+const {config} = storage;
 
 
 export type Command = {
@@ -30,7 +32,7 @@ type SupinicComAlias = {
  */
 function lookup_command(this: void, name: string): Command | null {
     c2.log(c2.LogLevel.Debug, "Looking up ", name);
-    for (const c of generated.definitions) {
+    for (const c of storage.definitions) {
         if (c.name === name) {
             return c;
         }
@@ -63,10 +65,10 @@ function lookup_subcommand(this: void, name: string, cmdData: Command): Command 
 
 function users_aliases(this: void, prefix: string): c2.CompletionList {
     const out = utils.new_completion_list();
-    if (generated.aliases.length === 0)
+    if (storage.aliases.length === 0)
         return out;
     out.hide_others = true;
-    for (const alias of <any[]>generated.aliases) {
+    for (const alias of storage.aliases) {
         out.values.push(prefix + alias.name);
     }
     return out;
@@ -282,7 +284,7 @@ if (utils.has_load()) {
 
     c2.register_command("/sbc:eval", cmd_eval);
 }
-if (generated.config.rewrite_gift) {
+if (config.rewrite_gift) {
     function cmd_fake_gift(this: void, ctx: c2.CommandContext) {
         const invocation = ctx.words.shift(); // remove invocation
         const usage = `This is Supibot-completion-plugin fake $gift/$give. Usage: ${invocation} cookie <name>`;
@@ -306,4 +308,4 @@ if (generated.config.rewrite_gift) {
     c2.register_command("$give", cmd_fake_gift);
 }
 c2.Channel.by_name("supinic", c2.Platform.Twitch)
-    ?.add_system_message(`[Supibot completion ${generated.git.version} loaded]`);
+    ?.add_system_message(`[Supibot completion ${storage.git.version} loaded]`);

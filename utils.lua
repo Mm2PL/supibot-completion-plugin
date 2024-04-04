@@ -11,10 +11,12 @@ local SyntaxError = ____lualib.SyntaxError
 local TypeError = ____lualib.TypeError
 local URIError = ____lualib.URIError
 local __TS__StringSplit = ____lualib.__TS__StringSplit
+local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ArrayEvery = ____lualib.__TS__ArrayEvery
 local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local ____exports = {}
-local generated = require("completions_generated")
+local ____data = require("data")
+local storage = ____data.default
 local utils = {}
 do
     function utils.arr_contains_any(left, right)
@@ -118,10 +120,10 @@ do
     end
     utils.REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG"
     local function get_excluded_flags()
-        if generated.config.rewrite_gift then
-            return generated.excluded_flags
+        if storage.config.rewrite_gift then
+            return storage.excluded_flags
         end
-        local temp = {table.unpack(generated.excluded_flags)}
+        local temp = {__TS__Spread(storage.excluded_flags)}
         temp[#temp + 1] = utils.REQUIRE_LEGACY_GIVE_CFG
         return temp
     end
@@ -133,7 +135,7 @@ do
         end
         local out = utils.new_completion_list()
         local excl_flags = get_excluded_flags()
-        for ____, val in ipairs(generated.definitions) do
+        for ____, val in ipairs(storage.definitions) do
             do
                 if #required_flags ~= 0 and not __TS__ArrayEvery(
                     required_flags,

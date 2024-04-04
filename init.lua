@@ -6,18 +6,21 @@ local __TS__ArrayJoin = ____lualib.__TS__ArrayJoin
 local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
-local generated = require("completions_generated")
 local ____percommand = require("percommand")
 local commands = ____percommand.default
+local ____data = require("data")
+local storage = ____data.default
+local ____storage_0 = storage
+local config = ____storage_0.config
 --- Look up a command by name from the generated definitions
 local function lookup_command(name)
     c2.log(c2.LogLevel.Debug, "Looking up ", name)
-    for ____, c in ipairs(generated.definitions) do
+    for ____, c in ipairs(storage.definitions) do
         if c.name == name then
             return c
         end
-        local ____opt_0 = c.aliases
-        if ____opt_0 and __TS__ArrayIncludes(c.aliases, name) then
+        local ____opt_1 = c.aliases
+        if ____opt_1 and __TS__ArrayIncludes(c.aliases, name) then
             return c
         end
     end
@@ -44,13 +47,13 @@ local function lookup_subcommand(name, cmdData)
 end
 local function users_aliases(prefix)
     local out = utils.new_completion_list()
-    if #generated.aliases == 0 then
+    if #storage.aliases == 0 then
         return out
     end
     out.hide_others = true
-    for ____, alias in ipairs(generated.aliases) do
-        local ____out_values_2 = out.values
-        ____out_values_2[#____out_values_2 + 1] = prefix .. tostring(alias.name)
+    for ____, alias in ipairs(storage.aliases) do
+        local ____out_values_3 = out.values
+        ____out_values_3[#____out_values_3 + 1] = prefix .. alias.name
     end
     return out
 end
@@ -70,11 +73,11 @@ local function try_subcommand_completions(text, sub_data, subcommand, tree, is_p
                     if is_piped and not val.pipe then
                         goto __continue23
                     end
-                    local ____out_values_3 = out.values
-                    ____out_values_3[#____out_values_3 + 1] = val.name .. " "
+                    local ____out_values_4 = out.values
+                    ____out_values_4[#____out_values_4 + 1] = val.name .. " "
                     for ____, v2 in ipairs(val.aliases or ({})) do
-                        local ____out_values_4 = out.values
-                        ____out_values_4[#____out_values_4 + 1] = v2 .. " "
+                        local ____out_values_5 = out.values
+                        ____out_values_5[#____out_values_5 + 1] = v2 .. " "
                     end
                 end
                 ::__continue23::
@@ -185,13 +188,13 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
         print("DANKING!")
         for ____, val in ipairs(cmd_data.params) do
             if val.type == "boolean" then
-                local ____out_values_19 = out.values
-                ____out_values_19[#____out_values_19 + 1] = val.name .. ":true"
                 local ____out_values_20 = out.values
-                ____out_values_20[#____out_values_20 + 1] = val.name .. ":false"
-            else
+                ____out_values_20[#____out_values_20 + 1] = val.name .. ":true"
                 local ____out_values_21 = out.values
-                ____out_values_21[#____out_values_21 + 1] = val.name .. ":"
+                ____out_values_21[#____out_values_21 + 1] = val.name .. ":false"
+            else
+                local ____out_values_22 = out.values
+                ____out_values_22[#____out_values_22 + 1] = val.name .. ":"
             end
         end
         return out
@@ -212,8 +215,8 @@ local function filter(self, inp, filter)
             string.lower(c),
             filter
         ) then
-            local ____out_values_24 = out.values
-            ____out_values_24[#____out_values_24 + 1] = c
+            local ____out_values_25 = out.values
+            ____out_values_25[#____out_values_25 + 1] = c
         end
     end
     return out
@@ -253,7 +256,7 @@ if utils.has_load() then
     end
     c2.register_command("/sbc:eval", cmd_eval)
 end
-if generated.config.rewrite_gift then
+if config.rewrite_gift then
     local function cmd_fake_gift(ctx)
         local invocation = table.remove(ctx.words, 1)
         local usage = ("This is Supibot-completion-plugin fake $gift/$give. Usage: " .. tostring(invocation)) .. " cookie <name>"
@@ -279,8 +282,8 @@ if generated.config.rewrite_gift then
     c2.register_command("$gift", cmd_fake_gift)
     c2.register_command("$give", cmd_fake_gift)
 end
-local ____opt_25 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
-if ____opt_25 ~= nil then
-    ____opt_25:add_system_message(("[Supibot completion " .. generated.git.version) .. " loaded]")
+local ____opt_26 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
+if ____opt_26 ~= nil then
+    ____opt_26:add_system_message(("[Supibot completion " .. tostring(storage.git.version)) .. " loaded]")
 end
 return ____exports

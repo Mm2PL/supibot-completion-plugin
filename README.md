@@ -27,7 +27,8 @@ The plugin:
 ### Update command definitions
 
 1. This involves executing basically arbitrary code from [the supibot repo](https://github.com/supinic/supibot), ensure you are comfortable with that.
-2. Run `make update` to update/download the `supibot` submodule, regenerate `completions_generated.json` and rebuild the plugin
+2. Run `make update` to update/download the `supibot` submodule, regenerate `data/completions_generated.json` and rebuild the plugin
+
 ## Projects used
 
 This uses `json.lua` created by rxi, [the project is available

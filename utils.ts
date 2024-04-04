@@ -1,4 +1,4 @@
-import * as generated from './completions_generated.json';
+import storage from './data';
 
 namespace utils {
     export function arr_contains_any<T>(this: void, left: Array<T>, right: Array<T>): boolean {
@@ -82,10 +82,10 @@ namespace utils {
 
     export const REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG";
     function get_excluded_flags(this: void): Array<string> {
-        if (generated.config.rewrite_gift) {
-            return generated.excluded_flags;
+        if (storage.config.rewrite_gift) {
+            return storage.excluded_flags;
         }
-        let temp = [...generated.excluded_flags];
+        let temp = [...storage.excluded_flags];
         temp.push(REQUIRE_LEGACY_GIVE_CFG);
         return temp;
     }
@@ -97,7 +97,7 @@ namespace utils {
     export function commands_and_their_aliases(this: void, prefix: string, required_flags: Array<string> = []): c2.CompletionList {
         let out: c2.CompletionList = utils.new_completion_list();
         const excl_flags = get_excluded_flags();
-        for (const val of generated.definitions) {
+        for (const val of storage.definitions) {
             if (required_flags.length !== 0 && !required_flags.every(it => val.flags.includes(it))) {
                 continue;
             }
