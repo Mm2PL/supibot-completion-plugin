@@ -98,11 +98,12 @@ namespace commands {
             // we can be in simple mode, as we have no params
             const merged = utils.commands_and_their_aliases("", ["BLOCK"]);
             merged.values.unshift("all");
+            merged.values.push(...out.values);
             // have $[un]block <username> <word>|
             merged.hide_others = argv.length === 2;
             return merged;
         }
-        return utils.new_completion_list();
+        return out;
     }
 
     /**

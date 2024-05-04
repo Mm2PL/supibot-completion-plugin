@@ -3,9 +3,9 @@ local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__ArrayMap = ____lualib.__TS__ArrayMap
 local __TS__ObjectEntries = ____lualib.__TS__ObjectEntries
 local __TS__ArrayUnshift = ____lualib.__TS__ArrayUnshift
+local __TS__ArrayPushArray = ____lualib.__TS__ArrayPushArray
 local __TS__StringSubstring = ____lualib.__TS__StringSubstring
 local __TS__StringTrim = ____lualib.__TS__StringTrim
-local __TS__ArrayPushArray = ____lualib.__TS__ArrayPushArray
 local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
@@ -133,10 +133,11 @@ do
         if parsed.params.size == 0 then
             local merged = utils.commands_and_their_aliases("", {"BLOCK"})
             __TS__ArrayUnshift(merged.values, "all")
+            __TS__ArrayPushArray(merged.values, out.values)
             merged.hide_others = #argv == 2
             return merged
         end
-        return utils.new_completion_list()
+        return out
     end
     --- Advanced mode: $unping command:<all|command> [user:] [channel:] [platform:]
     -- Simple mode: $unping <all|command>
