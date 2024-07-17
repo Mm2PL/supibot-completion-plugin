@@ -8,7 +8,7 @@ declare module c2 {
     Critical,
   }
   class CommandContext {
-    words: String[];
+    words: string[];
     channel: Channel;
   }
 
@@ -67,8 +67,8 @@ declare module c2 {
     is_mod(): boolean;
     is_vip(): boolean;
 
-    static by_name(name: string, platform: Platform): null | Channel;
-    static by_twitch_id(id: string): null | Channel;
+    static by_name(this: void, name: string, platform: Platform): null | Channel;
+    static by_twitch_id(this: void, id: string): null | Channel;
   }
 
   enum HTTPMethod {
@@ -103,7 +103,7 @@ declare module c2 {
 
   function log(level: LogLevel, ...data: any[]): void;
   function register_command(
-    name: String,
+    name: string,
     handler: (ctx: CommandContext) => void
   ): boolean;
 
@@ -115,7 +115,7 @@ declare module c2 {
   }
 
   class CompletionList {
-    values: String[];
+    values: string[];
     hide_others: boolean;
   }
 
