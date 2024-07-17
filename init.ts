@@ -2,6 +2,7 @@
 import utils from './utils';
 import commands from './percommand';
 import storage from './data';
+import {init_config_edit, sbcconfig_complete} from './configedit';
 
 const {config} = storage;
 
@@ -249,6 +250,9 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
 c2.register_callback(
     c2.EventType.CompletionRequested,
     (ev: c2.CompletionEvent) => {
+        if (ev.full_text_content.startsWith("/sbc:config")) {
+            return sbcconfig_complete(ev);
+        }
         c2.log(c2.LogLevel.Debug, "doing completions: ", ev.query, ev.full_text_content, ev.cursor_position, ev.is_first_word);
         return utils.filter(find_useful_completions(ev.full_text_content, ev.query, ev.cursor_position, ev.is_first_word), ev.query)
     }
@@ -295,5 +299,6 @@ if (config.rewrite_gift) {
     c2.register_command("$gift", cmd_fake_gift);
     c2.register_command("$give", cmd_fake_gift);
 }
+init_config_edit();
 c2.Channel.by_name("supinic", c2.Platform.Twitch)
     ?.add_system_message(`[Supibot completion ${storage.git.version} loaded]`);

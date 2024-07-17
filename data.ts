@@ -1,5 +1,5 @@
 import {Command} from "./init";
-import {decode} from "./json";
+import {decode, encode} from "./json";
 
 function load_file(this: void, fname: string, default_val = {}): any {
     const [f, err] = io.open(fname, 'r');
@@ -13,23 +13,34 @@ function load_file(this: void, fname: string, default_val = {}): any {
 }
 
 export class Config {
-    #data: Record<string, any>;
+    data: Record<string, any>;
     constructor() {
-        this.#data = load_file('config.json');
+        this.data = load_file('config.json');
+    }
+
+    public save(): void {
+        c2.log(c2.LogLevel.Info, 'Writing config file.');
+        const [f, err] = io.open('config.json', 'w');
+        if (err !== null || f === undefined) {
+            c2.log(c2.LogLevel.Info, 'Failed to open config file', err);
+            throw new Error(`Unable to open config file: ${err}`);
+        }
+        f.write(encode(this.data));
+        f.close();
     }
 
     public get my_username(): string {
-        return this.#data.my_username ?? "";
+        return this.data.my_username ?? "";
     }
     public set my_username(val: string) {
-        this.#data.my_username = val;
+        this.data.my_username = val;
     }
 
     public get rewrite_gift(): boolean {
-        return this.#data.rewrite_gift ?? false;
+        return this.data.rewrite_gift ?? false;
     }
     public set rewrite_gift(val: boolean) {
-        this.#data.rewrite_gift = val;
+        this.data.rewrite_gift = val;
     }
 };
 

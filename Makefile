@@ -3,7 +3,7 @@ all: data/completions_generated.json init.lua
 # Change this to your preferred package manager
 NPM := npm
 
-init.lua: init.ts utils.ts chatterino.d.ts data/completions_generated.json tsconfig.json package.json Makefile percommand.ts
+init.lua: init.ts utils.ts chatterino.d.ts data/completions_generated.json tsconfig.json package.json Makefile percommand.ts configedit.ts
 	$(NPM) run build
 
 # This empty rule convinces make to update completions_generated if config.json was touched but not cry if it doesn't exist

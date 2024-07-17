@@ -1,12 +1,19 @@
 local ____lualib = require("lualib_bundle")
 local __TS__Class = ____lualib.__TS__Class
 local __TS__SetDescriptor = ____lualib.__TS__SetDescriptor
+local Error = ____lualib.Error
+local RangeError = ____lualib.RangeError
+local ReferenceError = ____lualib.ReferenceError
+local SyntaxError = ____lualib.SyntaxError
+local TypeError = ____lualib.TypeError
+local URIError = ____lualib.URIError
+local __TS__New = ____lualib.__TS__New
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ArrayMap = ____lualib.__TS__ArrayMap
-local __TS__New = ____lualib.__TS__New
 local ____exports = {}
 local ____json = require("json")
 local decode = ____json.decode
+local encode = ____json.encode
 local function load_file(fname, default_val)
     if default_val == nil then
         default_val = {}
@@ -24,21 +31,21 @@ ____exports.Config = __TS__Class()
 local Config = ____exports.Config
 Config.name = "Config"
 function Config.prototype.____constructor(self)
-    self["#data"] = load_file("config.json")
+    self.data = load_file("config.json")
 end
 __TS__SetDescriptor(
     Config.prototype,
     "my_username",
     {
         get = function(self)
-            local ____self__23data_my_username_0 = self["#data"].my_username
-            if ____self__23data_my_username_0 == nil then
-                ____self__23data_my_username_0 = ""
+            local ____self_data_my_username_0 = self.data.my_username
+            if ____self_data_my_username_0 == nil then
+                ____self_data_my_username_0 = ""
             end
-            return ____self__23data_my_username_0
+            return ____self_data_my_username_0
         end,
         set = function(self, val)
-            self["#data"].my_username = val
+            self.data.my_username = val
         end
     },
     true
@@ -48,18 +55,34 @@ __TS__SetDescriptor(
     "rewrite_gift",
     {
         get = function(self)
-            local ____self__23data_rewrite_gift_1 = self["#data"].rewrite_gift
-            if ____self__23data_rewrite_gift_1 == nil then
-                ____self__23data_rewrite_gift_1 = false
+            local ____self_data_rewrite_gift_1 = self.data.rewrite_gift
+            if ____self_data_rewrite_gift_1 == nil then
+                ____self_data_rewrite_gift_1 = false
             end
-            return ____self__23data_rewrite_gift_1
+            return ____self_data_rewrite_gift_1
         end,
         set = function(self, val)
-            self["#data"].rewrite_gift = val
+            self.data.rewrite_gift = val
         end
     },
     true
 )
+function Config.prototype.save(self)
+    c2.log(c2.LogLevel.Info, "Writing config file.")
+    local f, err = io.open("config.json", "w")
+    if err ~= nil or f == nil then
+        c2.log(c2.LogLevel.Info, "Failed to open config file", err)
+        error(
+            __TS__New(
+                Error,
+                "Unable to open config file: " .. tostring(err)
+            ),
+            0
+        )
+    end
+    f:write(encode(self.data))
+    f:close()
+end
 local gen = load_file("completions_generated.json")
 local definitions = gen.definitions
 local git = gen.git

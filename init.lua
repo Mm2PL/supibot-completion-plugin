@@ -10,6 +10,9 @@ local ____percommand = require("percommand")
 local commands = ____percommand.default
 local ____data = require("data")
 local storage = ____data.default
+local ____configedit = require("configedit")
+local init_config_edit = ____configedit.init_config_edit
+local sbcconfig_complete = ____configedit.sbcconfig_complete
 local ____storage_0 = storage
 local config = ____storage_0.config
 --- Look up a command by name from the generated definitions
@@ -209,6 +212,9 @@ end
 c2.register_callback(
     c2.EventType.CompletionRequested,
     function(ev)
+        if __TS__StringStartsWith(ev.full_text_content, "/sbc:config") then
+            return sbcconfig_complete(ev)
+        end
         c2.log(
             c2.LogLevel.Debug,
             "doing completions: ",
@@ -266,8 +272,9 @@ if config.rewrite_gift then
     c2.register_command("$gift", cmd_fake_gift)
     c2.register_command("$give", cmd_fake_gift)
 end
-local ____opt_26 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
-if ____opt_26 ~= nil then
-    ____opt_26:add_system_message(("[Supibot completion " .. tostring(storage.git.version)) .. " loaded]")
+init_config_edit()
+local ____opt_25 = c2.Channel.by_name("supinic", c2.Platform.Twitch)
+if ____opt_25 ~= nil then
+    ____opt_25:add_system_message(("[Supibot completion " .. tostring(storage.git.version)) .. " loaded]")
 end
 return ____exports

@@ -10,7 +10,8 @@
         "integration"
     ],
     "permissions": [
-        {"type": "FilesystemRead"}
+        {"type": "FilesystemRead"},
+        {"type": "FilesystemWrite"}
     ],
     "version": "1.0.0",
     "license": "MIT"
