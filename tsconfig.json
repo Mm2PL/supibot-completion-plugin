@@ -10,7 +10,8 @@
     "resolveJsonModule": true
   },
   "tstl": {
-    "luaTarget": "5.4"
+    "luaTarget": "5.4",
+    "noImplicitSelf": true
   },
   "exclude": ["supibot/*", "make_lua.js"]
 }

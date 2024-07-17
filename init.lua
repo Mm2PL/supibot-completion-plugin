@@ -2,7 +2,6 @@ local ____lualib = require("lualib_bundle")
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local __TS__StringEndsWith = ____lualib.__TS__StringEndsWith
-local __TS__ArrayJoin = ____lualib.__TS__ArrayJoin
 local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
@@ -232,7 +231,7 @@ c2.register_callback(
 if utils.has_load() then
     local function cmd_eval(ctx)
         table.remove(ctx.words, 1)
-        local input = __TS__ArrayJoin(ctx.words, " ")
+        local input = table.concat(ctx.words, " ")
         local source = "return " .. input
         ctx.channel:add_system_message(">>>" .. input)
         local f
@@ -241,7 +240,7 @@ if utils.has_load() then
         if f == nil then
             ctx.channel:add_system_message("!<" .. tostring(err))
         else
-            ctx.channel:add_system_message("<< " .. tostring(f(nil)))
+            ctx.channel:add_system_message("<< " .. tostring(f()))
         end
     end
     c2.register_command("/sbc:eval", cmd_eval)
