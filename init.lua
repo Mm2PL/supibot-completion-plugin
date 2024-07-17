@@ -206,21 +206,6 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
     end
     return utils.new_completion_list()
 end
-local function filter(self, inp, filter)
-    local out = utils.new_completion_list()
-    out.hide_others = inp.hide_others
-    filter = string.lower(filter)
-    for ____, c in ipairs(inp.values) do
-        if __TS__StringStartsWith(
-            string.lower(c),
-            filter
-        ) then
-            local ____out_values_25 = out.values
-            ____out_values_25[#____out_values_25 + 1] = c
-        end
-    end
-    return out
-end
 c2.register_callback(
     c2.EventType.CompletionRequested,
     function(ev)
@@ -232,8 +217,7 @@ c2.register_callback(
             ev.cursor_position,
             ev.is_first_word
         )
-        return filter(
-            nil,
+        return utils.filter(
             find_useful_completions(ev.full_text_content, ev.query, ev.cursor_position, ev.is_first_word),
             ev.query
         )

@@ -14,6 +14,7 @@ local __TS__StringSplit = ____lualib.__TS__StringSplit
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ArrayEvery = ____lualib.__TS__ArrayEvery
 local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
+local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
 local ____exports = {}
 local ____data = require("data")
 local storage = ____data.default
@@ -166,6 +167,21 @@ do
                 end
             end
             ::__continue26::
+        end
+        return out
+    end
+    function utils.filter(inp, filter)
+        local out = utils.new_completion_list()
+        out.hide_others = inp.hide_others
+        filter = string.lower(filter)
+        for ____, c in ipairs(inp.values) do
+            if __TS__StringStartsWith(
+                string.lower(c),
+                filter
+            ) then
+                local ____out_values_5 = out.values
+                ____out_values_5[#____out_values_5 + 1] = c
+            end
         end
         return out
     end

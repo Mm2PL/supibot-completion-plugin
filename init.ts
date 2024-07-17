@@ -246,23 +246,11 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
     return utils.new_completion_list();
 }
 
-function filter(inp: c2.CompletionList, filter: string): c2.CompletionList {
-    let out = utils.new_completion_list();
-    out.hide_others = inp.hide_others;
-    filter = filter.toLowerCase();
-    for (const c of inp.values) {
-        if (c.toLowerCase().startsWith(filter)) {
-            out.values.push(c);
-        }
-    }
-    return out;
-}
-
 c2.register_callback(
     c2.EventType.CompletionRequested,
     (ev: c2.CompletionEvent) => {
         c2.log(c2.LogLevel.Debug, "doing completions: ", ev.query, ev.full_text_content, ev.cursor_position, ev.is_first_word);
-        return filter(find_useful_completions(ev.full_text_content, ev.query, ev.cursor_position, ev.is_first_word), ev.query)
+        return utils.filter(find_useful_completions(ev.full_text_content, ev.query, ev.cursor_position, ev.is_first_word), ev.query)
     }
 );
 

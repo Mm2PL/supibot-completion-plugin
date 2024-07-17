@@ -121,6 +121,19 @@ namespace utils {
         }
         return out;
     }
+
+    export function filter(inp: c2.CompletionList, filter: string): c2.CompletionList {
+        let out = utils.new_completion_list();
+        out.hide_others = inp.hide_others;
+        filter = filter.toLowerCase();
+        for (const c of inp.values) {
+            if (c.toLowerCase().startsWith(filter)) {
+                out.values.push(c);
+            }
+        }
+        return out;
+    }
+
 }
 
 export default utils;
