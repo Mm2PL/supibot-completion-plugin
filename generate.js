@@ -1,4 +1,4 @@
-const REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG";
+'use strict';
 const EXCLUDE_FLAGS = ["WHITELIST"];
 const META_COMMANDS = ["pipe", "alias"];
 const SUPINICS_CHANNEL_WHITELIST = [
@@ -64,8 +64,8 @@ const child_process = require('node:child_process');
         let eat_before_sub = 0;
         let subcommands = null;
         if (def.Name === "set") {
-            const sd = def.Static_Data();
-            subcommands = sd.variables.filter(v => !v.adminOnly || ADMIN_MODE).map(v => {
+            const vars = require('./supibot/commands/set/subcommands/index.js');
+            subcommands = vars.filter(v => !v.adminOnly || ADMIN_MODE).map(v => {
                 let innersubs = null;
                 if (v.name === "twitchlotto") {
                     innersubs = require("./supibot/commands/twitchlotto/definitions.js").flags.map(
@@ -93,8 +93,7 @@ const child_process = require('node:child_process');
                     flags: [],
                     params: [],
                 }
-            }
-            );
+            });
         } else if (def.Name == "texttransform") {
             const transforms = require("./supibot/commands/texttransform/transforms.js");
             subcommands = transforms.types.map(t => {
@@ -157,7 +156,6 @@ const child_process = require('node:child_process');
                 }
             });
         } else if (def.Name === 'gift') {
-            flags.push(REQUIRE_LEGACY_GIVE_CFG);
             subcommands = [
                 {
                     name: 'cookie',
@@ -165,7 +163,7 @@ const child_process = require('node:child_process');
                     pipe: false,
                     eat_before_sub_command: 0,
                     params: [],
-                    flags: [REQUIRE_LEGACY_GIVE_CFG],
+                    flags: [],
                     subcommands: null,
                 }
             ];
