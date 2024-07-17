@@ -1,6 +1,5 @@
 /** @noSelfInFile */
 import storage from "./data";
-import {inspect} from "./inspect";
 import utils from "./utils";
 const {config} = storage;
 
@@ -90,7 +89,6 @@ function command_config(ctx: c2.CommandContext) {
     }
     const sub = <string>ctx.words.shift();
     const cb = config_subs[sub];
-    print(inspect(ctx.words));
     cb.func(ctx, [...ctx.words]);
 }
 export function init_config_edit() {
@@ -99,12 +97,10 @@ export function init_config_edit() {
 }
 
 export function sbcconfig_complete(ev: c2.CompletionEvent): c2.CompletionList {
-    print(inspect(ev));
     const words = ev.full_text_content.split(' ');
     if (words[words.length - 1] == "") {
         words.pop();
     }
-    print(inspect(words));
     if (words.length == 1) {
         return utils.new_completion_list();
     }
@@ -113,7 +109,6 @@ export function sbcconfig_complete(ev: c2.CompletionEvent): c2.CompletionList {
         const list = utils.new_completion_list();
         list.hide_others = true;
         list.values = Object.keys(config_subs).map(it => it + ' ');
-        print(inspect(list));
         return utils.filter(list, ev.query);
     }
     // /sbc:config <sub> <query>
