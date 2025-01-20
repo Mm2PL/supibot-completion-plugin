@@ -300,5 +300,5 @@ if (config.rewrite_gift) {
     c2.register_command("$give", cmd_fake_gift);
 }
 init_config_edit();
-c2.Channel.by_name("supinic", c2.Platform.Twitch)
+c2.Channel.by_name("supinic")
     ?.add_system_message(`[Supibot completion ${storage.git.version} loaded]`);
