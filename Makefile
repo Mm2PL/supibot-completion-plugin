@@ -1,7 +1,7 @@
 all: data/completions_generated.json init.lua
 
 # Change this to your preferred package manager
-NPM := npm
+NPM := yarn
 
 init.lua: data/completions_generated.json tsconfig.json package.json Makefile $(wildcard *.ts)
 	$(NPM) run build
@@ -15,6 +15,7 @@ update_pull:
 	git submodule update --init supibot
 	git -C supibot checkout master
 	git -C supibot pull
-	cd supibot; $(NPM) install --no-package-lock
+	cp supibot/config-default.json supibot/config.json
+	cd supibot; $(NPM) install
 
 update: update_pull data/completions_generated.json init.lua

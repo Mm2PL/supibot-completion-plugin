@@ -27,7 +27,7 @@ const fs = require("fs");
 const child_process = require('node:child_process');
 
 (async () => {
-    const supicore = await import("./supibot/node_modules/supi-core/index.js");
+    const supicore = await import("./supibot/node_modules/supi-core/build/index.js");
 
     globalThis.sb = {
         Date: supicore.Date,
@@ -224,7 +224,7 @@ const child_process = require('node:child_process');
         version: "<Unknown>",
     };
     try {
-        git.version = child_process.execSync('git describe --abbrev=0 --dirty').toString().trim();
+        git.version = child_process.execSync('git describe --abbrev=0').toString().trim();
     } catch (e) {
         // no git
     }
