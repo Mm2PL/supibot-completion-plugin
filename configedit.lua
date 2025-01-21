@@ -26,7 +26,7 @@ local function config_show(ctx, args)
     end
 end
 local function config_set(ctx, args)
-    if #args == 0 then
+    if #args < 2 then
         ctx.channel:add_system_message("Usage: /sbc:config set <property_name> <value>")
         return
     end

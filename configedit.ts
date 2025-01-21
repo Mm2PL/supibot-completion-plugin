@@ -11,7 +11,7 @@ function config_show(ctx: c2.CommandContext, args: string[]): void {
 }
 
 function config_set(ctx: c2.CommandContext, args: string[]): void {
-    if (args.length === 0) {
+    if (args.length < 2) {
         ctx.channel.add_system_message('Usage: /sbc:config set <property_name> <value>');
         return;
     }
