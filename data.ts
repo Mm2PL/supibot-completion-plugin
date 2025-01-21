@@ -19,6 +19,13 @@ export class Config {
 
     constructor() {
         this.data = load_file('config.json');
+        this.init_defaults();
+    }
+
+    private init_defaults(): void {
+        this.data.my_username ??= "";
+        this.data.rewrite_gift ??= false;
+        this.data.intercept_alias ??= true;
     }
 
     public save(): void {

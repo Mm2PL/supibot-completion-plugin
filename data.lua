@@ -30,6 +30,7 @@ local Config = ____exports.Config
 Config.name = "Config"
 function Config.prototype.____constructor(self)
     self.data = load_file("config.json")
+    self:init_defaults()
 end
 __TS__SetDescriptor(
     Config.prototype,
@@ -82,6 +83,20 @@ __TS__SetDescriptor(
     },
     true
 )
+function Config.prototype.init_defaults(self)
+    local ____self_data_3, ____my_username_4 = self.data, "my_username"
+    if ____self_data_3[____my_username_4] == nil then
+        ____self_data_3[____my_username_4] = ""
+    end
+    local ____self_data_5, ____rewrite_gift_6 = self.data, "rewrite_gift"
+    if ____self_data_5[____rewrite_gift_6] == nil then
+        ____self_data_5[____rewrite_gift_6] = false
+    end
+    local ____self_data_7, ____intercept_alias_8 = self.data, "intercept_alias"
+    if ____self_data_7[____intercept_alias_8] == nil then
+        ____self_data_7[____intercept_alias_8] = true
+    end
+end
 function Config.prototype.save(self)
     c2.log(c2.LogLevel.Info, "Writing config file.")
     local f, err = io.open("config.json", "w")
