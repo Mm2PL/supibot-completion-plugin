@@ -14,16 +14,16 @@ The plugin:
 
 ## Usage
 
-1. Ensure you are on a build after [#5280](https://github.com/chatterino/chatterino2/pull/5280).
+1. Ensure you are on a build after [#2800](https://github.com/Chatterino/chatterino2/pull/5800): this build fixed a crash related to HTTP requests.
 2. Just dump the contents of the repo into a new directory in your chatterino plugins directory.
 3. Enable in the settings
+4. Optionally configure the plugin using `/sbc:config`.
 
 ## Building
 
 1. Clone with submodules
 2. `npm i`
-3. Optionally copy `data/config.dist.json` to `data/config.json` and put in your username to download a list of your Supibot aliases automatically.
-4. Use `make` to compile Typescript to Lua (if you delete `data/completions_generated.json` this will regenerate it)
+3. Use `make` to compile Typescript to Lua (if you delete `data/completions_generated.json` this will regenerate it)
 
 ### Update command definitions
 
