@@ -1,5 +1,5 @@
-import {Command} from "./init";
-import {decode, encode} from "./json";
+import { Command } from "./init";
+import { decode, encode } from "./json";
 import utils from "./utils";
 
 function load_file(this: void, fname: string, default_val = {}): any {

@@ -2,10 +2,10 @@
 import utils from './utils';
 import commands from './percommand';
 import storage from './data';
-import {init_config_edit, sbcconfig_complete} from './configedit';
 import { load_aliases, get_aliases, should_load_aliases } from './aliases';
+import { init_config_edit, sbcconfig_complete } from './configedit';
 
-const {config} = storage;
+const { config } = storage;
 
 
 export type Command = {
@@ -305,3 +305,4 @@ init_config_edit();
 c2.Channel.by_name("supinic")
     ?.add_system_message(`[Supibot completion ${storage.git.version} loaded]`);
 load_aliases();
+

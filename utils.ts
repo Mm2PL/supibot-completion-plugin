@@ -60,7 +60,7 @@ namespace utils {
     }
 
     export function new_completion_list(this: void): c2.CompletionList {
-        return {hide_others: false, values: []};
+        return { hide_others: false, values: [] };
     }
 
     export function has_load(this: void): boolean {
@@ -116,7 +116,7 @@ namespace utils {
             out.set(currentname, text.slice(value_begin ?? 0, text.length));
         }
         non_param_args.push(text.slice(last_param_end, text.length));
-        return {params: out, argv: non_param_args.join(" ").split(" ")};
+        return { params: out, argv: non_param_args.join(" ").split(" ") };
     }
 
     export const REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG";

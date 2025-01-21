@@ -41,7 +41,7 @@ const child_process = require('node:child_process');
     const cmds = await (require('./supibot/commands').loadCommands({
         skipArchivedCommands: true
     }));
-    const {definitions, failed, skipped} = cmds;
+    const { definitions, failed, skipped } = cmds;
     console.log("Skipped commands: ", skipped);
     console.log("Failed commands: ", failed);
     console.log(`Loaded ${definitions.length} commands successfully.`);
@@ -111,19 +111,20 @@ const child_process = require('node:child_process');
             );
         } else if (def.Name == "alias") {
             const subs = [
-                {name: "add", aliases: ["create"]},
-                {name: "upsert", aliases: ["addedit"]},
-                {name: "check", aliases: ["list", "code", "spy"]},
-                {name: "publish", aliases: []},
-                {name: "unpublish", aliases: []},
-                {name: "copy", aliases: ["copyplace"]},
-                {name: "describe", aliases: []},
-                {name: "link", aliases: []},
-                {name: "delete", aliases: ["remove"]},
-                {name: "rename", aliases: []},
-                {name: "restrict", aliases: []},
-                {name: "unrestrict", aliases: []},
-                {name: "run", aliases: ["try"]},
+                { name: "add", aliases: ["create"] },
+                { name: "upsert", aliases: ["addedit"] },
+                { name: "check", aliases: ["list", "code", "spy"] },
+                { name: "publish", aliases: [] },
+                { name: "unpublish", aliases: [] },
+                { name: "copy", aliases: ["copyplace"] },
+                { name: "describe", aliases: [] },
+                { name: "link", aliases: [] },
+                { name: "delete", aliases: ["remove"] },
+                { name: "rename", aliases: [] },
+                { name: "restrict", aliases: [] },
+                { name: "unrestrict", aliases: [] },
+                { name: "run", aliases: ["try"] },
+                { name: "duplicate", aliases: [] },
             ];
             subcommands = subs.map(t => {
                 return {
@@ -139,10 +140,10 @@ const child_process = require('node:child_process');
         }
         else if (def.Name === 'cookie') {
             const subs = [
-                {name: "eat", aliases: []},
-                {name: "donate", aliases: ["give", "gift"]},
-                {name: "stats", aliases: ["statistics"]},
-                {name: "top", aliases: ["leaders", "leaderboard"]},
+                { name: "eat", aliases: [] },
+                { name: "donate", aliases: ["give", "gift"] },
+                { name: "stats", aliases: ["statistics"] },
+                { name: "top", aliases: ["leaders", "leaderboard"] },
             ];
             subcommands = subs.map(t => {
                 return {

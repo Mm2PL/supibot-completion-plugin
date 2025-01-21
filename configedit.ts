@@ -1,7 +1,7 @@
 /** @noSelfInFile */
 import storage from "./data";
 import utils from "./utils";
-const {config} = storage;
+const { config } = storage;
 
 function config_show(ctx: c2.CommandContext, args: string[]): void {
     ctx.channel.add_system_message("Supibot Completion Plugin config:");
@@ -35,7 +35,7 @@ function config_set(ctx: c2.CommandContext, args: string[]): void {
     config.save();
 }
 
-function conv_str(s: string) {return s;}
+function conv_str(s: string) { return s; }
 function conv_bool(s: string) {
     if (s === 'true') {
         return true;
@@ -47,8 +47,8 @@ function conv_bool(s: string) {
 }
 
 const props = [
-    {name: "my_username", display: "Username", convert: conv_str},
-    {name: "rewrite_gift", display: "Rewrite $gift to $cookie", convert: conv_bool},
+    { name: "my_username", display: "Username", convert: conv_str },
+    { name: "rewrite_gift", display: "Rewrite $gift to $cookie", convert: conv_bool },
     { name: "intercept_alias", display: "Intercept $alias command and reload aliases", convert: conv_bool }
 ]
 
@@ -59,7 +59,7 @@ type ConfigSub = {
 };
 
 const config_subs: Record<string, ConfigSub> = {
-    show: {help: "Shows you the config", func: config_show, completions: () => []},
+    show: { help: "Shows you the config", func: config_show, completions: () => [] },
     set: {
         help: "Sets a config value",
         func: config_set,
