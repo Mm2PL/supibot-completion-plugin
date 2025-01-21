@@ -1,7 +1,7 @@
 import storage from './data';
 
 namespace utils {
-    export const VERSION = 'v1.1.0';
+    export const VERSION = 'v1.2.0';
     export const HTTP_USER_AGENT = `supibot-completion-plugin (${VERSION}) (https://github.com/mm2pl/supibot-completion-plugin)`;
 
     const ASCII = {

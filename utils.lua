@@ -22,7 +22,7 @@ local ____data = require("data")
 local storage = ____data.default
 local utils = {}
 do
-    utils.VERSION = "v1.1.0"
+    utils.VERSION = "v1.2.0"
     utils.HTTP_USER_AGENT = ("supibot-completion-plugin (" .. utils.VERSION) .. ") (https://github.com/mm2pl/supibot-completion-plugin)"
     local ASCII = {
         A = string.byte("A"),
