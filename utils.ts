@@ -1,6 +1,45 @@
 import storage from './data';
 
 namespace utils {
+    export const VERSION = 'v1.1.0';
+    export const HTTP_USER_AGENT = `supibot-completion-plugin (${VERSION}) (https://github.com/mm2pl/supibot-completion-plugin)`;
+
+    const ASCII = {
+        'A': string.byte('A'),
+        'Z': string.byte('Z'),
+        'a': string.byte('a'),
+        'z': string.byte('z'),
+        '0': string.byte('0'),
+        '9': string.byte('9'),
+    };
+
+    /**
+     * Returns true if i is in [begin, end].
+     */
+    function in_range(this: void, i: number, begin: number, end: number): boolean {
+        return begin <= i && i <= end;
+    }
+
+    export function encode_uri_component(this: void, input: string): string {
+        let out = '';
+        const outliers = [...'-.!~*\'()'];
+        for (const char of input) {
+            const byte = string.byte(char);
+            if (outliers.includes(char)) {
+                out += char;
+            } else if (in_range(byte, ASCII.A, ASCII.Z)
+                || in_range(byte, ASCII.a, ASCII.z)
+                || in_range(byte, ASCII['0'], ASCII['9'])
+            ) {
+                out += char;
+            } else {
+                // We need to encode it with % encoding
+                out += '%' + byte.toString(16);
+            }
+        }
+        return out;
+    }
+
     export function arr_contains_any<T>(this: void, left: Array<T>, right: Array<T>): boolean {
         for (const e of right) {
             if (left.includes(e)) return true;

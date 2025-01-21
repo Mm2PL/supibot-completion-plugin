@@ -3,6 +3,7 @@ import utils from './utils';
 import commands from './percommand';
 import storage from './data';
 import {init_config_edit, sbcconfig_complete} from './configedit';
+import { load_aliases, get_aliases, should_load_aliases } from './aliases';
 
 const {config} = storage;
 
@@ -66,10 +67,11 @@ function lookup_subcommand(this: void, name: string, cmdData: Command): Command 
 
 function users_aliases(this: void, prefix: string): c2.CompletionList {
     const out = utils.new_completion_list();
-    if (storage.aliases.length === 0)
+    const aliases = get_aliases();
+    if (aliases === null || aliases.length === 0)
         return out;
     out.hide_others = true;
-    for (const alias of storage.aliases) {
+    for (const alias of aliases) {
         out.values.push(prefix + alias.name);
     }
     return out;
@@ -302,3 +304,4 @@ if (config.rewrite_gift) {
 init_config_edit();
 c2.Channel.by_name("supinic")
     ?.add_system_message(`[Supibot completion ${storage.git.version} loaded]`);
+load_aliases();

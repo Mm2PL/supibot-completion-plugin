@@ -1,5 +1,8 @@
 local ____lualib = require("lualib_bundle")
+local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ArrayIncludes = ____lualib.__TS__ArrayIncludes
+local __TS__NumberToString = ____lualib.__TS__NumberToString
+local __TS__Iterator = ____lualib.__TS__Iterator
 local Map = ____lualib.Map
 local __TS__New = ____lualib.__TS__New
 local __TS__StringAccess = ____lualib.__TS__StringAccess
@@ -11,7 +14,6 @@ local SyntaxError = ____lualib.SyntaxError
 local TypeError = ____lualib.TypeError
 local URIError = ____lualib.URIError
 local __TS__StringSplit = ____lualib.__TS__StringSplit
-local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ArrayEvery = ____lualib.__TS__ArrayEvery
 local __TS__ArrayFilter = ____lualib.__TS__ArrayFilter
 local __TS__StringStartsWith = ____lualib.__TS__StringStartsWith
@@ -20,6 +22,35 @@ local ____data = require("data")
 local storage = ____data.default
 local utils = {}
 do
+    utils.VERSION = "v1.1.0"
+    utils.HTTP_USER_AGENT = ("supibot-completion-plugin (" .. utils.VERSION) .. ") (https://github.com/mm2pl/supibot-completion-plugin)"
+    local ASCII = {
+        A = string.byte("A"),
+        Z = string.byte("Z"),
+        a = string.byte("a"),
+        z = string.byte("z"),
+        ["0"] = string.byte("0"),
+        ["9"] = string.byte("9")
+    }
+    --- Returns true if i is in [begin, end].
+    local function in_range(i, begin, ____end)
+        return begin <= i and i <= ____end
+    end
+    function utils.encode_uri_component(input)
+        local out = ""
+        local outliers = {__TS__Spread("-.!~*'()")}
+        for ____, char in __TS__Iterator(input) do
+            local byte = string.byte(char)
+            if __TS__ArrayIncludes(outliers, char) then
+                out = out .. char
+            elseif in_range(byte, ASCII.A, ASCII.Z) or in_range(byte, ASCII.a, ASCII.z) or in_range(byte, ASCII["0"], ASCII["9"]) then
+                out = out .. char
+            else
+                out = out .. "%" .. __TS__NumberToString(byte, 16)
+            end
+        end
+        return out
+    end
     function utils.arr_contains_any(left, right)
         for ____, e in ipairs(right) do
             if __TS__ArrayIncludes(left, e) then
@@ -142,7 +173,7 @@ do
                     required_flags,
                     function(____, it) return __TS__ArrayIncludes(val.flags, it) end
                 ) then
-                    goto __continue26
+                    goto __continue33
                 end
                 if not utils.arr_contains_any(val.flags, excl_flags) then
                     local ____opt_0 = val.aliases
@@ -166,7 +197,7 @@ do
                     end
                 end
             end
-            ::__continue26::
+            ::__continue33::
         end
         return out
     end

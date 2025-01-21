@@ -49,6 +49,7 @@ function conv_bool(s: string) {
 const props = [
     {name: "my_username", display: "Username", convert: conv_str},
     {name: "rewrite_gift", display: "Rewrite $gift to $cookie", convert: conv_bool},
+    { name: "intercept_alias", display: "Intercept $alias command and reload aliases", convert: conv_bool }
 ]
 
 type ConfigSub = {
@@ -93,7 +94,6 @@ function command_config(ctx: c2.CommandContext) {
 }
 export function init_config_edit() {
     c2.register_command('/sbc:config', command_config);
-
 }
 
 export function sbcconfig_complete(ev: c2.CompletionEvent): c2.CompletionList {

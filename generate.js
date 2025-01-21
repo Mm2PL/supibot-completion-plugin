@@ -194,29 +194,6 @@ const child_process = require('node:child_process');
     const defs = definitions.map(definitionToJson);
 
     let aliases = [];
-    let config;
-    try {
-        config = require('./data/config.json');
-    } catch {
-    }
-
-    if (!config) {
-        console.log('Unable to load user config, using data/config.dist.json instead');
-        config = require('./data/config.dist.json');
-    }
-
-    if (!config.my_username) {
-        console.log("Skipping generation of user-specific data, no username given in config.");
-    } else {
-        const r = await fetch(`https://supinic.com/api/bot/user/${config.my_username}/alias/list`);
-        if (r.status !== 200) {
-            console.log(`supinic.com api unexpectidly returned ${r.status}, abort`);
-            return;
-        }
-        const data = await r.json();
-        console.log(`Downloaded ${data.data.length} aliases from supinic.com`);
-        fs.writeFileSync("data/aliases.json", JSON.stringify(data));
-    }
     const git = {
         commit: "<No data>",
 

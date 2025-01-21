@@ -1,5 +1,6 @@
 import {Command} from "./init";
 import {decode, encode} from "./json";
+import utils from "./utils";
 
 function load_file(this: void, fname: string, default_val = {}): any {
     const [f, err] = io.open(fname, 'r');
@@ -12,8 +13,10 @@ function load_file(this: void, fname: string, default_val = {}): any {
     return decode(dat);
 }
 
+
 export class Config {
     data: Record<string, any>;
+
     constructor() {
         this.data = load_file('config.json');
     }
@@ -42,29 +45,22 @@ export class Config {
     public set rewrite_gift(val: boolean) {
         this.data.rewrite_gift = val;
     }
+
+    public get intercept_alias(): boolean {
+        return this.data.intercept_alias ?? true;
+    }
+    public set intercept_alias(val: boolean) {
+        this.data.intercept_alias = val;
+    }
 };
 
 const gen = load_file("completions_generated.json");
-const {definitions, git, excluded_flags} = gen;
+const { definitions, git, excluded_flags } = gen;
 
-type AliasType = {name: string, created: string, edited: string | null, link_author: string | null, link_name: string | null, invocation: string};
-type SupinicComAlias = {name: string, created: string, edited: string, linkAuthor: string | null, linkName: string | null, invocation: string};
-const aliases: Array<AliasType> = [...load_file("aliases.json", {data: []}).data].map((inp: SupinicComAlias) => {
-    return {
-        name: inp.name,
-        created: inp.created,
-        edited: inp.edited,
-        link_author: inp.linkAuthor,
-        link_name: inp.linkName,
-
-        invocation: inp.invocation,
-    }
-});
 
 export default {
     config: new Config(),
     definitions: <Array<Command>>definitions,
     git,
     excluded_flags,
-    aliases: aliases,
 };

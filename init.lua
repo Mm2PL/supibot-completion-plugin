@@ -9,6 +9,9 @@ local ____percommand = require("percommand")
 local commands = ____percommand.default
 local ____data = require("data")
 local storage = ____data.default
+local ____aliases = require("aliases")
+local load_aliases = ____aliases.load_aliases
+local get_aliases = ____aliases.get_aliases
 local ____configedit = require("configedit")
 local init_config_edit = ____configedit.init_config_edit
 local sbcconfig_complete = ____configedit.sbcconfig_complete
@@ -49,11 +52,12 @@ local function lookup_subcommand(name, cmdData)
 end
 local function users_aliases(prefix)
     local out = utils.new_completion_list()
-    if #storage.aliases == 0 then
+    local aliases = get_aliases()
+    if aliases == nil or #aliases == 0 then
         return out
     end
     out.hide_others = true
-    for ____, alias in ipairs(storage.aliases) do
+    for ____, alias in ipairs(aliases) do
         local ____out_values_3 = out.values
         ____out_values_3[#____out_values_3 + 1] = prefix .. alias.name
     end
@@ -276,4 +280,5 @@ local ____opt_25 = c2.Channel.by_name("supinic")
 if ____opt_25 ~= nil then
     ____opt_25:add_system_message(("[Supibot completion " .. tostring(storage.git.version)) .. " loaded]")
 end
+load_aliases()
 return ____exports

@@ -8,8 +8,6 @@ local SyntaxError = ____lualib.SyntaxError
 local TypeError = ____lualib.TypeError
 local URIError = ____lualib.URIError
 local __TS__New = ____lualib.__TS__New
-local __TS__Spread = ____lualib.__TS__Spread
-local __TS__ArrayMap = ____lualib.__TS__ArrayMap
 local ____exports = {}
 local ____json = require("json")
 local decode = ____json.decode
@@ -67,6 +65,23 @@ __TS__SetDescriptor(
     },
     true
 )
+__TS__SetDescriptor(
+    Config.prototype,
+    "intercept_alias",
+    {
+        get = function(self)
+            local ____self_data_intercept_alias_2 = self.data.intercept_alias
+            if ____self_data_intercept_alias_2 == nil then
+                ____self_data_intercept_alias_2 = true
+            end
+            return ____self_data_intercept_alias_2
+        end,
+        set = function(self, val)
+            self.data.intercept_alias = val
+        end
+    },
+    true
+)
 function Config.prototype.save(self)
     c2.log(c2.LogLevel.Info, "Writing config file.")
     local f, err = io.open("config.json", "w")
@@ -87,24 +102,10 @@ local gen = load_file("completions_generated.json")
 local definitions = gen.definitions
 local git = gen.git
 local excluded_flags = gen.excluded_flags
-local aliases = __TS__ArrayMap(
-    {__TS__Spread(load_file("aliases.json", {data = {}}).data)},
-    function(____, inp)
-        return {
-            name = inp.name,
-            created = inp.created,
-            edited = inp.edited,
-            link_author = inp.linkAuthor,
-            link_name = inp.linkName,
-            invocation = inp.invocation
-        }
-    end
-)
 ____exports.default = {
     config = __TS__New(____exports.Config),
     definitions = definitions,
     git = git,
-    excluded_flags = excluded_flags,
-    aliases = aliases
+    excluded_flags = excluded_flags
 }
 return ____exports

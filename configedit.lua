@@ -15,8 +15,6 @@ local ____exports = {}
 local props
 local ____data = require("data")
 local storage = ____data.default
-local ____inspect = require("inspect")
-local inspect = ____inspect.inspect
 local ____utils = require("utils")
 local utils = ____utils.default
 local ____storage_0 = storage
@@ -78,7 +76,7 @@ local function conv_bool(s)
         0
     )
 end
-props = {{name = "my_username", display = "Username", convert = conv_str}, {name = "rewrite_gift", display = "Rewrite $gift to $cookie", convert = conv_bool}}
+props = {{name = "my_username", display = "Username", convert = conv_str}, {name = "rewrite_gift", display = "Rewrite $gift to $cookie", convert = conv_bool}, {name = "intercept_alias", display = "Intercept $alias command and reload aliases", convert = conv_bool}}
 local config_subs = {
     show = {
         help = "Shows you the config",
@@ -123,7 +121,6 @@ local function command_config(ctx)
     end
     local sub = table.remove(ctx.words, 1)
     local cb = config_subs[sub]
-    print(inspect(ctx.words))
     cb.func(
         ctx,
         {table.unpack(ctx.words)}
@@ -133,12 +130,10 @@ function ____exports.init_config_edit()
     c2.register_command("/sbc:config", command_config)
 end
 function ____exports.sbcconfig_complete(ev)
-    print(inspect(ev))
     local words = __TS__StringSplit(ev.full_text_content, " ")
     if words[#words] == "" then
         table.remove(words)
     end
-    print(inspect(words))
     if #words == 1 then
         return utils.new_completion_list()
     end
@@ -149,7 +144,6 @@ function ____exports.sbcconfig_complete(ev)
             __TS__ObjectKeys(config_subs),
             function(____, it) return it .. " " end
         )
-        print(inspect(list))
         return utils.filter(list, ev.query)
     end
     table.remove(words, 1)
