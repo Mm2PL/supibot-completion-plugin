@@ -6,6 +6,9 @@ local __TS__ArrayUnshift = ____lualib.__TS__ArrayUnshift
 local __TS__ArrayPushArray = ____lualib.__TS__ArrayPushArray
 local __TS__StringSubstring = ____lualib.__TS__StringSubstring
 local __TS__StringTrim = ____lualib.__TS__StringTrim
+local __TS__StringSplit = ____lualib.__TS__StringSplit
+local __TS__StringIncludes = ____lualib.__TS__StringIncludes
+local __TS__ArrayPush = ____lualib.__TS__ArrayPush
 local ____exports = {}
 local ____utils = require("utils")
 local utils = ____utils.default
@@ -234,6 +237,54 @@ do
             out.hide_others = true
             __TS__ArrayPushArray(out.values, to_merge.values)
         end
+        return out
+    end
+    local PLAYER_COMMON = {"rude:", "seasonal:"}
+    --- $osrs itemid <item>
+    -- $osrs price <item>
+    -- 
+    -- PLAYER_COMMON := [rude:] [seasonal:]
+    -- $osrs <username> [skill:] [virtual:] ${PLAYER_COMMON}
+    -- ACTIVITY := ?
+    -- $osrs (kc|killcount|kill-count) (activity:${ACTIVITY}|boss:${ACTIVITY}) ${PLAYER_COMMON} <name> 
+    -- $osrs stars|star
+    -- $osrs status
+    -- $osrs guthix|tears|tog
+    -- $osrs wiki <free form text>
+    function commands.osrs(cmd, text, prefix)
+        local s = __TS__StringSplit(text, " ", 2)
+        local sub = s[2]
+        local out = utils.new_completion_list()
+        if sub == "itemid" or sub == "price" or sub == "stars" or sub == "star" or sub == "status" or sub == "guthix" or sub == "tears" or sub == "tog" or sub == "wiki" then
+            return out
+        end
+        if sub == "kc" or sub == "killcount" or sub == "kill-count" then
+            if not __TS__StringIncludes(text, "activity:") and not __TS__StringIncludes(text, "boss:") then
+                local ____out_values_47 = out.values
+                ____out_values_47[#____out_values_47 + 1] = "activity:"
+                local ____out_values_48 = out.values
+                ____out_values_48[#____out_values_48 + 1] = "boss:"
+            end
+            __TS__ArrayPushArray(out.values, PLAYER_COMMON)
+            return out
+        end
+        if utils.count_occurences_of_byte(text, " ") <= 2 then
+            local ____out_values_49 = out.values
+            ____out_values_49[#____out_values_49 + 1] = "itemid "
+            local ____out_values_50 = out.values
+            ____out_values_50[#____out_values_50 + 1] = "price "
+            __TS__ArrayPush(out.values, "stars ", "star ")
+            local ____out_values_51 = out.values
+            ____out_values_51[#____out_values_51 + 1] = "status "
+            __TS__ArrayPush(out.values, "guthix ", "tears ", "tog ")
+            local ____out_values_52 = out.values
+            ____out_values_52[#____out_values_52 + 1] = "wiki "
+            __TS__ArrayPush(out.values, "kc ", "killcount ", "kill-count ")
+            __TS__ArrayPushArray(out.values, PLAYER_COMMON)
+            __TS__ArrayPush(out.values, "skill:", "virtual:")
+            return out
+        end
+        mm2pl_open_debugger().break_here()
         return out
     end
 end

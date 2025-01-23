@@ -224,6 +224,9 @@ function find_useful_completions(this: void, text: string, prefix: string, curso
     if (cmd_data?.name === 'unmention') {
         return commands.unmention(cmd_data, text, prefix);
     }
+    if (cmd_data?.name === 'osrs') {
+        return commands.osrs(cmd_data, text, prefix);
+    }
 
     if (cmd_data !== null && cmd_data.params !== null && cmd_data.params.length != 0) {
         let out = utils.new_completion_list();

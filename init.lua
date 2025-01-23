@@ -189,18 +189,21 @@ local function find_useful_completions(text, prefix, cursor_position, is_first_w
     if (cmd_data and cmd_data.name) == "unmention" then
         return commands.unmention(cmd_data, text, prefix)
     end
+    if (cmd_data and cmd_data.name) == "osrs" then
+        return commands.osrs(cmd_data, text, prefix)
+    end
     if cmd_data ~= nil and cmd_data.params ~= nil and #cmd_data.params ~= 0 then
         local out = utils.new_completion_list()
         print("DANKING!")
         for ____, val in ipairs(cmd_data.params) do
             if val.type == "boolean" then
-                local ____out_values_20 = out.values
-                ____out_values_20[#____out_values_20 + 1] = val.name .. ":true"
-                local ____out_values_21 = out.values
-                ____out_values_21[#____out_values_21 + 1] = val.name .. ":false"
-            else
                 local ____out_values_22 = out.values
-                ____out_values_22[#____out_values_22 + 1] = val.name .. ":"
+                ____out_values_22[#____out_values_22 + 1] = val.name .. ":true"
+                local ____out_values_23 = out.values
+                ____out_values_23[#____out_values_23 + 1] = val.name .. ":false"
+            else
+                local ____out_values_24 = out.values
+                ____out_values_24[#____out_values_24 + 1] = val.name .. ":"
             end
         end
         return out
@@ -276,9 +279,9 @@ if config.rewrite_gift then
     c2.register_command("$give", cmd_fake_gift)
 end
 init_config_edit()
-local ____opt_25 = c2.Channel.by_name("supinic")
-if ____opt_25 ~= nil then
-    ____opt_25:add_system_message(("[Supibot completion " .. tostring(storage.git.version)) .. " loaded]")
+local ____opt_27 = c2.Channel.by_name("supinic")
+if ____opt_27 ~= nil then
+    ____opt_27:add_system_message(("[Supibot completion " .. tostring(storage.git.version)) .. " loaded]")
 end
 load_aliases()
 return ____exports

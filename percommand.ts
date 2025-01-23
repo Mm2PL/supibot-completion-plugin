@@ -190,6 +190,63 @@ namespace commands {
         }
         return out;
     }
+
+    const PLAYER_COMMON = [
+        'rude:',
+        'seasonal:',
+    ];
+    /**
+      * $osrs itemid <item>
+      * $osrs price <item>
+      *
+      * PLAYER_COMMON := [rude:] [seasonal:]
+      * $osrs <username> [skill:] [virtual:] ${PLAYER_COMMON}
+      * ACTIVITY := ?
+      * $osrs (kc|killcount|kill-count) (activity:${ACTIVITY}|boss:${ACTIVITY}) ${PLAYER_COMMON} <name> 
+      * $osrs stars|star
+      * $osrs status
+      * $osrs guthix|tears|tog
+      * $osrs wiki <free form text>
+      */
+
+    export function osrs(this: void, cmd: Command, text: string, prefix: string): c2.CompletionList {
+        const s = text.split(" ", 2);
+        const sub = s[1];
+
+        const out = utils.new_completion_list();
+        if (sub === 'itemid' || sub === 'price'
+            || sub === 'stars' || sub === 'star'
+            || sub === 'status'
+            || sub === 'guthix' || sub == 'tears' || sub == 'tog'
+            || sub == 'wiki') {
+            return out; // nothing to complete
+        }
+        if (sub === 'kc' || sub == 'killcount' || sub === 'kill-count') {
+            // TODO
+
+            if (!text.includes('activity:') && !text.includes('boss:')) {
+                out.values.push('activity:');
+                out.values.push('boss:');
+            }
+            out.values.push(...PLAYER_COMMON);
+            return out;
+        }
+        if (utils.count_occurences_of_byte(text, ' ') <= 2) {
+            out.values.push('itemid ');
+            out.values.push('price ');
+            out.values.push('stars ', 'star ');
+            out.values.push('status ');
+            out.values.push('guthix ', 'tears ', 'tog ');
+            out.values.push('wiki ');
+            out.values.push('kc ', 'killcount ', 'kill-count ');
+            out.values.push(...PLAYER_COMMON);
+            out.values.push('skill:', 'virtual:');
+            return out;
+        }
+        mm2pl_open_debugger().break_here();
+        // $osrs <sub> ...
+        return out;
+    }
 }
 
 export default commands;
