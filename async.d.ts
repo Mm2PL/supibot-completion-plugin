@@ -40,7 +40,7 @@ type ParametersNull<
  * @throws {GetErrCallback<F>}
  */
 export declare function lawait<
-    F extends (...a: any) => any
+    F extends (this: void, ...a: any) => any
 >(this: void, fun: F, ...args: RemoveCallbacks<Parameters<F>>):
     ParametersNull<
         GetOkCallback<Parameters<F>>
@@ -51,7 +51,7 @@ export declare function lawait<
  * If the error callback is called, this will return false and then the error
  */
 export declare function plawait<
-    F extends (...a: any) => any
+    F extends (this: void, ...a: any) => any
 >(this: void, fun: F, ...args: RemoveCallbacks<Parameters<F>>):
     LuaMultiReturn<[true, ParametersNull<GetOkCallback<Parameters<F>>>]>
     | LuaMultiReturn<[false, ParametersNull<GetErrCallback<Parameters<F>>>]>;

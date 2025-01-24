@@ -47,7 +47,7 @@ namespace utils {
         return false;
     }
 
-    export function count_occurences_of_byte(this: void, str: string, b: string): Number {
+    export function count_occurences_of_byte(this: void, str: string, b: string): number {
         const byte = string.byte(b);
         let count = 0;
         for (let i = 1; i <= str.length; i++) {
