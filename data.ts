@@ -1,6 +1,18 @@
-import { Command } from "./init";
 import { decode, encode } from "./json";
 import utils from "./utils";
+
+export type Command = {
+    name: string,
+    aliases: string[] | null,
+    params: {
+        name: string,
+        type: string,
+    }[] | null,
+    flags: string[],
+    subcommands: Command[] | null,
+    eat_before_sub_command: number,
+    pipe: boolean,
+};
 
 function load_file(this: void, fname: string, default_val = {}): any {
     const [f, err] = io.open(fname, 'r');

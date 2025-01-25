@@ -1,25 +1,12 @@
 //import {inspect} from './inspect';
 import utils from './utils';
 import commands from './percommand';
-import storage from './data';
+import storage, { Command } from './data';
 import { load_aliases, get_aliases, should_load_aliases } from './aliases';
 import { init_config_edit, sbcconfig_complete } from './configedit';
 
 const { config } = storage;
 
-
-export type Command = {
-    name: string,
-    aliases: string[] | null,
-    params: {
-        name: string,
-        type: string,
-    }[] | null,
-    flags: string[],
-    subcommands: Command[] | null,
-    eat_before_sub_command: number,
-    pipe: boolean,
-};
 type SupinicComAlias = {
     name: string,
     invocation: string,

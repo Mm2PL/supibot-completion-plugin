@@ -1,4 +1,4 @@
-import {Command} from "./init";
+import { Command } from "./data";
 import utils from "./utils";
 enum BanType {
     OFFLINE_ONLY = "offline-only",
