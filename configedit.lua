@@ -146,6 +146,10 @@ local function command_config(ctx)
     end
     local sub = table.remove(ctx.words, 1)
     local cb = config_subs[sub]
+    if cb == nil then
+        ctx.channel:add_system_message("Subcommand not found")
+        return
+    end
     cb.func(
         ctx,
         {table.unpack(ctx.words)}

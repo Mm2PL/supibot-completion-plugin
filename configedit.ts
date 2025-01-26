@@ -111,6 +111,10 @@ function command_config(ctx: c2.CommandContext) {
     }
     const sub = <string>ctx.words.shift();
     const cb = config_subs[sub];
+    if (cb === null) {
+        ctx.channel.add_system_message('Subcommand not found');
+        return;
+    }
     cb.func(ctx, [...ctx.words]);
 }
 export function init_config_edit() {
