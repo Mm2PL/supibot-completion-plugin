@@ -7,11 +7,12 @@ local SyntaxError = ____lualib.SyntaxError
 local TypeError = ____lualib.TypeError
 local URIError = ____lualib.URIError
 local __TS__New = ____lualib.__TS__New
+local __TS__StringTrim = ____lualib.__TS__StringTrim
+local __TS__StringSplit = ____lualib.__TS__StringSplit
 local __TS__ArrayMap = ____lualib.__TS__ArrayMap
 local Set = ____lualib.Set
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ObjectEntries = ____lualib.__TS__ObjectEntries
-local __TS__StringSplit = ____lualib.__TS__StringSplit
 local __TS__ObjectKeys = ____lualib.__TS__ObjectKeys
 local ____exports = {}
 local collect_flags, props
@@ -35,7 +36,11 @@ local config = ____storage_0.config
 local function config_show(ctx, args)
     ctx.channel:add_system_message("Supibot Completion Plugin config:")
     for ____, p in ipairs(props) do
-        ctx.channel:add_system_message((((("[" .. p.name) .. "] ") .. p.display) .. ": ") .. tostring(config.data[p.name]))
+        local value = config.data[p.name]
+        if type(value) == "table" then
+            value = table.concat(value, ", ")
+        end
+        ctx.channel:add_system_message((((("[" .. p.name) .. "] ") .. p.display) .. ": ") .. tostring(value))
     end
 end
 local function config_set(ctx, args)
@@ -89,7 +94,13 @@ local function conv_bool(s)
         0
     )
 end
-props = {{name = "my_username", display = "Username", convert = conv_str}, {name = "rewrite_gift", display = "Rewrite $gift to $cookie", convert = conv_bool}, {name = "intercept_alias", display = "Intercept $alias command and reload aliases", convert = conv_bool}}
+local function conv_arr_str(s)
+    return __TS__ArrayMap(
+        __TS__StringSplit(s, ","),
+        function(____, it) return __TS__StringTrim(it) end
+    )
+end
+props = {{name = "my_username", display = "Username", convert = conv_str}, {name = "rewrite_gift", display = "Rewrite $gift to $cookie", convert = conv_bool}, {name = "intercept_alias", display = "Intercept $alias command and reload aliases", convert = conv_bool}, {name = "excluded_flags", display = "Flags excluded from completion (comma separated, see /sbc:config list_flags)", convert = conv_arr_str}}
 local config_subs = {
     show = {
         help = "Shows you the config",

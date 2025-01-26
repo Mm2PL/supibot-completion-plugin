@@ -1,12 +1,16 @@
 /** @noSelfInFile */
-import storage from "./data";
+import storage, { Command } from "./data";
 import utils from "./utils";
 const { config } = storage;
 
 function config_show(ctx: c2.CommandContext, args: string[]): void {
     ctx.channel.add_system_message("Supibot Completion Plugin config:");
     for (const p of props) {
-        ctx.channel.add_system_message(`[${p.name}] ${p.display}: ${config.data[p.name]}`);
+        let value = config.data[p.name];
+        if (type(value) === 'table') {
+            value = table.concat(value, ", ");
+        }
+        ctx.channel.add_system_message(`[${p.name}] ${p.display}: ${value}`);
     }
 }
 
@@ -45,11 +49,15 @@ function conv_bool(s: string) {
     }
     throw new Error(`Unable to convert: ${s} to boolean`);
 }
+function conv_arr_str(s: string) {
+    return s.split(',').map(it => it.trim());
+}
 
 const props = [
     { name: "my_username", display: "Username", convert: conv_str },
     { name: "rewrite_gift", display: "Rewrite $gift to $cookie", convert: conv_bool },
-    { name: "intercept_alias", display: "Intercept $alias command and reload aliases", convert: conv_bool }
+    { name: "intercept_alias", display: "Intercept $alias command and reload aliases", convert: conv_bool },
+    { name: "excluded_flags", display: "Flags excluded from completion (comma separated, see /sbc:config list_flags)", convert: conv_arr_str },
 ]
 
 type ConfigSub = {
