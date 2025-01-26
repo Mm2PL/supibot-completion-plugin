@@ -8,15 +8,28 @@ local TypeError = ____lualib.TypeError
 local URIError = ____lualib.URIError
 local __TS__New = ____lualib.__TS__New
 local __TS__ArrayMap = ____lualib.__TS__ArrayMap
+local Set = ____lualib.Set
+local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ObjectEntries = ____lualib.__TS__ObjectEntries
 local __TS__StringSplit = ____lualib.__TS__StringSplit
 local __TS__ObjectKeys = ____lualib.__TS__ObjectKeys
 local ____exports = {}
-local props
+local collect_flags, props
 local ____data = require("data")
 local storage = ____data.default
 local ____utils = require("utils")
 local utils = ____utils.default
+function collect_flags(cmds, out)
+    for ____, cmd in ipairs(cmds) do
+        for ____, f in ipairs(cmd.flags) do
+            out:add(f)
+        end
+        if cmd.subcommands ~= nil then
+            collect_flags(cmd.subcommands, out)
+        end
+    end
+    return out
+end
 local ____storage_0 = storage
 local config = ____storage_0.config
 local function config_show(ctx, args)
@@ -106,6 +119,18 @@ local config_subs = {
                 return {}
             end
         end
+    },
+    list_flags = {
+        help = "Lists all flags from commands",
+        func = function(ctx, args)
+            local flags = __TS__New(Set)
+            collect_flags(storage.definitions, flags)
+            ctx.channel:add_system_message("All command flags: " .. table.concat(
+                {__TS__Spread(flags)},
+                ", "
+            ))
+        end,
+        completions = function() return {} end
     }
 }
 local function command_config(ctx)

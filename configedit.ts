@@ -77,7 +77,28 @@ const config_subs: Record<string, ConfigSub> = {
             }
         }
     },
+    list_flags: {
+        help: "Lists all flags from commands",
+        func: (ctx: c2.CommandContext, args: string[]) => {
+            const flags: Set<string> = new Set();
+            collect_flags(storage.definitions, flags);
+            ctx.channel.add_system_message(`All command flags: ${[...flags].join(", ")}`);
+        },
+        completions: () => [],
+    }
 };
+
+function collect_flags(cmds: Array<Command>, out: Set<string>) {
+    for (const cmd of cmds) {
+        for (const f of cmd.flags) {
+            out.add(f);
+        }
+        if (cmd.subcommands !== null) {
+            collect_flags(cmd.subcommands, out);
+        }
+    }
+    return out;
+}
 
 function command_config(ctx: c2.CommandContext) {
     ctx.words.shift();
