@@ -38,6 +38,7 @@ export class Config {
         this.data.my_username ??= "";
         this.data.rewrite_gift ??= false;
         this.data.intercept_alias ??= true;
+        this.data.excluded_flags ??= ["WHITELIST"];
     }
 
     public save(): void {
@@ -71,15 +72,21 @@ export class Config {
     public set intercept_alias(val: boolean) {
         this.data.intercept_alias = val;
     }
+
+    public get excluded_flags(): Array<string> {
+        return this.data.excluded_flags ?? ["WHITELIST"];
+    }
+    public set excluded_flags(val: Array<string>) {
+        this.data.excluded_flags = val;
+    }
 };
 
 const gen = load_file("completions_generated.json");
-const { definitions, git, excluded_flags } = gen;
+const { definitions, git } = gen;
 
 
 export default {
     config: new Config(),
     definitions: <Array<Command>>definitions,
     git,
-    excluded_flags,
 };

@@ -1,5 +1,4 @@
 'use strict';
-const EXCLUDE_FLAGS = ["WHITELIST"];
 const META_COMMANDS = ["pipe", "alias"];
 const SUPINICS_CHANNEL_WHITELIST = [
     "current",
@@ -214,7 +213,6 @@ const child_process = require('node:child_process');
 
     fs.writeFileSync("data/completions_generated.json", JSON.stringify({
         definitions: defs,
-        excluded_flags: EXCLUDE_FLAGS,
         git,
     }));
 })();

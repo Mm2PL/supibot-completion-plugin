@@ -153,9 +153,9 @@ do
     utils.REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG"
     local function get_excluded_flags()
         if storage.config.rewrite_gift then
-            return storage.excluded_flags
+            return storage.config.excluded_flags
         end
-        local temp = {__TS__Spread(storage.excluded_flags)}
+        local temp = {table.unpack(storage.config.excluded_flags)}
         temp[#temp + 1] = utils.REQUIRE_LEGACY_GIVE_CFG
         return temp
     end

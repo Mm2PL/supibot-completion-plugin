@@ -45,6 +45,10 @@ function Config.prototype.init_defaults(self)
     if ____self_data_4[____intercept_alias_5] == nil then
         ____self_data_4[____intercept_alias_5] = true
     end
+    local ____self_data_6, ____excluded_flags_7 = self.data, "excluded_flags"
+    if ____self_data_6[____excluded_flags_7] == nil then
+        ____self_data_6[____excluded_flags_7] = {"WHITELIST"}
+    end
 end
 function Config.prototype.save(self)
     c2.log(c2.LogLevel.Info, "Writing config file.")
@@ -67,11 +71,11 @@ __TS__SetDescriptor(
     "my_username",
     {
         get = function(self)
-            local ____self_data_my_username_6 = self.data.my_username
-            if ____self_data_my_username_6 == nil then
-                ____self_data_my_username_6 = ""
+            local ____self_data_my_username_8 = self.data.my_username
+            if ____self_data_my_username_8 == nil then
+                ____self_data_my_username_8 = ""
             end
-            return ____self_data_my_username_6
+            return ____self_data_my_username_8
         end,
         set = function(self, val)
             self.data.my_username = val
@@ -84,11 +88,11 @@ __TS__SetDescriptor(
     "rewrite_gift",
     {
         get = function(self)
-            local ____self_data_rewrite_gift_7 = self.data.rewrite_gift
-            if ____self_data_rewrite_gift_7 == nil then
-                ____self_data_rewrite_gift_7 = false
+            local ____self_data_rewrite_gift_9 = self.data.rewrite_gift
+            if ____self_data_rewrite_gift_9 == nil then
+                ____self_data_rewrite_gift_9 = false
             end
-            return ____self_data_rewrite_gift_7
+            return ____self_data_rewrite_gift_9
         end,
         set = function(self, val)
             self.data.rewrite_gift = val
@@ -101,11 +105,11 @@ __TS__SetDescriptor(
     "intercept_alias",
     {
         get = function(self)
-            local ____self_data_intercept_alias_8 = self.data.intercept_alias
-            if ____self_data_intercept_alias_8 == nil then
-                ____self_data_intercept_alias_8 = true
+            local ____self_data_intercept_alias_10 = self.data.intercept_alias
+            if ____self_data_intercept_alias_10 == nil then
+                ____self_data_intercept_alias_10 = true
             end
-            return ____self_data_intercept_alias_8
+            return ____self_data_intercept_alias_10
         end,
         set = function(self, val)
             self.data.intercept_alias = val
@@ -113,14 +117,29 @@ __TS__SetDescriptor(
     },
     true
 )
+__TS__SetDescriptor(
+    Config.prototype,
+    "excluded_flags",
+    {
+        get = function(self)
+            local ____self_data_excluded_flags_11 = self.data.excluded_flags
+            if ____self_data_excluded_flags_11 == nil then
+                ____self_data_excluded_flags_11 = {"WHITELIST"}
+            end
+            return ____self_data_excluded_flags_11
+        end,
+        set = function(self, val)
+            self.data.excluded_flags = val
+        end
+    },
+    true
+)
 local gen = load_file("completions_generated.json")
 local definitions = gen.definitions
 local git = gen.git
-local excluded_flags = gen.excluded_flags
 ____exports.default = {
     config = __TS__New(____exports.Config),
     definitions = definitions,
-    git = git,
-    excluded_flags = excluded_flags
+    git = git
 }
 return ____exports

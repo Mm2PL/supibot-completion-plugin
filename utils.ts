@@ -122,9 +122,9 @@ namespace utils {
     export const REQUIRE_LEGACY_GIVE_CFG = "REQUIRE_LEGACY_GIVE_CFG";
     function get_excluded_flags(this: void): Array<string> {
         if (storage.config.rewrite_gift) {
-            return storage.excluded_flags;
+            return storage.config.excluded_flags;
         }
-        let temp = [...storage.excluded_flags];
+        let temp = [...storage.config.excluded_flags];
         temp.push(REQUIRE_LEGACY_GIVE_CFG);
         return temp;
     }
