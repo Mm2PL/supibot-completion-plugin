@@ -82,7 +82,7 @@ namespace commands {
      */
     export function block(this: void, cmd: Command, text: string, prefix: string): c2.CompletionList {
         const parsed = utils.parse_params(text, cmd.params?.map(it => it.name) ?? []);
-        const {argv} = parsed;
+        const { argv } = parsed;
         argv.shift(); // remove command name
 
         // maybe simple mode?
@@ -116,7 +116,7 @@ namespace commands {
         }
         // XXX: This is parsed in-command
         const parsed = utils.parse_params(text, ["channel", "user", "command", "platform"]);
-        const {argv} = parsed;
+        const { argv } = parsed;
         argv.shift(); // remove command name
 
         const out = utils.new_completion_list();
@@ -150,7 +150,7 @@ namespace commands {
         }
         const params = cmd.params?.map(it => it.name) ?? [];
         const parsed = utils.parse_params(text, params);
-        const {argv} = parsed;
+        const { argv } = parsed;
         const committed_args = (text.substring(0, cursor_position - prefix.length) + text.substring(cursor_position)).trim();
         const committed = utils.parse_params(committed_args, params);
         committed.argv.shift();
