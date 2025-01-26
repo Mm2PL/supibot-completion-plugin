@@ -214,5 +214,5 @@ const child_process = require('node:child_process');
     fs.writeFileSync("data/completions_generated.json", JSON.stringify({
         definitions: defs,
         git,
-    }));
+    }, null, 2));
 })();
