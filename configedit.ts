@@ -15,15 +15,13 @@ function config_show(ctx: c2.CommandContext, args: string[]): void {
 }
 
 function config_set(ctx: c2.CommandContext, args: string[]): void {
-    if (args.length < 2) {
-        ctx.channel.add_system_message('Usage: /sbc:config set <property_name> <value>');
+    if (args.length === 0) {
+        ctx.channel.add_system_message('Usage: /sbc:config set <property_name> [value]');
         return;
     }
-    const prop = ctx.words.shift();
-    const value = ctx.words.shift();
-    if (prop === undefined || value === undefined) {
-        return assert(false);
-    }
+    const prop = <string>ctx.words.shift();
+    const value = ctx.words.shift() ?? "";
+
     const p = props.find(v => v.name === prop);
     if (p === undefined) {
         ctx.channel.add_system_message(`Unknown sbc config: ${prop}`);
@@ -47,7 +45,10 @@ function conv_bool(s: string) {
     if (s === 'false') {
         return false;
     }
-    throw new Error(`Unable to convert: ${s} to boolean`);
+    if (s === '') {
+        throw "Use true or false to set a boolean setting's value.";
+    }
+    throw `Unable to convert: ${s} to boolean`;
 }
 function conv_arr_str(s: string) {
     return s.split(',').map(it => it.trim());

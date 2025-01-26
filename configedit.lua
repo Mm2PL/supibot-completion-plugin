@@ -1,16 +1,10 @@
 local ____lualib = require("lualib_bundle")
 local __TS__ArrayFind = ____lualib.__TS__ArrayFind
-local Error = ____lualib.Error
-local RangeError = ____lualib.RangeError
-local ReferenceError = ____lualib.ReferenceError
-local SyntaxError = ____lualib.SyntaxError
-local TypeError = ____lualib.TypeError
-local URIError = ____lualib.URIError
-local __TS__New = ____lualib.__TS__New
 local __TS__StringTrim = ____lualib.__TS__StringTrim
 local __TS__StringSplit = ____lualib.__TS__StringSplit
 local __TS__ArrayMap = ____lualib.__TS__ArrayMap
 local Set = ____lualib.Set
+local __TS__New = ____lualib.__TS__New
 local __TS__Spread = ____lualib.__TS__Spread
 local __TS__ObjectEntries = ____lualib.__TS__ObjectEntries
 local __TS__ObjectKeys = ____lualib.__TS__ObjectKeys
@@ -44,15 +38,12 @@ local function config_show(ctx, args)
     end
 end
 local function config_set(ctx, args)
-    if #args < 2 then
-        ctx.channel:add_system_message("Usage: /sbc:config set <property_name> <value>")
+    if #args == 0 then
+        ctx.channel:add_system_message("Usage: /sbc:config set <property_name> [value]")
         return
     end
     local prop = table.remove(ctx.words, 1)
-    local value = table.remove(ctx.words, 1)
-    if prop == nil or value == nil then
-        return assert(false)
-    end
+    local value = table.remove(ctx.words, 1) or ""
     local p = __TS__ArrayFind(
         props,
         function(____, v) return v.name == prop end
@@ -89,10 +80,10 @@ local function conv_bool(s)
     if s == "false" then
         return false
     end
-    error(
-        __TS__New(Error, ("Unable to convert: " .. s) .. " to boolean"),
-        0
-    )
+    if s == "" then
+        error("Use true or false to set a boolean setting's value.", 0)
+    end
+    error(("Unable to convert: " .. s) .. " to boolean", 0)
 end
 local function conv_arr_str(s)
     return __TS__ArrayMap(
