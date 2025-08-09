@@ -26,26 +26,18 @@ const fs = require("fs");
 const child_process = require('node:child_process');
 
 (async () => {
-    const supicore = await import("./supibot/node_modules/supi-core/build/index.js");
-
-    globalThis.sb = {
-        Date: supicore.Date,
-        Error: supicore.Error,
-        Promise: supicore.Promise,
-        Got: supicore.Got,
-        Metrics: new supicore.Metrics(),
-        Utils: new supicore.Utils()
-    };
-
-    const cmds = await (require('./supibot/commands').loadCommands({
-        skipArchivedCommands: true
-    }));
-    const { definitions, failed, skipped } = cmds;
-    console.log("Skipped commands: ", skipped);
-    console.log("Failed commands: ", failed);
+    const {User} = (await import('./supibot/build/classes/user.js'));
+    const {Command} = (await import('./supibot/build/classes/command.js'));
+    const CMDPATH = './supibot/build/commands';
+    const definitions = (await import(`${CMDPATH}/index.js`)).default;
     console.log(`Loaded ${definitions.length} commands successfully.`);
 
     const knownFlags = new Set();
+
+    const COMMAND_SET_SUBCOMMANDS = (await import(`${CMDPATH}/set/subcommands/index.js`)).default;
+    const TL_DEFINITIONS = (await import(`${CMDPATH}/twitchlotto/definitions.js`));
+    const TT_DEFINITIONS = (await import(`${CMDPATH}/texttransform/transforms.js`)).default;
+    const FISH_SUBCOMMANDS = (await import(`${CMDPATH}/fish/subcommands/index.js`)).default;
 
     function definitionToJson(def) {
         let flags = [];
@@ -63,11 +55,10 @@ const child_process = require('node:child_process');
         let eat_before_sub = 0;
         let subcommands = null;
         if (def.Name === "set") {
-            const vars = require('./supibot/commands/set/subcommands/index.js');
-            subcommands = vars.filter(v => !v.adminOnly || ADMIN_MODE).map(v => {
+            subcommands = COMMAND_SET_SUBCOMMANDS.filter(v => !v.adminOnly || ADMIN_MODE).map(v => {
                 let innersubs = null;
                 if (v.name === "twitchlotto") {
-                    innersubs = require("./supibot/commands/twitchlotto/definitions.js").flags.map(
+                    innersubs = TL_DEFINITIONS.flags.map(
                         it => {
                             return {
                                 name: it.name,
@@ -94,8 +85,7 @@ const child_process = require('node:child_process');
                 }
             });
         } else if (def.Name == "texttransform") {
-            const transforms = require("./supibot/commands/texttransform/transforms.js");
-            subcommands = transforms.types.map(t => {
+            subcommands = TT_DEFINITIONS.types.map(t => {
                 return {
                     name: t.name,
                     aliases: t.aliases,
@@ -168,8 +158,7 @@ const child_process = require('node:child_process');
                 }
             ];
         } else if (def.Name === 'fish') {
-            const scmds = require("./supibot/commands/fish/subcommands");
-            subcommands = scmds.subcommands.map(it => ({
+            subcommands = FISH_SUBCOMMANDS.map(it => ({
                 name: it.name,
                 aliases: it.aliases,
                 pipe: true,
@@ -193,7 +182,6 @@ const child_process = require('node:child_process');
 
     const defs = definitions.map(definitionToJson);
 
-    let aliases = [];
     const git = {
         commit: "<No data>",
 
@@ -205,14 +193,24 @@ const child_process = require('node:child_process');
     } catch (e) {
         // no git
     }
+    console.log(`Git version: ${git.version}`);
     try {
         git.commit = child_process.execSync('git rev-parse HEAD').toString().trim();
     } catch (e) {
         // no git
     }
+    console.log(`Git version: ${git.commit}`);
 
     fs.writeFileSync("data/completions_generated.json", JSON.stringify({
         definitions: defs,
         git,
     }, null, 2));
+    console.log('Done writing.');
+    User.destroy();
+    clearTimeout(User.highLoadUserInterval);
+    // I HATE THIS
+    Command.prototype.destroy = function() {
+        this['#cooldownManager'].destroy();
+    }
+    Command.destroy();
 })();
