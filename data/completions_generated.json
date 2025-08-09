@@ -1,9 +1,11 @@
 {
   "definitions": [
     {
-      "name": "%",
-      "aliases": null,
-      "params": null,
+      "name": "percent",
+      "aliases": [
+        "%"
+      ],
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -16,7 +18,7 @@
     {
       "name": "8ball",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -30,7 +32,7 @@
       "aliases": [
         "gag"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "EXTERNAL_INPUT",
         "MENTION",
@@ -44,7 +46,7 @@
     {
       "name": "about",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -58,7 +60,7 @@
       "aliases": [
         "accage"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -102,7 +104,7 @@
         "study",
         "nap"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "PIPE"
       ],
@@ -115,7 +117,7 @@
       "aliases": [
         "$"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "EXTERNAL_INPUT",
         "MENTION",
@@ -312,42 +314,12 @@
       "pipe": true
     },
     {
-      "name": "atop",
-      "aliases": null,
-      "params": null,
-      "flags": [
-        "DEVELOPER",
-        "MENTION",
-        "PIPE",
-        "SYSTEM",
-        "WHITELIST"
-      ],
-      "subcommands": null,
-      "eat_before_sub_command": 0,
-      "pipe": true
-    },
-    {
-      "name": "automodcheck",
-      "aliases": [
-        "amc"
-      ],
-      "params": null,
-      "flags": [
-        "DEVELOPER",
-        "MENTION",
-        "PIPE"
-      ],
-      "subcommands": null,
-      "eat_before_sub_command": 0,
-      "pipe": true
-    },
-    {
       "name": "badapplerendition",
       "aliases": [
         "badapple",
         "bar"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -419,7 +391,7 @@
       "aliases": [
         "bc"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -432,7 +404,7 @@
     {
       "name": "beefact",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -585,7 +557,7 @@
       "aliases": [
         "cn"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "OPT_OUT",
@@ -637,7 +609,7 @@
         "CheckEm",
         "check'em"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -650,7 +622,7 @@
     {
       "name": "code",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -683,7 +655,7 @@
     {
       "name": "comment",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -726,7 +698,7 @@
     {
       "name": "cookie",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -784,7 +756,7 @@
     {
       "name": "copypasta",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -799,7 +771,7 @@
       "aliases": [
         "covid"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -813,7 +785,7 @@
       "aliases": [
         "cl"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "OPT_OUT",
@@ -828,7 +800,7 @@
       "aliases": [
         "clc"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -843,7 +815,7 @@
       "aliases": [
         "clt"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION"
       ],
@@ -854,7 +826,7 @@
     {
       "name": "crypto",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -869,7 +841,7 @@
       "aliases": [
         "cg"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -904,7 +876,7 @@
       "aliases": [
         "money"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1005,7 +977,7 @@
         "monthoftheyear",
         "moty"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1067,7 +1039,7 @@
         "/dev/null",
         "null"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "NON_NULLABLE",
         "PIPE"
@@ -1099,7 +1071,7 @@
     {
       "name": "discord",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "EXTERNAL_INPUT",
         "MENTION",
@@ -1141,7 +1113,7 @@
       "aliases": [
         "dlclip"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1195,7 +1167,7 @@
       "aliases": [
         "ebot"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "EXTERNAL_INPUT",
         "MENTION",
@@ -1208,7 +1180,7 @@
     {
       "name": "faceit",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1221,7 +1193,7 @@
     {
       "name": "fakenews",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -1233,7 +1205,7 @@
     {
       "name": "faq",
       "aliases": [],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -1245,7 +1217,7 @@
     {
       "name": "fill",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "PIPE"
       ],
@@ -1258,7 +1230,7 @@
       "aliases": [
         "frs"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "PIPE",
@@ -1273,7 +1245,7 @@
       "aliases": [
         "fcf"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1289,7 +1261,7 @@
       "aliases": [
         "ffc"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1330,7 +1302,7 @@
       "aliases": [
         "fs"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "MENTION",
@@ -1449,7 +1421,7 @@
       "aliases": [
         "fa"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1491,7 +1463,7 @@
       "aliases": [
         "pajaCD"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "PIPE"
       ],
@@ -1502,7 +1474,7 @@
     {
       "name": "forsenE",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "PIPE"
       ],
@@ -1515,7 +1487,7 @@
       "aliases": [
         "ff"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1531,7 +1503,7 @@
         "gachilist",
         "gl"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -1545,7 +1517,7 @@
       "aliases": [
         "gc"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -1570,21 +1542,6 @@
       ],
       "flags": [
         "MENTION",
-        "PIPE"
-      ],
-      "subcommands": null,
-      "eat_before_sub_command": 0,
-      "pipe": true
-    },
-    {
-      "name": "gamesdonequick",
-      "aliases": [
-        "gdq"
-      ],
-      "params": null,
-      "flags": [
-        "MENTION",
-        "NON_NULLABLE",
         "PIPE"
       ],
       "subcommands": null,
@@ -1621,7 +1578,7 @@
       "aliases": [
         "gvd"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -1637,7 +1594,7 @@
       "aliases": [
         "give"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -1660,7 +1617,7 @@
     {
       "name": "github",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -1676,7 +1633,7 @@
       "aliases": [
         "ghs"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "NON_NULLABLE",
@@ -1754,7 +1711,7 @@
         "commands",
         "helpgrep"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -1766,7 +1723,7 @@
     {
       "name": "horoscope",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1781,7 +1738,7 @@
       "aliases": [
         "hltb"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1796,7 +1753,7 @@
       "aliases": [
         "uid"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -1809,7 +1766,7 @@
     {
       "name": "inspireme",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1822,7 +1779,7 @@
     {
       "name": "isdown",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -1834,7 +1791,7 @@
     {
       "name": "kanji",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1847,7 +1804,7 @@
     {
       "name": "kiss",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "OPT_OUT",
         "PIPE"
@@ -1861,7 +1818,7 @@
       "aliases": [
         "kym"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -1899,7 +1856,7 @@
       "aliases": [
         "ls"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "MENTION",
@@ -1913,7 +1870,7 @@
     {
       "name": "link",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -2036,7 +1993,7 @@
     {
       "name": "mdn",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -2052,7 +2009,7 @@
       "aliases": [
         "/me"
       ],
-      "params": null,
+      "params": [],
       "flags": [],
       "subcommands": null,
       "eat_before_sub_command": 0,
@@ -2061,7 +2018,7 @@
     {
       "name": "metrics",
       "aliases": [],
-      "params": null,
+      "params": [],
       "flags": [],
       "subcommands": null,
       "eat_before_sub_command": 0,
@@ -2140,7 +2097,7 @@
     {
       "name": "npm",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -2353,7 +2310,7 @@
         "pung",
         "pyng"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "PIPE",
         "SKIP_BANPHRASE"
@@ -2368,7 +2325,7 @@
         "letmeknow",
         "lmk"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "MENTION",
@@ -2414,7 +2371,7 @@
       "aliases": [
         "ps"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -2430,7 +2387,7 @@
       "aliases": [
         "poe2"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2443,7 +2400,7 @@
     {
       "name": "pyramid",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "WHITELIST"
@@ -2479,7 +2436,7 @@
       "aliases": [
         "ra"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2498,7 +2455,7 @@
         "rdf",
         "rff"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2517,7 +2474,7 @@
         "rdp",
         "rfp"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2643,7 +2600,7 @@
       "aliases": [
         "rd"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -2657,7 +2614,7 @@
       "aliases": [
         "re"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "PIPE"
       ],
@@ -2732,7 +2689,7 @@
       "aliases": [
         "rf"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2775,7 +2732,7 @@
       "aliases": [
         "rhe"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -2838,7 +2795,7 @@
       "aliases": [
         "rmeal"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2930,7 +2887,7 @@
       "aliases": [
         "rsc"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -2945,7 +2902,7 @@
       "aliases": [
         "rscp"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -3004,7 +2961,7 @@
     {
       "name": "record",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -3071,7 +3028,7 @@
     {
       "name": "restart",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "SYSTEM",
         "WHITELIST"
@@ -3087,7 +3044,7 @@
         "cafk",
         "continueafk"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -3121,7 +3078,7 @@
       "aliases": [
         "ral"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -3136,7 +3093,7 @@
       "aliases": [
         "rr"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -3148,7 +3105,7 @@
     {
       "name": "schedule",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "EXTERNAL_INPUT",
         "MENTION",
@@ -3197,43 +3154,9 @@
           "params": []
         },
         {
-          "name": "instagram-nsfw",
+          "name": "default-gpt-model",
           "aliases": [
-            "rig-nsfw"
-          ],
-          "pipe": false,
-          "subcommands": null,
-          "eat_before_sub_command": 0,
-          "flags": [],
-          "params": []
-        },
-        {
-          "name": "reddit-nsfw",
-          "aliases": [
-            "rm-nsfw"
-          ],
-          "pipe": false,
-          "subcommands": null,
-          "eat_before_sub_command": 0,
-          "flags": [],
-          "params": []
-        },
-        {
-          "name": "twitch-lotto-nsfw",
-          "aliases": [
-            "twitchlotto-nsfw",
-            "tl-nsfw"
-          ],
-          "pipe": false,
-          "subcommands": null,
-          "eat_before_sub_command": 0,
-          "flags": [],
-          "params": []
-        },
-        {
-          "name": "twitter-nsfw",
-          "aliases": [
-            "tweet-nsfw"
+            "gpt-model"
           ],
           "pipe": false,
           "subcommands": null,
@@ -3309,6 +3232,15 @@
           "params": []
         },
         {
+          "name": "osrs-username",
+          "aliases": [],
+          "pipe": false,
+          "subcommands": null,
+          "eat_before_sub_command": 0,
+          "flags": [],
+          "params": []
+        },
+        {
           "name": "reminder",
           "aliases": [
             "remind",
@@ -3349,6 +3281,51 @@
             "trackfavorite",
             "track-favourite",
             "track-favorite"
+          ],
+          "pipe": false,
+          "subcommands": null,
+          "eat_before_sub_command": 0,
+          "flags": [],
+          "params": []
+        },
+        {
+          "name": "instagram-nsfw",
+          "aliases": [
+            "rig-nsfw"
+          ],
+          "pipe": false,
+          "subcommands": null,
+          "eat_before_sub_command": 0,
+          "flags": [],
+          "params": []
+        },
+        {
+          "name": "reddit-nsfw",
+          "aliases": [
+            "rm-nsfw"
+          ],
+          "pipe": false,
+          "subcommands": null,
+          "eat_before_sub_command": 0,
+          "flags": [],
+          "params": []
+        },
+        {
+          "name": "twitch-lotto-nsfw",
+          "aliases": [
+            "twitchlotto-nsfw",
+            "tl-nsfw"
+          ],
+          "pipe": false,
+          "subcommands": null,
+          "eat_before_sub_command": 0,
+          "flags": [],
+          "params": []
+        },
+        {
+          "name": "twitter-nsfw",
+          "aliases": [
+            "tweet-nsfw"
           ],
           "pipe": false,
           "subcommands": null,
@@ -3561,7 +3538,7 @@
       "aliases": [
         "so"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION"
       ],
@@ -3591,7 +3568,7 @@
       "aliases": [
         "ssql"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -3653,7 +3630,7 @@
         "srq",
         "queue"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -3666,7 +3643,7 @@
     {
       "name": "sort",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "NON_NULLABLE",
         "PIPE"
@@ -3715,7 +3692,7 @@
         "stackoverflow",
         "sos"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -3728,7 +3705,7 @@
     {
       "name": "stalk",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "EXTERNAL_INPUT",
@@ -3789,7 +3766,7 @@
         "stocks",
         "stonks"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -3802,31 +3779,13 @@
     {
       "name": "stream",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
         "PIPE",
         "SYSTEM",
         "WHITELIST"
-      ],
-      "subcommands": null,
-      "eat_before_sub_command": 0,
-      "pipe": true
-    },
-    {
-      "name": "streamgames",
-      "aliases": [
-        "games",
-        "sg"
-      ],
-      "params": null,
-      "flags": [
-        "DEVELOPER",
-        "MENTION",
-        "PIPE",
-        "SYSTEM",
-        "SUPINICS_ONLY"
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
@@ -3864,7 +3823,7 @@
       "aliases": [
         "sa"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE"
@@ -3915,7 +3874,7 @@
     {
       "name": "supibotupdates",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "PING"
       ],
@@ -3994,7 +3953,7 @@
         "reversetexttransform",
         "rtt"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "EXTERNAL_INPUT",
         "NON_NULLABLE",
@@ -4365,7 +4324,7 @@
     {
       "name": "tf2",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -4396,7 +4355,7 @@
     {
       "name": "time",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "MENTION",
@@ -4429,7 +4388,7 @@
     {
       "name": "topgames",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -4442,7 +4401,7 @@
     {
       "name": "topstreams",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -4458,7 +4417,7 @@
         "acl",
         "tcl"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -4473,7 +4432,7 @@
       "aliases": [
         "tr"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -4552,7 +4511,7 @@
         "hug",
         "truck"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "BLOCK",
         "OPT_OUT",
@@ -4597,7 +4556,7 @@
       "aliases": [
         "tle"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION"
       ],
@@ -4650,7 +4609,7 @@
       "aliases": [
         "remention"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION"
       ],
@@ -4718,7 +4677,7 @@
     {
       "name": "vanish",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "SKIP_BANPHRASE"
       ],
@@ -4729,7 +4688,7 @@
     {
       "name": "videostats",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -4787,7 +4746,7 @@
       "aliases": [
         "tracemoe"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "NON_NULLABLE",
@@ -4824,7 +4783,7 @@
     {
       "name": "when",
       "aliases": null,
-      "params": null,
+      "params": [],
       "flags": [
         "MENTION",
         "PIPE",
@@ -4840,7 +4799,7 @@
         "/w",
         "pm"
       ],
-      "params": null,
+      "params": [],
       "flags": [],
       "subcommands": null,
       "eat_before_sub_command": 0,
@@ -4873,7 +4832,7 @@
       "aliases": [
         "ws"
       ],
-      "params": null,
+      "params": [],
       "flags": [
         "DEVELOPER",
         "MENTION",
@@ -4910,7 +4869,7 @@
     }
   ],
   "git": {
-    "commit": "05c7f87af948f93d6224abd9af634aa786f47a50",
+    "commit": "8b059725041f3a16400e5ad95a910bff7e46ef3a",
     "version": "v1.1.0"
   }
 }
