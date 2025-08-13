@@ -205,7 +205,8 @@ async function definitionToJson(def) {
         flags,
         subcommands: subcommands,
         eat_before_sub_command: eat_before_sub,
-        pipe: def.Flags.includes("pipe")
+        pipe: def.Flags.includes("pipe"),
+        exclusive_subcommands: def.Name !== 'osrs',
     }
 }
 

@@ -75,7 +75,7 @@ function try_subcommand_completions(this: void, text: string, sub_data: Command 
         if (temp !== null) {
             print(`matched subcmd "${temp}" from "${pat_end}"`);
             let out = utils.new_completion_list();
-            out.hide_others = true;
+            out.hide_others = sub_data.exclusive_subcommands;
             for (const val of sub_data.subcommands) {
                 if (is_piped && !val.pipe) {
                     continue;

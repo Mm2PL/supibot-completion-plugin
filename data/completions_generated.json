@@ -13,7 +13,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "8ball",
@@ -25,7 +26,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "9gag",
@@ -41,7 +43,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "about",
@@ -53,7 +56,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "accountage",
@@ -68,7 +72,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "addbetween",
@@ -88,7 +93,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "afk",
@@ -110,7 +116,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "alias",
@@ -267,7 +274,8 @@
         }
       ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "aliasbuildingblock",
@@ -311,7 +319,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "badapplerendition",
@@ -324,9 +333,39 @@
         "MENTION",
         "PIPE"
       ],
-      "subcommands": null,
+      "subcommands": [
+        {
+          "name": "check",
+          "aliases": [
+            "add"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [],
+          "subcommands": []
+        },
+        {
+          "name": "list",
+          "aliases": [
+            "show"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [],
+          "subcommands": []
+        },
+        {
+          "name": "random",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [],
+          "subcommands": []
+        }
+      ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "ban",
@@ -384,7 +423,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "bancheck",
@@ -399,7 +439,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "beefact",
@@ -411,7 +452,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "block",
@@ -445,7 +487,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "bot",
@@ -469,9 +512,219 @@
         "PIPE",
         "SKIP_BANPHRASE"
       ],
-      "subcommands": null,
+      "subcommands": [
+        {
+          "name": "banphrase-api",
+          "aliases": [
+            "api",
+            "banphrase"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "check-live",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "enable-rustlog",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "global-emotes",
+          "aliases": [
+            "enable-global-emotes",
+            "disable-global-emotes"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "links",
+          "aliases": [
+            "enable-links",
+            "disable-links"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "offline-only",
+          "aliases": [
+            "enable-offline-only",
+            "disable-offline-only"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "rejoin",
+          "aliases": [
+            "i-will-not-ban-supibot-again"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "rename",
+          "aliases": [
+            "renamed"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "toggle",
+          "aliases": [
+            "enable",
+            "disable"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "channel",
+              "aliases": []
+            },
+            {
+              "name": "mode",
+              "aliases": []
+            },
+            {
+              "name": "url",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        }
+      ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "botsubs",
@@ -495,7 +748,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "chan",
@@ -527,7 +781,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "channelfounderlist",
@@ -550,7 +805,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "chatneighbour",
@@ -565,7 +821,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "chatsummary",
@@ -584,7 +841,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "check",
@@ -601,7 +859,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "checkem",
@@ -617,7 +876,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "code",
@@ -630,7 +890,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "coinflip",
@@ -650,7 +911,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "comment",
@@ -663,7 +925,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "commitcount",
@@ -693,7 +956,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "cookie",
@@ -751,7 +1015,8 @@
         }
       ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "copypasta",
@@ -764,7 +1029,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "corona",
@@ -778,7 +1044,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "countline",
@@ -793,7 +1060,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "countlinechannel",
@@ -808,7 +1076,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "countlinetotal",
@@ -821,7 +1090,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "crypto",
@@ -834,7 +1104,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "cryptogame",
@@ -849,7 +1120,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "cryptowallet",
@@ -869,7 +1141,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "currency",
@@ -885,7 +1158,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "current",
@@ -906,7 +1180,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "dalle",
@@ -931,7 +1206,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "dankdebug",
@@ -968,7 +1244,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "dayoftheyear",
@@ -986,7 +1263,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "debug",
@@ -1011,7 +1289,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "define",
@@ -1031,7 +1310,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "devnull",
@@ -1046,7 +1326,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "dictionary",
@@ -1066,7 +1347,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "discord",
@@ -1079,7 +1361,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "doesnotexist",
@@ -1106,7 +1389,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "downloadclip",
@@ -1121,7 +1405,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "epal",
@@ -1134,7 +1419,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "espn",
@@ -1160,7 +1446,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "externalbot",
@@ -1175,7 +1462,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "faceit",
@@ -1186,9 +1474,29 @@
         "NON_NULLABLE",
         "PIPE"
       ],
-      "subcommands": null,
+      "subcommands": [
+        {
+          "name": "elo",
+          "aliases": [
+            "rating"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [],
+          "subcommands": []
+        },
+        {
+          "name": "forsen",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [],
+          "subcommands": []
+        }
+      ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "fakenews",
@@ -1200,7 +1508,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "faq",
@@ -1212,7 +1521,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "fill",
@@ -1223,7 +1533,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "findraidstreams",
@@ -1238,7 +1549,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "firstchannelfollower",
@@ -1254,7 +1566,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "firstfollowedchannel",
@@ -1270,7 +1583,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "firstline",
@@ -1295,7 +1609,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "firstseen",
@@ -1311,7 +1626,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "fish",
@@ -1414,7 +1730,8 @@
         }
       ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "followage",
@@ -1429,7 +1746,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "formula1",
@@ -1454,9 +1772,145 @@
         "MENTION",
         "PIPE"
       ],
-      "subcommands": null,
+      "subcommands": [
+        {
+          "name": "constructorStandings",
+          "aliases": [
+            "wcc"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "season",
+              "aliases": []
+            },
+            {
+              "name": "year",
+              "aliases": []
+            },
+            {
+              "name": "weather",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "copypasta",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "season",
+              "aliases": []
+            },
+            {
+              "name": "year",
+              "aliases": []
+            },
+            {
+              "name": "weather",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "driverStandings",
+          "aliases": [
+            "wdc"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "season",
+              "aliases": []
+            },
+            {
+              "name": "year",
+              "aliases": []
+            },
+            {
+              "name": "weather",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "ferrari",
+          "aliases": [
+            "ferari"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "season",
+              "aliases": []
+            },
+            {
+              "name": "year",
+              "aliases": []
+            },
+            {
+              "name": "weather",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "kimi",
+          "aliases": [
+            "gimi"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "season",
+              "aliases": []
+            },
+            {
+              "name": "year",
+              "aliases": []
+            },
+            {
+              "name": "weather",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "race",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "season",
+              "aliases": []
+            },
+            {
+              "name": "year",
+              "aliases": []
+            },
+            {
+              "name": "weather",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        }
+      ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "forsenCD",
@@ -1469,7 +1923,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "forsenE",
@@ -1480,7 +1935,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "funfact",
@@ -1495,7 +1951,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "gachi",
@@ -1510,7 +1967,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "gachicheck",
@@ -1525,7 +1983,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "gachisearch",
@@ -1546,7 +2005,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "getprofilepicture",
@@ -1571,7 +2031,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "getvideodata",
@@ -1587,7 +2048,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "gift",
@@ -1612,7 +2074,8 @@
         }
       ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "github",
@@ -1626,7 +2089,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "githubstatus",
@@ -1641,7 +2105,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "gpt",
@@ -1681,7 +2146,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "haHAA",
@@ -1703,7 +2169,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "help",
@@ -1718,7 +2185,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "horoscope",
@@ -1731,7 +2199,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "howlongtobeat",
@@ -1746,7 +2215,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "id",
@@ -1761,7 +2231,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "inspireme",
@@ -1774,7 +2245,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "isdown",
@@ -1786,7 +2258,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "kanji",
@@ -1799,7 +2272,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "kiss",
@@ -1811,7 +2285,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "knowyourmeme",
@@ -1826,7 +2301,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "lastline",
@@ -1849,7 +2325,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "lastseen",
@@ -1865,7 +2342,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "link",
@@ -1878,7 +2356,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "liveuamap",
@@ -1899,7 +2378,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "markov",
@@ -1936,7 +2416,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "mastodon",
@@ -1962,7 +2443,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "math",
@@ -1988,7 +2470,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "mdn",
@@ -2002,7 +2485,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "me",
@@ -2013,7 +2497,8 @@
       "flags": [],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "metrics",
@@ -2022,7 +2507,8 @@
       "flags": [],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "moba",
@@ -2043,7 +2529,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "necrodancer",
@@ -2066,7 +2553,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "news",
@@ -2092,7 +2580,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "npm",
@@ -2106,7 +2595,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "nutrients",
@@ -2124,7 +2614,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "ocr",
@@ -2151,7 +2642,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "optout",
@@ -2186,7 +2678,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "origin",
@@ -2203,7 +2696,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "osrs",
@@ -2243,9 +2737,357 @@
         "NON_NULLABLE",
         "PIPE"
       ],
-      "subcommands": null,
+      "subcommands": [
+        {
+          "name": "itemid",
+          "aliases": [
+            "item-id"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "kc",
+          "aliases": [
+            "kill-count"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "playercount",
+          "aliases": [
+            "pc"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "price",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "stars",
+          "aliases": [
+            "star"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "stats",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "status",
+          "aliases": [],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "guthix",
+          "aliases": [
+            "tears",
+            "tog"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        },
+        {
+          "name": "wiki",
+          "aliases": [
+            "search"
+          ],
+          "pipe": true,
+          "flags": [],
+          "params": [
+            {
+              "name": "activity",
+              "aliases": []
+            },
+            {
+              "name": "boss",
+              "aliases": []
+            },
+            {
+              "name": "force",
+              "aliases": []
+            },
+            {
+              "name": "rude",
+              "aliases": []
+            },
+            {
+              "name": "seasonal",
+              "aliases": []
+            },
+            {
+              "name": "skill",
+              "aliases": []
+            },
+            {
+              "name": "virtual",
+              "aliases": []
+            }
+          ],
+          "subcommands": []
+        }
+      ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": false
     },
     {
       "name": "pastebin",
@@ -2282,7 +3124,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "pick",
@@ -2299,7 +3142,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "ping",
@@ -2317,7 +3161,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "pingme",
@@ -2334,7 +3179,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "pipe",
@@ -2364,7 +3210,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "playsound",
@@ -2380,7 +3227,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "poe",
@@ -2395,7 +3243,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "pyramid",
@@ -2407,7 +3256,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "query",
@@ -2429,7 +3279,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomalbum",
@@ -2444,7 +3295,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomanimalfact",
@@ -2463,7 +3315,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomanimalpicture",
@@ -2482,7 +3335,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomclip",
@@ -2526,7 +3380,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomcocktail",
@@ -2549,7 +3404,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomcommandalias",
@@ -2593,7 +3449,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomdonger",
@@ -2607,7 +3464,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomemoji",
@@ -2620,7 +3478,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomemote",
@@ -2682,7 +3541,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomfilm",
@@ -2697,7 +3557,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomgachi",
@@ -2725,7 +3586,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomhistoricevent",
@@ -2739,7 +3601,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randominstagram",
@@ -2762,7 +3625,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomline",
@@ -2788,7 +3652,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randommeal",
@@ -2803,7 +3668,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randommeme",
@@ -2856,7 +3722,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randompastebin",
@@ -2880,7 +3747,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomsadcat",
@@ -2895,7 +3763,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomscp",
@@ -2910,7 +3779,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomuploadervideo",
@@ -2930,7 +3800,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "randomword",
@@ -2956,7 +3827,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "record",
@@ -2968,7 +3840,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "reload",
@@ -2987,7 +3860,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "remind",
@@ -3023,7 +3897,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "restart",
@@ -3035,7 +3910,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "resumeafk",
@@ -3051,7 +3927,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "roll",
@@ -3071,7 +3948,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "russianarmylosses",
@@ -3086,7 +3964,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "russianroulette",
@@ -3100,7 +3979,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "schedule",
@@ -3115,7 +3995,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "set",
@@ -3531,7 +4412,8 @@
         }
       ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "shoutout",
@@ -3544,7 +4426,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "shuffle",
@@ -3561,7 +4444,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "simplesql",
@@ -3577,7 +4461,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "slots",
@@ -3594,7 +4479,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "songrequest",
@@ -3622,7 +4508,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "songrequestqueue",
@@ -3638,7 +4525,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "sort",
@@ -3650,7 +4538,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "speedrun",
@@ -3684,7 +4573,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "stackoverflowsearch",
@@ -3700,7 +4590,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "stalk",
@@ -3715,7 +4606,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "statistics",
@@ -3735,7 +4627,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "steamgameplayers",
@@ -3758,7 +4651,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "stock",
@@ -3774,7 +4668,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "stream",
@@ -3789,7 +4684,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "streaminfo",
@@ -3816,7 +4712,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "subage",
@@ -3830,7 +4727,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "subscribe",
@@ -3850,7 +4748,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "suggest",
@@ -3869,7 +4768,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "supibotupdates",
@@ -3880,7 +4780,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "test",
@@ -3919,7 +4820,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "texttospeech",
@@ -3944,7 +4846,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "texttransform",
@@ -4319,7 +5222,8 @@
         }
       ],
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "tf2",
@@ -4332,7 +5236,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "thesaurus",
@@ -4350,7 +5255,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "time",
@@ -4365,7 +5271,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "top",
@@ -4383,7 +5290,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "topgames",
@@ -4396,7 +5304,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "topstreams",
@@ -4409,7 +5318,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "totalcountline",
@@ -4425,7 +5335,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "trackreupload",
@@ -4441,7 +5352,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "translate",
@@ -4482,7 +5394,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "transliterate",
@@ -4500,7 +5413,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "tuck",
@@ -4519,7 +5433,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "twitchlotto",
@@ -4549,7 +5464,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "twitchlottoexplain",
@@ -4562,7 +5478,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "twitter",
@@ -4602,7 +5519,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "unmention",
@@ -4615,7 +5533,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "unping",
@@ -4653,7 +5572,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "urban",
@@ -4672,7 +5592,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "vanish",
@@ -4683,7 +5604,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "videostats",
@@ -4697,7 +5619,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "weather",
@@ -4739,7 +5662,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "whatanimeisit",
@@ -4754,7 +5678,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "whatemoteisit",
@@ -4778,7 +5703,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "when",
@@ -4791,7 +5717,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "whisper",
@@ -4803,7 +5730,8 @@
       "flags": [],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": false
+      "pipe": false,
+      "exclusive_subcommands": true
     },
     {
       "name": "wiki",
@@ -4825,7 +5753,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "wrongsong",
@@ -4841,7 +5770,8 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     },
     {
       "name": "youtubesearch",
@@ -4865,11 +5795,12 @@
       ],
       "subcommands": null,
       "eat_before_sub_command": 0,
-      "pipe": true
+      "pipe": true,
+      "exclusive_subcommands": true
     }
   ],
   "git": {
-    "commit": "8b059725041f3a16400e5ad95a910bff7e46ef3a",
+    "commit": "7c14dfbc937a9f4cc9dc3c2b857d64558ff4b646",
     "version": "v1.1.0"
   }
 }

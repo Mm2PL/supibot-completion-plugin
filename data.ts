@@ -12,6 +12,7 @@ export type Command = {
     subcommands: Command[] | null,
     eat_before_sub_command: number,
     pipe: boolean,
+    exclusive_subcommands: boolean
 };
 
 function load_file(this: void, fname: string, default_val = {}): any {

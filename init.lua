@@ -73,7 +73,7 @@ local function try_subcommand_completions(text, sub_data, subcommand, tree, is_p
         if temp ~= nil then
             print(((("matched subcmd \"" .. temp) .. "\" from \"") .. pat_end) .. "\"")
             local out = utils.new_completion_list()
-            out.hide_others = true
+            out.hide_others = sub_data.exclusive_subcommands
             for ____, val in ipairs(sub_data.subcommands) do
                 do
                     if is_piped and not val.pipe then
