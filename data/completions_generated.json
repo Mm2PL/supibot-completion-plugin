@@ -5800,7 +5800,7 @@
     }
   ],
   "git": {
-    "commit": "7c14dfbc937a9f4cc9dc3c2b857d64558ff4b646",
-    "version": "v1.1.0"
+    "commit": "248d89e4e12fb7629ded151f85003a8662dd2556",
+    "version": "v1.3.0"
   }
 }
