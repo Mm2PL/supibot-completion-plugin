@@ -8,8 +8,8 @@ init.lua: data/completions_generated.json tsconfig.json package.json Makefile $(
 
 # This empty rule convinces make to update completions_generated if config.json was touched but not cry if it doesn't exist
 data/config.json:
-data/completions_generated.json: generate.js data/config.json $(wildcard supibot/build/commands/*/*.js)
-	node generate.js
+data/completions_generated.json: generate.mjs data/config.json $(wildcard supibot/build/commands/*/*.js)
+	node generate.mjs
 
 update_pull:
 	git submodule update --init supibot
