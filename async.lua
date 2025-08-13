@@ -1,5 +1,4 @@
 local async = {}
-local inspect = require("inspect")
 
 ---Calls fun with arguments '...', sets up callbacks and yields.
 ---@param fun any A function with a signature like (arg0, arg1, ..., okcb, errcb): any
