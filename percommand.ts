@@ -243,7 +243,6 @@ namespace commands {
             out.values.push('skill:', 'virtual:');
             return out;
         }
-        mm2pl_open_debugger().break_here();
         // $osrs <sub> ...
         return out;
     }

@@ -284,7 +284,6 @@ do
             __TS__ArrayPush(out.values, "skill:", "virtual:")
             return out
         end
-        mm2pl_open_debugger().break_here()
         return out
     end
 end
